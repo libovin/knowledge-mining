@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: data-mining
+  jersey:
+    application-path: /data-miming/api
+
+server:
+  port: 19989
+
+jersey:
+  swagger:
+    ip: 127.0.0.1
+    port: ${server.port}
