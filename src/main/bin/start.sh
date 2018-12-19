@@ -2,7 +2,7 @@
 
 . ./env.sh
 
-APP_NAME=data-mining.jar
+APP_NAME=knowledge-mining.jar
 APP_PATH=$kgms_home/lib/$APP_NAME
 APP_CONF=$kgms_home/conf/application-${active_profile}.properties,$kgms_home/conf/plantdata-manage-${active_profile}.properties
 echo $APP_NAME

@@ -1,4 +1,4 @@
-package com.hiekn.data.mining.statistics;
+package com.hiekn.knowledge.mining.statistics;
 
 /**
  *  词频

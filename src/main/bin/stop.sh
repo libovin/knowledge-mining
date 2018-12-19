@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APP_NAME=data-mining.jar
+APP_NAME=knowledge-mining.jar
 
 tpid=$(ps aux | grep $APP_NAME | grep -v 'grep' | awk '{print $2}')
 if [ ${tpid} ]; then

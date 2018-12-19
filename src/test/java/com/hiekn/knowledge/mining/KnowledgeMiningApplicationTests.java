@@ -1,4 +1,4 @@
-package com.hiekn.data.mining;
+package com.hiekn.knowledge.mining;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

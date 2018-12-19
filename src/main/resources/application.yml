@@ -1,8 +1,8 @@
 spring:
   application:
-    name: data-mining
+    name: knowledge-mining
   jersey:
-    application-path: /data-miming/api
+    application-path: /knowledge-miming/api
 
 server:
   port: 19989
