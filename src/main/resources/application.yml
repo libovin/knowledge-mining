@@ -3,7 +3,9 @@ spring:
     name: knowledge-mining
   jersey:
     application-path: /knowledge-miming/api
-
+  data:
+    mongodb:
+      uri: mongodb://192.168.1.156:27017/knowledge_mining
 server:
   port: 19989
 

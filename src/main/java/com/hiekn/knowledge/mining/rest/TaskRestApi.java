@@ -49,7 +49,7 @@ public class TaskRestApi {
     @POST
     @Path("preprocess")
     @ApiOperation("任务预执行")
-    public RestResp preprocess() {
+    public RestResp preprocess(String content, String config) {
 
         return new RestResp();
     }
