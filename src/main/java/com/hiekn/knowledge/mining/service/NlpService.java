@@ -2,14 +2,14 @@ package com.hiekn.knowledge.mining.service;
 
 import com.hiekn.nlp.bean.PartOfSpeech;
 import com.hiekn.nlp.bean.TermBean;
-import com.hiekn.nlp.tool.NLPService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 分词
  */
-public interface ParticipleService {
+public interface NlpService {
 
 
     /**
@@ -61,4 +61,6 @@ public interface ParticipleService {
      * @return
      */
     String textClassification(String input);
+
+    Map getProp();
 }

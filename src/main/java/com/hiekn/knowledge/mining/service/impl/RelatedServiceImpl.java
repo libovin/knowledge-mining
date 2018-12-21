@@ -4,7 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.hiekn.knowledge.mining.service.AnalysisService;
+import com.hiekn.knowledge.mining.bean.Item;
+import com.hiekn.knowledge.mining.service.RelatedService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,6 +21,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -28,9 +31,9 @@ import java.util.regex.Pattern;
 
 
 @Service
-public class AnalysisServiceImpl implements AnalysisService {
+public class RelatedServiceImpl implements RelatedService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AnalysisServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(RelatedServiceImpl.class);
 
     @Autowired
     private RestTemplate restTemplate;
@@ -161,4 +164,14 @@ public class AnalysisServiceImpl implements AnalysisService {
         return UUID.randomUUID().toString().replace("-", "").toLowerCase();
     }
 
+
+    @Override
+    public List getProp(){
+        List<Item> list =new ArrayList<>();
+        list.add(Item.of("分析","analysis"));
+        list.add(Item.of("Aminer","aminer"));
+        list.add(Item.of("期刊","journal"));
+        list.add(Item.of("文献","literature"));
+        return list;
+    }
 }
