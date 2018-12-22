@@ -12,6 +12,7 @@
     "model":"nlp",   // 选择的模型
     "inputSource":"content", // 原文本或者结果
     "tool": "HanNLP", // 选择哪个NLP工具
+    "init": [],      // 初始化参数
     "method": "segment",  // nlp 工具方法
     "args":[],     // 参数
     "customDict": []
@@ -33,6 +34,7 @@
 {
   "nlp":{
     "HanNLP":{
+      "init":["人名","地名","机构"],
       "segment":["dict","index","shortest","nlp","crf","hmm"],
       "pos": ["crf","hmm"],
       "ner": ["crf","hmm"],
@@ -41,6 +43,7 @@
       "textClassification": null
     },
     "StanfordNLP":{
+      "init":["LOCATION","GPE","ORGANIZATION","PERSON"],
       "segment":[],
       "pos": null,
       "ner": null,
@@ -57,6 +60,7 @@
       "textClassification": null
     },
     "FdNLP":{
+      "init":["人名","地名","机构"],
       "segment":null,
       "pos": null,
       "ner": null,
@@ -72,9 +76,6 @@
       "summary": "Number",
       "textClassification": null
     }
-  },
-  "pattern":{
-    
   }
 }
 ```
