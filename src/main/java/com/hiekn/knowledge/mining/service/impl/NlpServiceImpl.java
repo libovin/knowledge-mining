@@ -48,19 +48,21 @@ public class NlpServiceImpl implements NlpService {
     @Override
     public Map getProp() {
         Map<String,Object> map = Maps.newHashMap();
-        map.put("tool",getTool());
-        map.put("method",getMethod());
+        map.put("HanNLP",getHanNLPProp());
+        map.put("LTP",getMethod());
+        map.put("FdNLP",getMethod());
+        map.put("NLPIR",getMethod());
+        map.put("StanfordNLP",getMethod());
         return map;
     }
 
-    private List getTool(){
-        List<Item> list =new ArrayList<>();
-        list.add(Item.of("HanNLP","HanNLP"));
-        list.add(Item.of("LTP","LTP"));
-        list.add(Item.of("FdNLP","FdNLP"));
-        list.add(Item.of("NLPIR","NLPIR"));
-        list.add(Item.of("StanfordNLP","StanfordNLP"));
-        return list;
+    private Map getHanNLPProp(){
+        Map<String,Object> map =Maps.newHashMap();
+        map.put("customDict","");
+        map.put("segment","");
+
+
+        return map;
     }
 
     private List getMethod(){

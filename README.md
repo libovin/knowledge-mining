@@ -13,9 +13,8 @@
    "inputSource":"content", // 原文本或者结果
    "tool": "HanNLP", // 选择哪个NLP工具
    "method": "segment",  // nlp 工具方法
-   "next": {
-   // 下一步的config 配置
-   }
+   "args":[],     // 参数
+   "customDict": []
   },{
     "model": "pattern",
     "inputSource": "content",
@@ -26,6 +25,55 @@
   "inputSource": "content",
   "method": "aminer"
   }]
+}
+```
+
+args 配置
+```json
+{
+  "nlp":{
+    "HanNLP":{
+      "segment":["dict","index","shortest","nlp","crf","hmm"],
+      "pos": ["crf","hmm"],
+      "ner": ["crf","hmm"],
+      "keyword": "Number",
+      "summary": "Number",
+      "textClassification": null
+    },
+    "StanfordNLP":{
+      "segment":[],
+      "pos": null,
+      "ner": null,
+      "keyword": "Number",
+      "summary": "Number",
+      "textClassification": null
+    },
+    "NLPIR":{
+      "segment":[],
+      "pos": null,
+      "ner": null,
+      "keyword": "Number",
+      "summary": "Number",
+      "textClassification": null
+    },
+    "FdNLP":{
+      "segment":null,
+      "pos": null,
+      "ner": null,
+      "keyword": "Number",
+      "summary": "Number",
+      "textClassification": null
+    },
+    "LTP":{
+      "segment":null,
+      "pos": null,
+      "ner": null,
+      "keyword": "Number",
+      "summary": "Number",
+      "textClassification": null
+    }
+  }
+      
 }
 ```
 
@@ -43,8 +91,8 @@
       "summary":"",
       "textClassification":"",
       "counter":[
-      {"text":"xxx","count":1},
-      {"text":"xxy","count":2}
+          {"text":"xxx","count":1},
+          {"text":"xxy","count":2}
       ]
     },
     "pattern":{

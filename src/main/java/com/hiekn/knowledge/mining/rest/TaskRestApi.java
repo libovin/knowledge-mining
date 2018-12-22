@@ -3,7 +3,7 @@ package com.hiekn.knowledge.mining.rest;
 import com.alibaba.fastjson.JSON;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
-import com.hiekn.knowledge.mining.bean.NlpConfig;
+import com.hiekn.knowledge.mining.bean.nlp.NlpConfig;
 import com.hiekn.knowledge.mining.bean.PatternConfig;
 import com.hiekn.knowledge.mining.bean.RelatedConfig;
 import com.hiekn.knowledge.mining.service.TaskService;
