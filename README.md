@@ -9,26 +9,26 @@
   "content": "待处理文本",
   "config": [
   {
-   "model":"nlp",   // 选择的模型
-   "inputSource":"content", // 原文本或者结果
-   "tool": "HanNLP", // 选择哪个NLP工具
-   "method": "segment",  // nlp 工具方法
-   "args":[],     // 参数
-   "customDict": []
+    "model":"nlp",   // 选择的模型
+    "inputSource":"content", // 原文本或者结果
+    "tool": "HanNLP", // 选择哪个NLP工具
+    "method": "segment",  // nlp 工具方法
+    "args":[],     // 参数
+    "customDict": []
   },{
     "model": "pattern",
     "inputSource": "content",
     "pattern":"\\d+",  // 表达式
     "type":"matches" //  matches 全部匹配  find 部分匹配
   },{
-  "model": "related",
-  "inputSource": "content",
-  "method": "aminer"
+    "model": "related",
+    "inputSource": "content",
+    "method": "aminer"
   }]
 }
 ```
 
-args 配置
+配置
 ```json
 {
   "nlp":{
@@ -72,8 +72,10 @@ args 配置
       "summary": "Number",
       "textClassification": null
     }
+  },
+  "pattern":{
+    
   }
-      
 }
 ```
 
@@ -84,10 +86,10 @@ args 配置
   "content": "待处理文本",
   "results":{
     "nlp":{
-      "segment":["","",""],
-      "pos":[],
-      "ner":[],
-      "keyword":"",
+      "segment":["词1","词2","词3"],
+      "pos":[{"tag":"","description":""}],
+      "ner":[{"term":"","type":""}],
+      "keyword":["",""],
       "summary":"",
       "textClassification":"",
       "counter":[
