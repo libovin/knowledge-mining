@@ -11,9 +11,10 @@
   {
     "model":"nlp",   // 选择的模型
     "inputSource":"content", // 原文本或者结果
-    "tool": "HanNLP", // 选择哪个NLP工具
-    "init": [],      // 初始化参数
     "method": "segment",  // nlp 工具方法
+    "init": [],      // 初始化参数
+    
+    "tool": "HanNLP", // 选择哪个NLP工具
     "args":[],     // 参数
     "customDict": []
   },{
@@ -29,10 +30,83 @@
 }
 ```
 
+算法配置
+```json
+{
+    "nlp":{
+      "segment":{
+        "dict": ["HanNLP"],
+        "index": ["HanNLP"],
+        "shortest":["HanNLP"],
+        "nlp":["HanNLP"],
+        "crf":["HanNLP"],
+        "hmm":["HanNLP"],
+        "stanford":["StanfordNLP"],
+        "NLPir": ["NLPir"],
+        "fudan": ["FdNLP"]
+      },
+      "pos":{
+        "crf":["HanNLP"],
+        "hmm":["HanNLP"],
+        "stanford":["StanfordNLP"],
+        "fudan": ["FdNLP"]
+      },
+      "ner":{
+        "crf":["HanNLP"],
+        "hmm":["HanNLP"],
+        "stanford":["StanfordNLP"],
+        "fudan": ["FdNLP"]
+      },
+      "keyword":{
+        "args": "size" 
+      },
+      "summary":{
+        "args": "size" 
+      },
+      "textClassification":{
+          
+      }
+    }
+}
+```
+
+
+
 配置
 ```json
 {
   "nlp":{
+    "segment":{
+      "algorithm":{
+          "dict": [
+            {"tool": "HanNLP", "args":["人名","地名","机构"]},
+            {"tool":"StanfordNLP","args":["LOCATION","GPE","ORGANIZATION","PERSON"]},
+            {"tool":"FdNLP","args":["人名","地名","机构"]}
+          ],
+          "index": ["HanNLP"],
+          "shortest":["HanNLP"],
+          "nlp":["HanNLP"],
+          "crf":["HanNLP"],
+          "hmm":["HanNLP"]
+      },
+      "pos":{
+        "crf":["HanNLP"],
+        "hmm":["HanNLP"]
+      },
+      "ner":{
+        "crf":["HanNLP"],
+        "hmm":["HanNLP"]
+      },
+      "keyword":{
+      
+      },
+      "summary":{
+      
+      },
+      "textClassification":{
+      
+      }
+    },
     "HanNLP":{
       "init":["人名","地名","机构"],
       "segment":["dict","index","shortest","nlp","crf","hmm"],
