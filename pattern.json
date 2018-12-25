@@ -1,0 +1,30 @@
+// 输入
+["word1","word2","word3"]
+// 或
+[
+  {"term":"word1","type":""},
+  {"term":"word2","type":""},
+  {"term":"word3","type":""}
+]
+// 或
+[
+  {"tag":"word1","description":""},
+  {"tag":"word2","description":""},
+  {"tag":"word3","description":""}
+]
+
+
+
+// 输出
+{
+  "matches": [
+    {"text": "分词1", "value": false},
+    {"text": "分词2", "value": false},
+    {"text": "分词3", "value": false}
+  ],
+  "find": [
+    {"text": "xxx", "start": 1, "end": 4},
+    {"text": "xxx", "start": 5, "end": 4},
+    {"text": "xxx", "start": 1, "end": 4}
+  ]
+}

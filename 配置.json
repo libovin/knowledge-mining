@@ -17,7 +17,7 @@
       "allowedNext": {
         "nlp": ["pos", "ner"],
         "counter": "counter",
-        "pattern":["matches","find"]
+        "pattern":["matches"]
       }
     },
     // 词性
@@ -31,7 +31,7 @@
       "allowedNext":{
         "nlp": ["pos", "ner"],
         "counter": "counter",
-        "pattern":["matches","find"]
+        "pattern":["matches"]
       }
     },
     // 实体识别
@@ -45,7 +45,7 @@
       "allowedNext":{
         "nlp": ["pos", "ner"],
         "counter": "counter",
-        "pattern":["matches","find"]
+        "pattern":["matches"]
       }
     },
     // 关键字
@@ -53,7 +53,7 @@
       "args": "size",
       "allowedNext":{
         "nlp": ["pos", "ner"],
-        "pattern":["matches","find"]
+        "pattern":["matches"]
       }
     },
     // 摘要
@@ -61,24 +61,27 @@
       "args": "size",
       "allowedNext": {
         "nlp": ["segment","keyword","summary","textClassification"],
-        "pattern":["matches","find"]
+        "pattern":["find"]
       }
     },
     // 文本分类
     "textClassification": {
+      "args": {},
       "allowedNext": {}
     }
   },
   // 词频
   "counter":{
     "args":{
-      "filter": {"exclude":[",","。"]}
+      "filter": {"exclude":[",","。"]},
+      "sort":"asc|desc"
     },
     "allowedNext": {
       "nlp": ["pos", "ner"],
       "pattern":["matches","find"]
     }
   },
+  // 模式匹配
   "pattern":{
     "matches":{
       "args":{
@@ -101,10 +104,23 @@
       }
     }
   },
+  // 关联信息
   "related":{
-    "baidu":{"args":{}},
-    "aminer":{"args":{}},
-    "journal":{"args":{}},
-    "literature":{"args":{}}
+    "baidu":{
+      "args":{},
+      "allowedNext": {}
+    },
+    "aminer":{
+      "args":{},
+      "allowedNext": {}
+    },
+    "journal":{
+      "args":{},
+      "allowedNext": {}
+    },
+    "literature":{
+      "args":{},
+      "allowedNext": {}
+    }
   }
 }

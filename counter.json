@@ -1,0 +1,23 @@
+// 输入
+["word1","word2","word3"]
+// 或
+[
+  {"term":"word1","type":""},
+  {"term":"word2","type":""},
+  {"term":"word3","type":""}
+]
+// 或
+[
+  {"tag":"word1","description":""},
+  {"tag":"word2","description":""},
+  {"tag":"word3","description":""}
+]
+
+
+
+// 输出
+[
+  {"word":"word1","count": 13,"frequency":0.01},
+  {"word":"word2","count": 10,"frequency":0.01},
+  {"word":"word3","count": 6,"frequency":0.01}
+]
