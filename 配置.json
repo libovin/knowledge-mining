@@ -1,0 +1,110 @@
+{
+  // nlp配置
+  "nlp": {
+    //分词
+    "segment": {
+      "args": {
+        "dict": ["HanNLP"],
+        "index": ["HanNLP"],
+        "shortest": ["HanNLP"],
+        "nlp": ["HanNLP"],
+        "crf": ["HanNLP"],
+        "hmm": ["HanNLP"],
+        "stanford": ["StanfordNLP"],
+        "NLPir": ["NLPir"],
+        "fudan": ["FdNLP"]
+      },
+      "allowedNext": {
+        "nlp": ["pos", "ner"],
+        "counter": "counter",
+        "pattern":["matches","find"]
+      }
+    },
+    // 词性
+    "pos": {
+      "args":{
+        "crf": ["HanNLP"],
+        "hmm": ["HanNLP"],
+        "stanford": ["StanfordNLP"],
+        "fudan": ["FdNLP"]
+      },
+      "allowedNext":{
+        "nlp": ["pos", "ner"],
+        "counter": "counter",
+        "pattern":["matches","find"]
+      }
+    },
+    // 实体识别
+    "ner": {
+      "args":{
+        "crf": ["HanNLP"],
+        "hmm": ["HanNLP"],
+        "stanford": ["StanfordNLP"],
+        "fudan": ["FdNLP"]
+      },
+      "allowedNext":{
+        "nlp": ["pos", "ner"],
+        "counter": "counter",
+        "pattern":["matches","find"]
+      }
+    },
+    // 关键字
+    "keyword": {
+      "args": "size",
+      "allowedNext":{
+        "nlp": ["pos", "ner"],
+        "pattern":["matches","find"]
+      }
+    },
+    // 摘要
+    "summary": {
+      "args": "size",
+      "allowedNext": {
+        "nlp": ["segment","keyword","summary","textClassification"],
+        "pattern":["matches","find"]
+      }
+    },
+    // 文本分类
+    "textClassification": {
+      "allowedNext": {}
+    }
+  },
+  // 词频
+  "counter":{
+    "args":{
+      "filter": {"exclude":[",","。"]}
+    },
+    "allowedNext": {
+      "nlp": ["pos", "ner"],
+      "pattern":["matches","find"]
+    }
+  },
+  "pattern":{
+    "matches":{
+      "args":{
+        "rule":[
+          {"regx":"\\d"}
+        ]
+      },
+      "allowedNext": {
+        "counter": "counter"
+      }
+    },
+    "find":{
+      "args":{
+        "rule":[
+          {"regx":"\\d"}
+        ]
+      },
+      "allowedNext": {
+        "counter": "counter"
+      }
+    }
+  },
+  "related":{
+    "baidu":{"args":{}},
+    "aminer":{"args":{}},
+    "journal":{"args":{}},
+    "literature":{"args":{}}
+  }
+}
