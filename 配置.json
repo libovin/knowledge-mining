@@ -18,6 +18,10 @@
         "nlp": ["pos", "ner"],
         "counter": "counter",
         "pattern":["matches"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
       }
     },
     // 词性
@@ -32,6 +36,10 @@
         "nlp": ["pos", "ner"],
         "counter": "counter",
         "pattern":["matches"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
       }
     },
     // 实体识别
@@ -46,6 +54,10 @@
         "nlp": ["pos", "ner"],
         "counter": "counter",
         "pattern":["matches"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
       }
     },
     // 关键字
@@ -54,6 +66,10 @@
       "allowedNext":{
         "nlp": ["pos", "ner"],
         "pattern":["matches"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
       }
     },
     // 摘要
@@ -62,12 +78,20 @@
       "allowedNext": {
         "nlp": ["segment","keyword","summary","textClassification"],
         "pattern":["find"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
       }
     },
     // 文本分类
     "textClassification": {
       "args": {},
-      "allowedNext": {}
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
     }
   },
   // 词频
@@ -79,6 +103,10 @@
     "allowedNext": {
       "nlp": ["pos", "ner"],
       "pattern":["matches","find"]
+    },
+    "flow":{
+      "start":{},
+      "middle":{}
     }
   },
   // 模式匹配
@@ -91,6 +119,10 @@
       },
       "allowedNext": {
         "counter": "counter"
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
       }
     },
     "find":{
@@ -101,6 +133,10 @@
       },
       "allowedNext": {
         "counter": "counter"
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
       }
     }
   },
@@ -108,19 +144,35 @@
   "related":{
     "baidu":{
       "args":{},
-      "allowedNext": {}
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
     },
     "aminer":{
       "args":{},
-      "allowedNext": {}
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
     },
     "journal":{
       "args":{},
-      "allowedNext": {}
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
     },
     "literature":{
       "args":{},
-      "allowedNext": {}
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
     }
   }
 }
