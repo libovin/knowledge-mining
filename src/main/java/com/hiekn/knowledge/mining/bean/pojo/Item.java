@@ -1,4 +1,4 @@
-package com.hiekn.knowledge.mining.bean;
+package com.hiekn.knowledge.mining.bean.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,7 +6,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Item {
+
     private String label;
+
     private String value;
 
     public static Item of(String label, String value) {

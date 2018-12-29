@@ -1,7 +1,7 @@
 package com.hiekn.knowledge.mining.service.impl;
 
 import com.google.common.collect.Maps;
-import com.hiekn.knowledge.mining.bean.Item;
+import com.hiekn.knowledge.mining.bean.pojo.Item;
 import com.hiekn.knowledge.mining.service.NlpService;
 import com.hiekn.nlp.bean.PartOfSpeech;
 import com.hiekn.nlp.bean.TermBean;
@@ -60,8 +60,6 @@ public class NlpServiceImpl implements NlpService {
         Map<String,Object> map =Maps.newHashMap();
         map.put("customDict","");
         map.put("segment","");
-
-
         return map;
     }
 

@@ -1,4 +1,4 @@
-package com.hiekn.knowledge.mining.bean;
+package com.hiekn.knowledge.mining.bean.vo;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;

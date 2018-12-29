@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.hiekn.knowledge.mining.bean.Item;
+import com.hiekn.knowledge.mining.bean.pojo.Item;
 import com.hiekn.knowledge.mining.service.RelatedService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -168,7 +168,7 @@ public class RelatedServiceImpl implements RelatedService {
     @Override
     public List getProp(){
         List<Item> list =new ArrayList<>();
-        list.add(Item.of("分析","analysis"));
+        list.add(Item.of("baidu","analysis"));
         list.add(Item.of("Aminer","aminer"));
         list.add(Item.of("期刊","journal"));
         list.add(Item.of("文献","literature"));

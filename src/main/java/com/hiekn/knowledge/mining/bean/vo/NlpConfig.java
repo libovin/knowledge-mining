@@ -1,6 +1,5 @@
-package com.hiekn.knowledge.mining.bean.nlp;
+package com.hiekn.knowledge.mining.bean.vo;
 
-import com.hiekn.knowledge.mining.bean.Config;
 import lombok.Data;
 
 @Data
