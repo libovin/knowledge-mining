@@ -1,23 +1,14 @@
 package com.hiekn.knowledge.mining.bean.vo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 @Data
+@ApiModel
 public class NlpConfig  extends Config {
 
-    /**
-     * nlp工具
-     */
-    private String tool;
-
-    /**
-     * 使用的方法
-     */
-    private String method;
-
-    /**
-     * 算法
-     */
     private String algorithm;
+
+    private Integer size;
 
 }

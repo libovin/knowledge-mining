@@ -1,9 +1,9 @@
 package com.hiekn.knowledge.mining.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.hiekn.knowledge.mining.bean.pojo.Item;
-import com.hiekn.knowledge.mining.bean.pojo.PatternFind;
-import com.hiekn.knowledge.mining.bean.pojo.PatternMatches;
+import com.hiekn.knowledge.mining.bean.bo.Item;
+import com.hiekn.knowledge.mining.bean.bo.PatternFind;
+import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
 import com.hiekn.knowledge.mining.service.PatternService;
 import com.hiekn.nlp.bean.PartOfSpeech;
 import com.hiekn.nlp.bean.TermBean;
@@ -55,6 +55,7 @@ public class PatternServiceImpl implements PatternService {
         return patternList;
     }
 
+    @Override
     public PatternMatches matches(String string, Pattern pattern) {
         Matcher matcher = pattern.matcher(string);
         return new PatternMatches(string, matcher.matches());

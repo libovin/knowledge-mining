@@ -1,10 +1,12 @@
 package com.hiekn.knowledge.mining.service.impl;
 
 import com.google.common.collect.Maps;
-import com.hiekn.knowledge.mining.bean.pojo.Item;
+import com.hiekn.knowledge.mining.bean.bo.Item;
 import com.hiekn.knowledge.mining.service.NlpService;
 import com.hiekn.nlp.bean.PartOfSpeech;
 import com.hiekn.nlp.bean.TermBean;
+import com.hiekn.nlp.tool.ConfigurableNLPService;
+import com.hiekn.nlp.tool.support.FdNLPService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,32 +19,38 @@ public class NlpServiceImpl implements NlpService {
 
     @Override
     public List<String> segment(String input) {
-        return null;
+        ConfigurableNLPService nlpService = new FdNLPService();
+        return nlpService.segment(input);
     }
 
     @Override
     public List<PartOfSpeech> pos(String input) {
-        return null;
+        ConfigurableNLPService nlpService = new FdNLPService();
+        return nlpService.pos(input);
     }
 
     @Override
     public List<TermBean> ner(String input) {
-        return null;
+        ConfigurableNLPService nlpService = new FdNLPService();
+        return nlpService.ner(input);
     }
 
     @Override
     public List<String> extractKeyword(String input) {
-        return null;
+        ConfigurableNLPService nlpService = new FdNLPService();
+        return nlpService.extractKeyword(input);
     }
 
     @Override
     public List<String> autoSummary(String input) {
-        return null;
+        ConfigurableNLPService nlpService = new FdNLPService();
+        return nlpService.autoSummary(input);
     }
 
     @Override
     public String textClassification(String input) {
-        return null;
+        ConfigurableNLPService nlpService = new FdNLPService();
+        return nlpService.textClassification(input);
     }
 
     @Override

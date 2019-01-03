@@ -11,5 +11,5 @@ server:
 
 jersey:
   swagger:
-    ip: 192.168.1.89
+    ip: 192.168.1.45
     port: ${server.port}

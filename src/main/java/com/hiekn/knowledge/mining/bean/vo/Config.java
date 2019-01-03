@@ -9,5 +9,7 @@ public abstract class Config {
 
     private String model;
 
-    private String inputSource;
+    private String source;
+
+    private String method;
 }

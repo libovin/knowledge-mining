@@ -1,5 +1,7 @@
 package com.hiekn.knowledge.mining.service;
 
+import com.hiekn.knowledge.mining.bean.dao.Task;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,13 +12,13 @@ public interface TaskService {
 
     Map getProp();
 
-    Map remote(String serverId, String context);
+    Map remote(String serverId, String content);
 
-    Map save();
+    Task save(Map req);
 
     Map preprocess(Map req);
 
-    Map getTask(String id);
+    Task getTask(String id);
 
-    List getList();
+    List<Task> getList();
 }

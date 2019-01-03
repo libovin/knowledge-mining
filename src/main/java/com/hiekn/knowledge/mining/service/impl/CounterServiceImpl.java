@@ -2,10 +2,11 @@ package com.hiekn.knowledge.mining.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
-import com.hiekn.knowledge.mining.bean.pojo.Counter;
+import com.hiekn.knowledge.mining.bean.bo.Counter;
 import com.hiekn.knowledge.mining.service.CounterService;
 import com.hiekn.nlp.bean.PartOfSpeech;
 import com.hiekn.nlp.bean.TermBean;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class CounterServiceImpl implements CounterService {
 
     @Override

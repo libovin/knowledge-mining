@@ -12,7 +12,6 @@
     "model":"nlp",   // 选择的模型
     "inputSource":"content", // 原文本或者结果
     "method": "segment",  // nlp 工具方法
-    "init": [],      // 初始化参数
     "args":[],     // 参数
     "customDict": []
   },{

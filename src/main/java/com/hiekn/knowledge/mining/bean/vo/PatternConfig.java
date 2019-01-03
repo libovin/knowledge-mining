@@ -1,8 +1,10 @@
 package com.hiekn.knowledge.mining.bean.vo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 @Data
+@ApiModel
 public class PatternConfig extends Config {
 
     /**
@@ -10,8 +12,4 @@ public class PatternConfig extends Config {
      */
     private String pattern;
 
-    /**
-     * 匹配模式（全匹配/部分匹配）
-     */
-    private Boolean type;
 }
