@@ -19,7 +19,7 @@ public class PatternServiceImpl implements PatternService {
 
     @Override
     public Item getProp() {
-        return Item.of("匹配模式", "type");
+        return  new Item("匹配模式", "type");
     }
 
     @Override

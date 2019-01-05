@@ -85,7 +85,7 @@
       }
     },
     // 文本分类
-    "textClassification": {
+    "classifier": {
       "args": {},
       "allowedNext": {},
       "flow":{

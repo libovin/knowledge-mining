@@ -117,8 +117,9 @@ public class ConfigServiceImpl implements ConfigService {
     public Map getProp() {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("nlp", nlpService.getProp());
-        map.put("related", relatedService.getProp());
+        map.put("counter",counterService.getProp());
         map.put("pattern", patternService.getProp());
+        map.put("related", relatedService.getProp());
         return map;
     }
 }

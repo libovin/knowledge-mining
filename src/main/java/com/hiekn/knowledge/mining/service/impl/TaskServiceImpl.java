@@ -1,6 +1,7 @@
 package com.hiekn.knowledge.mining.service.impl;
 
 import com.google.common.collect.Maps;
+import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Task;
 import com.hiekn.knowledge.mining.bean.vo.CounterConfig;
 import com.hiekn.knowledge.mining.bean.vo.NlpConfig;
@@ -90,7 +91,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List getList() {
-        return taskRepository.findAll();
+    public RestData getList() {
+        return new RestData(taskRepository.findAll(),taskRepository.count());
     }
 }

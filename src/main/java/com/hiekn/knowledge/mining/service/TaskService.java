@@ -1,5 +1,6 @@
 package com.hiekn.knowledge.mining.service;
 
+import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Task;
 
 import java.util.List;
@@ -20,5 +21,5 @@ public interface TaskService {
 
     Task getTask(String id);
 
-    List<Task> getList();
+    RestData<List<Task>> getList();
 }

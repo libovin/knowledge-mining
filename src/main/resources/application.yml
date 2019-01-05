@@ -5,11 +5,206 @@ spring:
     application-path: /knowledge-miming/api
   data:
     mongodb:
-      uri: mongodb://192.168.1.156:27017/knowledge_mining
+      uri: mongodb://127.0.0.1:27017/knowledge_mining
 server:
   port: 19989
 
 jersey:
   swagger:
-    ip: 192.168.1.45
+    ip: 192.168.1.89
     port: ${server.port}
+
+
+#    pos:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#          - matches
+#    ner:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#          - matches
+#    keyword:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#          - matches
+#    summary:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#          - matches
+#    classifier:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#          - matches
+#  counter:
+#    count:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#          - matches
+#  pattern:
+#    find:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#          - matches
+#    matches:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#    segment:
+#      args:
+#        algorithm:
+#          - dict
+#          - index
+#          - shortest
+#          - nlp
+#          - crf
+#          - hmm
+#          - stanford
+#          - NLPir
+#          - fudan
+#      allowedNext:
+#        nlp:
+#          - pos
+#          - ner
+#        counter:
+#          - count
+#        pattern:
+#          - find
+#          - matches
+
+kgprop:
+  nlp: {segment: {args: sss}}

@@ -2,6 +2,7 @@ package com.hiekn.knowledge.mining.rest;
 
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
+import com.hiekn.knowledge.mining.bean.prop.KgProp;
 import com.hiekn.knowledge.mining.service.TaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,19 +28,21 @@ public class TaskRestApi {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private KgProp kgProp;
+
     @GET
     @Path("config")
     @ApiOperation("获取配置项")
-    public RestResp<Map> getConfig() {
-        return new RestResp<>(taskService.getProp());
+    public RestResp getConfig() {
+        return new RestResp(kgProp);
     }
 
     @GET
     @Path("list")
     @ApiOperation("任务列表")
     public RestResp<RestData> getList() {
-
-        return new RestResp<>();
+        return new RestResp<>(taskService.getList());
     }
 
     @GET
@@ -47,7 +50,7 @@ public class TaskRestApi {
     @ApiOperation("任务详情")
     public RestResp getTask(@PathParam("id") String id) {
 
-        return new RestResp();
+        return new RestResp(taskService.getTask(id));
     }
 
 
@@ -61,9 +64,8 @@ public class TaskRestApi {
     @POST
     @Path("save")
     @ApiOperation("任务保存/修改")
-    public RestResp save() {
-
-        return new RestResp();
+    public RestResp save(Map req) {
+        return new RestResp(taskService.save(req));
     }
 
     @POST
@@ -71,8 +73,7 @@ public class TaskRestApi {
     @ApiOperation("发布服务调用")
     public RestResp remote(@PathParam("serverId") String serverId,
                            @FormParam("context") @ApiParam(required = true) String context) {
-
-        return new RestResp();
+        return new RestResp(taskService.remote(serverId, context));
     }
 
 }

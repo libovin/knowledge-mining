@@ -52,6 +52,11 @@ public class CounterServiceImpl implements CounterService {
         return counters;
     }
 
+    @Override
+    public Map getProp() {
+        return null;
+    }
+
     public static void main(String[] args) {
         CounterServiceImpl service = new CounterServiceImpl();
         List list = new ArrayList();
