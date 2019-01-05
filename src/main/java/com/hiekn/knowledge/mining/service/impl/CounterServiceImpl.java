@@ -1,6 +1,5 @@
 package com.hiekn.knowledge.mining.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.bo.Counter;
 import com.hiekn.knowledge.mining.service.CounterService;
@@ -55,18 +54,5 @@ public class CounterServiceImpl implements CounterService {
     @Override
     public Map getProp() {
         return null;
-    }
-
-    public static void main(String[] args) {
-        CounterServiceImpl service = new CounterServiceImpl();
-        List list = new ArrayList();
-        list.add(new TermBean("a", "a"));
-        list.add(new TermBean("a", "a"));
-        list.add(new TermBean("b", "b"));
-        list.add(new TermBean("b", "b"));
-        list.add(new TermBean("c", "c"));
-        list.add(new TermBean("c", "c"));
-        list.add(new TermBean("c", "c"));
-        System.out.println(JSON.toJSONString(service.count(list)));
     }
 }

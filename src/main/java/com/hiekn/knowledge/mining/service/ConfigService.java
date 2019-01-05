@@ -9,12 +9,8 @@ import java.util.Map;
 
 public interface ConfigService {
     Map handler(Map result, CounterConfig counter);
-
     Map handler(Map result, NlpConfig counter);
-
     Map handler(Map result, PatternConfig counter);
-
     Map handler(Map result, RelatedConfig counter);
-
     Map getProp();
 }

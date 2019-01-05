@@ -1,48 +1,38 @@
 package com.hiekn.knowledge.mining.rest;
 
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TaskRestApiTest {
+
     @Autowired
-    private WebApplicationContext wac;
+    private TestRestTemplate restTemplate;
 
-    private MockMvc mvc;
-    private MockHttpSession session;
-
-
-    @Before
-    public void setupMockMvc() {
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build(); //初始化MockMvc对象
-        session = new MockHttpSession();
+    @Test
+    public void testConfig() {
+        String url = "/knowledge-miming/api/task/config";
+        ResponseEntity<String> entity = this.restTemplate.getForEntity(url, String.class);
+        assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        System.out.println(entity.getBody());
     }
 
     @Test
-    public void hello() throws Exception {
-        String url = "/task/config";
-        //访问url
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(url).accept(MediaType.APPLICATION_JSON)).andReturn();
-        //访问返回状态
-        int status = mvcResult.getResponse().getStatus();
-        //接口返回结果
-        String content = mvcResult.getResponse().getContentAsString();
-        //打印结果和状态
-        System.out.println(status);
-        System.out.println(content);
+    public void testGetList() {
+        String url = "/knowledge-miming/api/task/list";
+        ResponseEntity<String> entity = this.restTemplate.getForEntity(url, String.class);
+        assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        System.out.println(entity.getBody());
     }
 
 }

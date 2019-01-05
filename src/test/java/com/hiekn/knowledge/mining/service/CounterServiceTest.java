@@ -25,7 +25,7 @@ public class CounterServiceTest {
     }
 
     @Test
-    public void test() {
+    public void test0() {
         List list = new ArrayList();
         list.add(new TermBean("a", "a"));
         list.add(new TermBean("a", "a"));

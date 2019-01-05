@@ -17,4 +17,28 @@ public class RelatedServiceTest {
     public void getProp() {
         System.out.println(relatedService.getProp());
     }
+
+    @Test
+    public void testExtractAnalysis(){
+        String kw = "";
+        System.out.println(relatedService.extractAnalysis(kw));
+    }
+
+    @Test
+    public void testExtractJournal(){
+        String kw = "";
+        System.out.println(relatedService.extractJournal(kw));
+    }
+
+    @Test
+    public void testExtractLiterature(){
+        String kw = "";
+        System.out.println(relatedService.extractLiterature(kw));
+    }
+
+    @Test
+    public void testExtractAminer(){
+        String kw = "";
+        System.out.println(relatedService.extractAminer(kw));
+    }
 }

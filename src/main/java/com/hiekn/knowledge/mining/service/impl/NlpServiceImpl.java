@@ -34,19 +34,19 @@ public class NlpServiceImpl implements NlpService {
     }
 
     @Override
-    public List<String> extractKeyword(String input) {
+    public List<String> keyword(String input) {
         ConfigurableNLPService nlpService = new FdNLPService();
         return nlpService.extractKeyword(input);
     }
 
     @Override
-    public List<String> autoSummary(String input) {
+    public List<String> summary(String input) {
         ConfigurableNLPService nlpService = new FdNLPService();
         return nlpService.autoSummary(input);
     }
 
     @Override
-    public String textClassification(String input) {
+    public String classifier(String input) {
         ConfigurableNLPService nlpService = new FdNLPService();
         return nlpService.textClassification(input);
     }
@@ -59,7 +59,7 @@ public class NlpServiceImpl implements NlpService {
         map.put("ner", getNerArgs());
         map.put("keyword", getKeywordArgs());
         map.put("summary", getSummaryArgs());
-        map.put("textClassification", getTextClassArgs());
+        map.put("classifier", getTextClassArgs());
         return map;
     }
 

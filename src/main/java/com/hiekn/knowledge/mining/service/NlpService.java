@@ -42,7 +42,7 @@ public interface NlpService {
      * @param input
      * @return
      */
-    List<String> extractKeyword(String input);
+    List<String> keyword(String input);
 
 
     /**
@@ -51,7 +51,7 @@ public interface NlpService {
      * @param input
      * @return
      */
-    List<String> autoSummary(String input);
+    List<String> summary(String input);
 
 
     /**
@@ -60,7 +60,7 @@ public interface NlpService {
      * @param input
      * @return
      */
-    String textClassification(String input);
+    String classifier(String input);
 
     Map getProp();
 }

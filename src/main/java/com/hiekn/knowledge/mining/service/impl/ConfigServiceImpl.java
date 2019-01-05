@@ -59,11 +59,11 @@ public class ConfigServiceImpl implements ConfigService {
         } else if ("ner".equals(config.getMethod())) {
             o = nlpService.ner(content);
         } else if ("keyword".equals(config.getMethod())) {
-            o = nlpService.extractKeyword(content);
+            o = nlpService.keyword(content);
         } else if ("summary".equals(config.getMethod())) {
-            o = nlpService.autoSummary(content);
-        } else if ("textClassification".equals(config.getMethod())) {
-            o = nlpService.textClassification(content);
+            o = nlpService.summary(content);
+        } else if ("classifier".equals(config.getMethod())) {
+            o = nlpService.classifier(content);
         }
         map.put("content", result.get("content"));
         map.put("result", o);
