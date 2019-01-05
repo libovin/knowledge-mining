@@ -15,7 +15,7 @@ public class TaskRepositoryTest {
     private TaskRepository taskRepository;
 
     @Test
-    public void test() {
+    public void findAllTest() {
         System.out.println(taskRepository.findAll());
     }
 }
