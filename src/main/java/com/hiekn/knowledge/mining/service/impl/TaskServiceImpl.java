@@ -3,15 +3,11 @@ package com.hiekn.knowledge.mining.service.impl;
 import com.google.common.collect.Maps;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Task;
-import com.hiekn.knowledge.mining.bean.vo.CounterConfig;
-import com.hiekn.knowledge.mining.bean.vo.NlpConfig;
-import com.hiekn.knowledge.mining.bean.vo.PatternConfig;
-import com.hiekn.knowledge.mining.bean.vo.RelatedConfig;
+import com.hiekn.knowledge.mining.handler.Handler;
 import com.hiekn.knowledge.mining.repository.TaskRepository;
 import com.hiekn.knowledge.mining.service.ConfigService;
 import com.hiekn.knowledge.mining.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.beans.BeanMap;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,44 +40,34 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task save(Map req) {
-        List list = (List) req.get("config");
-        Task task = new Task();
-        task.setConfig(list);
-        return taskRepository.save(task);
+    public Task save(Task req) {
+        return taskRepository.save(req);
     }
 
     @Override
     public Map preprocess(Map req) {
         List list = (List) req.get("config");
-        Map result = Maps.newHashMap();
-        for (Object obj : list) {
+        Handler root = null;
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            Object obj = list.get(i);
             if (obj instanceof Map) {
                 Map map = (Map) obj;
-                String model = (String) map.get("model");
-                if ("nlp".equals(model)) {
-                    BeanMap beanMap = BeanMap.create(new NlpConfig());
-                    beanMap.putAll(map);
-                    NlpConfig config = (NlpConfig) beanMap.getBean();
-                    result = configService.handler(result, config);
-                } else if ("pattern".equals(model)) {
-                    BeanMap beanMap = BeanMap.create(new PatternConfig());
-                    beanMap.putAll(map);
-                    PatternConfig config = (PatternConfig) beanMap.getBean();
-                    result = configService.handler(result, config);
-                } else if ("related".equals(model)) {
-                    BeanMap beanMap = BeanMap.create(new RelatedConfig());
-                    beanMap.putAll(map);
-                    RelatedConfig config = (RelatedConfig) beanMap.getBean();
-                    result = configService.handler(result, config);
-                } else if ("counter".equals(model)) {
-                    BeanMap beanMap = BeanMap.create(new CounterConfig());
-                    beanMap.putAll(map);
-                    CounterConfig config = (CounterConfig) beanMap.getBean();
-                    result = configService.handler(result, config);
+                Handler handler = new Handler(configService.getFunction(map), map);
+                if (i == 0) {
+                    root = handler;
+                }
+                if (i + 1 < size) {
+                    Map nextMap = (Map) list.get(i + 1);
+                    Handler nextHandler = new Handler(configService.getFunction(nextMap), nextMap);
+                    handler.setNextHandler(nextHandler);
+                } else {
+                    handler.setNextHandler(null);
                 }
             }
         }
+        Map result = root.handle(req, root.getArgs());
+        result.put("content", req.get("content"));
         return result;
     }
 
@@ -91,7 +77,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public void delete(String id) {
+       taskRepository.delete(id);
+    }
+
+    @Override
     public RestData getList() {
-        return new RestData(taskRepository.findAll(),taskRepository.count());
+        return new RestData(taskRepository.findAll(), taskRepository.count());
     }
 }

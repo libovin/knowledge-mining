@@ -15,9 +15,11 @@ public interface TaskService {
 
     Map remote(String serverId, String content);
 
-    Task save(Map req);
+    Task save(Task req);
 
     Map preprocess(Map req);
+
+    void delete(String id);
 
     Task getTask(String id);
 

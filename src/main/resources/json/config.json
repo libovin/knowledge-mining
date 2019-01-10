@@ -1,0 +1,167 @@
+{
+  "nlp": {
+    "segment": {
+      "args": {
+        "dict": "",
+        "index": "",
+        "shortest": "",
+        "nlp": "",
+        "crf": "",
+        "hmm": "",
+        "stanford": "",
+        "NLPir": "",
+        "fudan": ""
+      },
+      "allowedNext": {
+        "nlp": ["pos", "ner"],
+        "counter": "counter",
+        "pattern":["matches"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "pos": {
+      "args":{
+        "crf": "",
+        "hmm": "",
+        "stanford": "",
+        "fudan": ""
+      },
+      "allowedNext":{
+        "nlp": ["pos", "ner"],
+        "counter": "counter",
+        "pattern":["matches"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "ner": {
+      "args":{
+        "crf": "",
+        "hmm": "",
+        "stanford": "",
+        "fudan": ""
+      },
+      "allowedNext":{
+        "nlp": ["pos", "ner"],
+        "counter": "counter",
+        "pattern":["matches"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "keyword": {
+      "args": "size",
+      "allowedNext":{
+        "nlp": ["pos", "ner"],
+        "pattern":["matches"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "summary": {
+      "args": "size",
+      "allowedNext": {
+        "nlp": ["segment","keyword","summary","classifier"],
+        "pattern":["find"]
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "classifier": {
+      "args": {},
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    }
+  },
+  "counter":{
+    "args":{
+      "sort":["asc","desc"]
+    },
+    "allowedNext": {
+      "nlp": ["pos", "ner"],
+      "pattern":["matches","find"]
+    },
+    "flow":{
+      "start":{},
+      "middle":{}
+    }
+  },
+  "pattern":{
+    "matches":{
+      "args":{
+        "rule":[
+          {"regx":"\\d"}
+        ]
+      },
+      "allowedNext": {
+        "counter": "counter"
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "find":{
+      "args":{
+        "rule":[
+          {"regx":"\\d"}
+        ]
+      },
+      "allowedNext": {
+        "counter": "counter"
+      },
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    }
+  },
+  "related":{
+    "baidu":{
+      "args":{},
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "aminer":{
+      "args":{},
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "journal":{
+      "args":{},
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    },
+    "literature":{
+      "args":{},
+      "allowedNext": {},
+      "flow":{
+        "start":{},
+        "middle":{}
+      }
+    }
+  }
+}

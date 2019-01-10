@@ -6,6 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface CounterService {
-    List<Counter> count(List list);
-    Map getProp();
+    List<Counter> count(Map req, Map config);
 }

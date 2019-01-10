@@ -14,11 +14,6 @@ public class RelatedServiceTest {
     private RelatedService relatedService;
 
     @Test
-    public void getProp() {
-        System.out.println(relatedService.getProp());
-    }
-
-    @Test
     public void testExtractAnalysis(){
         String kw = "";
         System.out.println(relatedService.extractAnalysis(kw));

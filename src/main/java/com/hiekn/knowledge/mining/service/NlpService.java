@@ -15,52 +15,50 @@ public interface NlpService {
     /**
      * 分词
      *
-     * @param input
+     * @param req
      * @return
      */
-    List<String> segment(String input);
+    List<String> segment(Map req, Map config);
 
     /**
      * 词性
      *
-     * @param input
+     * @param req
      * @return
      */
-    List<PartOfSpeech> pos(String input);
+    List<PartOfSpeech> pos(Map req, Map config);
 
     /**
      * 实体识别
      *
-     * @param input
+     * @param req
      * @return
      */
-    List<TermBean> ner(String input);
+    List<TermBean> ner(Map req, Map config);
 
     /**
      * 关键词提取
      *
-     * @param input
+     * @param req
      * @return
      */
-    List<String> keyword(String input);
+    List<String> keyword(Map req, Map config);
 
 
     /**
      * 自动摘要
      *
-     * @param input
+     * @param req
      * @return
      */
-    List<String> summary(String input);
+    List<String> summary(Map req, Map config);
 
 
     /**
      * 文本分类
      *
-     * @param input
+     * @param req
      * @return
      */
-    String classifier(String input);
-
-    Map getProp();
+    String classifier(Map req, Map config);
 }

@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.hiekn.knowledge.mining.bean.bo.Item;
 import com.hiekn.knowledge.mining.service.RelatedService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,8 +20,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -157,14 +154,4 @@ public class RelatedServiceImpl implements RelatedService {
         return UUID.randomUUID().toString().replace("-", "").toLowerCase();
     }
 
-
-    @Override
-    public List getProp(){
-        List<Item> list = new ArrayList<>();
-        list.add(Item.of("baidu","analysis"));
-        list.add(Item.of("Aminer","aminer"));
-        list.add(Item.of("期刊","journal"));
-        list.add(Item.of("文献","literature"));
-        return list;
-    }
 }

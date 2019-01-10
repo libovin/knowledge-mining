@@ -11,7 +11,4 @@ public class Item {
 
     private String value;
 
-    public static Item of(String label, String value) {
-        return new Item(label, value);
-    }
 }
