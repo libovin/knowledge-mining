@@ -4,8 +4,7 @@ import com.hiekn.knowledge.mining.bean.bo.PatternFind;
 import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
 import com.hiekn.knowledge.mining.service.PatternService;
 import com.hiekn.knowledge.mining.util.RuleUtils;
-import com.hiekn.nlp.bean.PartOfSpeech;
-import com.hiekn.nlp.bean.TermBean;
+import com.hiekn.nlplab.bean.TermBean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -59,9 +58,6 @@ public class PatternServiceImpl implements PatternService {
                     if (item instanceof String) {
                         String key = (String) item;
                         patternList.add(matches(key, patternId));
-                    } else if (item instanceof PartOfSpeech) {
-                        PartOfSpeech partOfSpeech = (PartOfSpeech) item;
-                        patternList.add(matches(partOfSpeech.getDescription(), patternId));
                     } else if (item instanceof TermBean) {
                         TermBean termBean = (TermBean) item;
                         patternList.add(matches(termBean.getTerm(), patternId));

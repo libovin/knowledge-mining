@@ -1,10 +1,7 @@
 package com.hiekn.knowledge.mining.config;
 
-import com.hiekn.nlp.tool.support.FdNLPService;
-import com.hiekn.nlp.tool.support.HanLpService;
-import com.hiekn.nlp.tool.support.LTPService;
-import com.hiekn.nlp.tool.support.NLPIRService;
-import com.hiekn.nlp.tool.support.StanfordService;
+import com.hiekn.nlplab.nlptools.NLPToolService;
+import com.hiekn.nlplab.nlptools.ToolService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,27 +9,9 @@ import org.springframework.context.annotation.Configuration;
 public class NlpConfig {
 
     @Bean
-    public FdNLPService fdNLPService() {
-        return new FdNLPService();
+    public ToolService toolService(){
+        return new NLPToolService();
     }
 
-    @Bean
-    public HanLpService hanLpService() {
-        return new HanLpService();
-    }
 
-    @Bean
-    public LTPService ltpService() {
-        return new LTPService();
-    }
-
-    @Bean
-    public NLPIRService nlpirService() {
-        return new NLPIRService();
-    }
-
-    @Bean
-    public StanfordService stanfordService() {
-        return new StanfordService();
-    }
 }

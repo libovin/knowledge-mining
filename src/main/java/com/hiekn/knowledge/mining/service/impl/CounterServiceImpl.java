@@ -3,8 +3,7 @@ package com.hiekn.knowledge.mining.service.impl;
 import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.bo.Counter;
 import com.hiekn.knowledge.mining.service.CounterService;
-import com.hiekn.nlp.bean.PartOfSpeech;
-import com.hiekn.nlp.bean.TermBean;
+import com.hiekn.nlplab.bean.TermBean;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -28,9 +27,6 @@ public class CounterServiceImpl implements CounterService {
                 if (item instanceof String) {
                     String key = (String) item;
                     map.compute(key, (k, v) -> v == null ? BigDecimal.ONE : v.add(BigDecimal.ONE));
-                } else if (item instanceof PartOfSpeech) {
-                    PartOfSpeech partOfSpeech = (PartOfSpeech) item;
-                    map.compute(partOfSpeech.getDescription(), (k, v) -> v == null ? BigDecimal.ONE : v.add(BigDecimal.ONE));
                 } else if (item instanceof TermBean) {
                     TermBean termBean = (TermBean) item;
                     map.compute(termBean.getTerm(), (k, v) -> v == null ? BigDecimal.ONE : v.add(BigDecimal.ONE));

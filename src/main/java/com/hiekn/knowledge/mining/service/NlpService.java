@@ -1,7 +1,7 @@
 package com.hiekn.knowledge.mining.service;
 
-import com.hiekn.nlp.bean.PartOfSpeech;
-import com.hiekn.nlp.bean.TermBean;
+
+import com.hiekn.nlplab.bean.TermBean;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +26,7 @@ public interface NlpService {
      * @param req
      * @return
      */
-    List<PartOfSpeech> pos(Map req, Map config);
+    List<TermBean> pos(Map req, Map config);
 
     /**
      * 实体识别
@@ -61,4 +61,6 @@ public interface NlpService {
      * @return
      */
     String classifier(Map req, Map config);
+
+    String denpendency(Map req, Map config);
 }

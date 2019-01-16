@@ -82,7 +82,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public RestData getList() {
-        return new RestData(taskRepository.findAll(), taskRepository.count());
+    public RestData<Task> getList() {
+        return new RestData<>(taskRepository.findAll(), taskRepository.count());
     }
 }

@@ -1,6 +1,5 @@
 package com.hiekn.knowledge.mining.service;
 
-
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Dict;
 import com.hiekn.knowledge.mining.bean.vo.DictFileImport;

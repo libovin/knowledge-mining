@@ -2,166 +2,148 @@
   "nlp": {
     "segment": {
       "args": {
-        "dict": "",
-        "index": "",
-        "shortest": "",
-        "nlp": "",
-        "crf": "",
-        "hmm": "",
-        "stanford": "",
-        "NLPir": "",
-        "fudan": ""
+        "algorithm": [
+          "F_SEG",
+          "shortest","crf","nlp","dict","index","standard","n_short",
+          "L_MME",
+          "N_SEG",
+          "S_SEG"
+        ]
       },
       "allowedNext": {
         "nlp": ["pos", "ner"],
-        "counter": "counter",
-        "pattern":["matches"]
+        "counter": ["count"],
+        "pattern": ["matches"]
       },
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+      "flow": {"start": {}, "middle": {}}
     },
     "pos": {
-      "args":{
-        "crf": "",
-        "hmm": "",
-        "stanford": "",
-        "fudan": ""
+      "args": {
+        "algorithm": [
+          "F_POS",
+          "crf", "percept",
+          "L_POS",
+          "S_POS"
+        ]
       },
-      "allowedNext":{
+      "allowedNext": {
         "nlp": ["pos", "ner"],
-        "counter": "counter",
-        "pattern":["matches"]
+        "counter": ["count"],
+        "pattern": ["matches"]
       },
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+      "flow": {"start": {}, "middle": {}}
     },
     "ner": {
-      "args":{
-        "crf": "",
-        "hmm": "",
-        "stanford": "",
-        "fudan": ""
+      "args": {
+        "algorithm": [
+          "F_NER",
+          "crf", "hmm",
+          "L_NER",
+          "S_NER"
+        ]
       },
-      "allowedNext":{
+      "allowedNext": {
         "nlp": ["pos", "ner"],
-        "counter": "counter",
-        "pattern":["matches"]
+        "counter": ["count"],
+        "pattern": ["matches"]
       },
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+      "flow": {"start": {}, "middle": {}}
     },
     "keyword": {
-      "args": "size",
-      "allowedNext":{
+      "args": {"size": "number"},
+      "allowedNext": {
         "nlp": ["pos", "ner"],
-        "pattern":["matches"]
+        "pattern": ["matches"]
       },
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+      "flow": {"start": {}, "middle": {}}
     },
     "summary": {
-      "args": "size",
+      "args": {"size": "number"},
       "allowedNext": {
-        "nlp": ["segment","keyword","summary","classifier"],
-        "pattern":["find"]
+        "nlp": ["segment", "keyword", "summary", "classifier"],
+        "pattern": ["find"]
       },
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+      "flow": {"start": {}, "middle": {}}
     },
     "classifier": {
       "args": {},
       "allowedNext": {},
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+      "flow": {"start": {}, "middle": {}}
+    },
+    "denpendency": {
+      "args": {},
+      "allowedNext": {},
+      "flow": {"start": {}, "middle": {}}
     }
   },
-  "counter":{
-    "args":{
-      "sort":["asc","desc"]
-    },
-    "allowedNext": {
-      "nlp": ["pos", "ner"],
-      "pattern":["matches","find"]
-    },
-    "flow":{
-      "start":{},
-      "middle":{}
-    }
-  },
-  "pattern":{
-    "matches":{
-      "args":{
-        "rule":[
-          {"regx":"\\d"}
-        ]
-      },
+  "counter": {
+    "count":{
+      "args": {"sort": ["asc", "desc"]},
       "allowedNext": {
-        "counter": "counter"
+        "nlp": ["pos", "ner"],
+        "pattern": ["matches", "find"]
       },
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
-    },
-    "find":{
-      "args":{
-        "rule":[
-          {"regx":"\\d"}
-        ]
-      },
-      "allowedNext": {
-        "counter": "counter"
-      },
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+      "flow": {"start": {}, "middle": {}}
     }
   },
-  "related":{
-    "baidu":{
-      "args":{},
-      "allowedNext": {},
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+  "pattern": {
+    "matches": {
+      "args": {"ruleId":"string"},
+      "allowedNext": {"counter": ["count"]},
+      "flow": {"start": {}, "middle": {}}
     },
-    "aminer":{
-      "args":{},
-      "allowedNext": {},
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
-    },
-    "journal":{
-      "args":{},
-      "allowedNext": {},
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
-    },
-    "literature":{
-      "args":{},
-      "allowedNext": {},
-      "flow":{
-        "start":{},
-        "middle":{}
-      }
+    "find": {
+      "args": {"ruleId":"string"},
+      "allowedNext": {"counter": ["count"]},
+      "flow": {"start": {}, "middle": {}}
     }
+  },
+  "related": {
+    "baidu": {
+      "args": {},
+      "allowedNext": {},
+      "flow": {
+        "start": {},
+        "middle": {}
+      }
+    },
+    "aminer": {
+      "args": {},
+      "allowedNext": {},
+      "flow": {
+        "start": {},
+        "middle": {}
+      }
+    },
+    "journal": {
+      "args": {},
+      "allowedNext": {},
+      "flow": {"start": {}, "middle": {}}
+    },
+    "literature": {
+      "args": {},
+      "allowedNext": {},
+      "flow": {"start": {}, "middle": {}}
+    }
+  },
+  "_label": {
+    "nlp": "自然语言处理",
+    "counter": "词频统计",
+    "pattern": "模式匹配",
+    "related": "关联分析",
+    "segment": "分词",
+    "pos": "词性",
+    "ner": "实体识别",
+    "keyword": "关键词",
+    "summary": "摘要",
+    "classifiar": "文本分类",
+    "denpendency": "依存分析",
+    "count": "词频统计",
+    "find": "查找",
+    "match": "全匹配",
+    "baidu": "百度源",
+    "aminer": "Aminer源",
+    "journal": "期刊",
+    "literature": "文献"
   }
 }

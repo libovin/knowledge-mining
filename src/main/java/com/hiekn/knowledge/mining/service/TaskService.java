@@ -23,5 +23,5 @@ public interface TaskService {
 
     Task getTask(String id);
 
-    RestData<List<Task>> getList();
+    RestData<Task> getList();
 }
