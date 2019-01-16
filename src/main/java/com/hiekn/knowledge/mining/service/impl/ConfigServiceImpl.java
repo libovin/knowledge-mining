@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 import com.google.common.io.Resources;
+import com.hiekn.knowledge.mining.bean.vo.Agrs;
+import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
 import com.hiekn.knowledge.mining.service.ConfigService;
 import com.hiekn.knowledge.mining.service.CounterService;
 import com.hiekn.knowledge.mining.service.NlpService;
@@ -59,103 +61,113 @@ public class ConfigServiceImpl implements ConfigService {
         return jsonObject;
     }
 
-    private Predicate<Map<String, ?>> segment = map -> "nlp".equals(map.get("model")) && "segment".equals(map.get("method"));
-    private Predicate<Map<String, ?>> pos = map -> "nlp".equals(map.get("model")) && "pos".equals(map.get("method"));
-    private Predicate<Map<String, ?>> ner = map -> "nlp".equals(map.get("model")) && "ner".equals(map.get("method"));
-    private Predicate<Map<String, ?>> keyword = map -> "nlp".equals(map.get("model")) && "keyword".equals(map.get("method"));
-    private Predicate<Map<String, ?>> summary = map -> "nlp".equals(map.get("model")) && "summary".equals(map.get("method"));
-    private Predicate<Map<String, ?>> classifier = map -> "nlp".equals(map.get("model")) && "classifier".equals(map.get("method"));
-    private Predicate<Map<String, ?>> count = map -> "counter".equals(map.get("model")) && "count".equals(map.get("method"));
-    private Predicate<Map<String, ?>> find = map -> "pattern".equals(map.get("model")) && "find".equals(map.get("method"));
-    private Predicate<Map<String, ?>> match = map -> "pattern".equals(map.get("model")) && "match".equals(map.get("method"));
-    private Predicate<Map<String, ?>> baidu = map -> "related".equals(map.get("model")) && "baidu".equals(map.get("method"));
-    private Predicate<Map<String, ?>> aminer = map -> "related".equals(map.get("model")) && "aminer".equals(map.get("method"));
-    private Predicate<Map<String, ?>> journal = map -> "related".equals(map.get("model")) && "journal".equals(map.get("method"));
-    private Predicate<Map<String, ?>> literature = map -> "related".equals(map.get("model")) && "literature".equals(map.get("method"));
+    private Predicate<ConfigReq> segment = map -> "nlp".equals(map.getModel()) && "segment".equals(map.getMethod());
+    private Predicate<ConfigReq> pos = map -> "nlp".equals(map.getModel()) && "pos".equals(map.getMethod());
+    private Predicate<ConfigReq> ner = map -> "nlp".equals(map.getModel()) && "ner".equals(map.getMethod());
+    private Predicate<ConfigReq> keyword = map -> "nlp".equals(map.getModel()) && "keyword".equals(map.getMethod());
+    private Predicate<ConfigReq> summary = map -> "nlp".equals(map.getModel()) && "summary".equals(map.getMethod());
+    private Predicate<ConfigReq> classifier = map -> "nlp".equals(map.getModel()) && "classifier".equals(map.getMethod());
+    private Predicate<ConfigReq> denpendency = map -> "nlp".equals(map.getMethod()) && "denpendency".equals(map.getMethod());
+    private Predicate<ConfigReq> count = map -> "counter".equals(map.getModel()) && "count".equals(map.getMethod());
+    private Predicate<ConfigReq> find = map -> "pattern".equals(map.getModel()) && "find".equals(map.getMethod());
+    private Predicate<ConfigReq> match = map -> "pattern".equals(map.getModel()) && "match".equals(map.getMethod());
+    private Predicate<ConfigReq> baidu = map -> "related".equals(map.getModel()) && "baidu".equals(map.getMethod());
+    private Predicate<ConfigReq> aminer = map -> "related".equals(map.getModel()) && "aminer".equals(map.getMethod());
+    private Predicate<ConfigReq> journal = map -> "related".equals(map.getModel()) && "journal".equals(map.getMethod());
+    private Predicate<ConfigReq> literature = map -> "related".equals(map.getModel()) && "literature".equals(map.getMethod());
 
-    private BiFunction<Map, Map, Object> segmentFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> segmentFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", nlpService.segment(req, args));
+        map.put("result", nlpService.segment(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> posFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> posFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", nlpService.pos(req, args));
+        map.put("result", nlpService.pos(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> nerFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> nerFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", nlpService.ner(req, args));
+        map.put("result", nlpService.ner(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> keywordFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> keywordFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", nlpService.keyword(req, args));
+        map.put("result", nlpService.keyword(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> summaryFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> summaryFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", nlpService.summary(req, args));
+        map.put("result", nlpService.summary(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> classifierFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> classifierFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", nlpService.classifier(req, args));
+        map.put("result", nlpService.classifier(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> countFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> denpendencyFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", counterService.count(req, args));
+        String kw = (String) req.get("content");
+        map.put("result", nlpService.denpendency(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> findFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> countFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", patternService.find(req, args));
+
+        map.put("result", counterService.count(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> matchFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> findFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
-        map.put("result", patternService.matches(req, args));
+        map.put("result", patternService.find(req, configReq));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> baiduFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> matchFun = (req, configReq) -> {
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("result", patternService.matches(req, configReq));
+        return map;
+    };
+
+    private BiFunction<Map, ConfigReq, Object> baiduFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
         String kw = (String) req.get("content");
         map.put("result", relatedService.extractAnalysis(kw));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> aminerFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> aminerFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
         String kw = (String) req.get("content");
         map.put("result", relatedService.extractAminer(kw));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> journalFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> journalFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
         String kw = (String) req.get("content");
         map.put("result", relatedService.extractJournal(kw));
         return map;
     };
 
-    private BiFunction<Map, Map, Object> literatureFun = (req, args) -> {
+    private BiFunction<Map, ConfigReq, Object> literatureFun = (req, configReq) -> {
         Map<String, Object> map = Maps.newHashMap();
         String kw = (String) req.get("content");
         map.put("result", relatedService.extractLiterature(kw));
         return map;
     };
 
-    public BiFunction getFunction(Map r) {
+
+    public BiFunction getFunction(ConfigReq r) {
         if (segment.test(r)) {
             return segmentFun;
         } else if (pos.test(r)) {
@@ -182,6 +194,8 @@ public class ConfigServiceImpl implements ConfigService {
             return journalFun;
         } else if (literature.test(r)) {
             return literatureFun;
+        } else if (denpendency.test(r)) {
+            return denpendencyFun;
         }
         return (x, y) -> x;
     }

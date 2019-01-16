@@ -3,6 +3,8 @@ package com.hiekn.knowledge.mining.service.impl;
 import com.hiekn.knowledge.mining.bean.bo.Counter;
 import com.hiekn.knowledge.mining.bean.bo.PatternFind;
 import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
+import com.hiekn.knowledge.mining.bean.vo.Agrs;
+import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
 import com.hiekn.knowledge.mining.service.NlpService;
 import com.hiekn.nlplab.bean.TermBean;
 import com.hiekn.nlplab.nlptools.ToolService;
@@ -20,14 +22,9 @@ public class NlpServiceImpl implements NlpService {
     private ToolService toolService;
 
     @Override
-    public List<String> segment(Map req, Map config) {
-        String input = (String) config.get("input");
-        Object s = config.get("algorithm");
-        String algorithm = null;
-        if (s != null) {
-            algorithm = (String) s;
-        }
-
+    public List<String> segment(Map req, ConfigReq config) {
+        String input = config.getInput();
+        String algorithm = config.getAlgorithm();
         Object o = req.get(input);
         if (o instanceof String) {
             String content = (String) o;
@@ -61,13 +58,9 @@ public class NlpServiceImpl implements NlpService {
 
 
     @Override
-    public List<TermBean> pos(Map req, Map config) {
-        String input = (String) config.get("input");
-        Object s = config.get("algorithm");
-        String algorithm = null;
-        if (s != null) {
-            algorithm = (String) s;
-        }
+    public List<TermBean> pos(Map req, ConfigReq config) {
+        String input = config.getInput();
+        String algorithm = config.getAlgorithm();
         Object o = req.get(input);
         if (o instanceof String) {
             String content = (String) o;
@@ -80,13 +73,9 @@ public class NlpServiceImpl implements NlpService {
     }
 
     @Override
-    public List<TermBean> ner(Map req, Map config) {
-        String input = (String) config.get("input");
-        Object s = config.get("algorithm");
-        String algorithm = null;
-        if (s != null) {
-            algorithm = (String) s;
-        }
+    public List<TermBean> ner(Map req, ConfigReq config) {
+        String input = config.getInput();
+        String algorithm = config.getAlgorithm();
         Object o = req.get(input);
         if (o instanceof String) {
             String content = (String) o;
@@ -99,13 +88,9 @@ public class NlpServiceImpl implements NlpService {
     }
 
     @Override
-    public List<String> keyword(Map req, Map config) {
-        String input = (String) config.get("input");
-        Object s = config.get("size");
-        Integer size = null;
-        if (s != null) {
-            size = (Integer) s;
-        }
+    public List<String> keyword(Map req, ConfigReq config) {
+        String input = config.getInput();
+        Integer size = config.getSize();
         Object o = req.get(input);
         if (o instanceof String) {
             String content = (String) o;
@@ -118,13 +103,9 @@ public class NlpServiceImpl implements NlpService {
     }
 
     @Override
-    public List<String> summary(Map req, Map config) {
-        String input = (String) config.get("input");
-        Object s = config.get("size");
-        Integer size = null;
-        if (s != null) {
-            size = (Integer) s;
-        }
+    public List<String> summary(Map req, ConfigReq config) {
+        String input = config.getInput();
+        Integer size = config.getSize();
         Object o = req.get(input);
         if (o instanceof String) {
             String content = (String) o;
@@ -134,8 +115,8 @@ public class NlpServiceImpl implements NlpService {
     }
 
     @Override
-    public String classifier(Map req, Map config) {
-        String input = (String) config.get("input");
+    public String classifier(Map req, ConfigReq config) {
+        String input = config.getInput();
         Object o = req.get(input);
         if (o instanceof String) {
             String content = (String) o;
@@ -145,8 +126,8 @@ public class NlpServiceImpl implements NlpService {
     }
 
     @Override
-    public String denpendency(Map req, Map config){
-        String input = (String) config.get("input");
+    public String denpendency(Map req, ConfigReq config) {
+        String input = config.getInput();
         Object o = req.get(input);
         if (o instanceof String) {
             String content = (String) o;

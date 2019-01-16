@@ -2,7 +2,7 @@ package com.hiekn.knowledge.mining.rest;
 
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
-import com.hiekn.knowledge.mining.bean.dao.PreProcess;
+import com.hiekn.knowledge.mining.bean.vo.PreProcess;
 import com.hiekn.knowledge.mining.bean.dao.Task;
 import com.hiekn.knowledge.mining.service.TaskService;
 import io.swagger.annotations.Api;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanMap;
 import org.springframework.stereotype.Component;
 
+import javax.validation.Valid;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -55,14 +56,14 @@ public class TaskRestApi {
     @POST
     @Path("preprocess")
     @ApiOperation("任务预执行")
-    public RestResp preprocess(PreProcess req) {
-        return new RestResp(taskService.preprocess(BeanMap.create(req)));
+    public RestResp preprocess(@Valid PreProcess req) {
+        return new RestResp(taskService.preprocess(req));
     }
 
     @POST
     @Path("save")
     @ApiOperation("任务保存/修改")
-    public RestResp save(Task req) {
+    public RestResp save(@Valid Task req) {
         return new RestResp(taskService.save(req));
     }
 

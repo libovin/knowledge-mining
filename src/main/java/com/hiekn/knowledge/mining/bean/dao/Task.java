@@ -1,5 +1,6 @@
 package com.hiekn.knowledge.mining.bean.dao;
 
+import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -20,6 +21,6 @@ public class Task extends Base{
     @ApiModelProperty(value = "配置列表")
     @Size(min = 1, message = "配置数量必须大于1")
     @NotNull(message = "配置不能为空")
-    private List config;
+    private List<ConfigReq> config;
 
 }

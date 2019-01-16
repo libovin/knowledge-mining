@@ -2,6 +2,7 @@ package com.hiekn.knowledge.mining.service;
 
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Task;
+import com.hiekn.knowledge.mining.bean.vo.PreProcess;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public interface TaskService {
 
     Task save(Task req);
 
-    Map preprocess(Map req);
+    Map preprocess(PreProcess req);
 
     void delete(String id);
 

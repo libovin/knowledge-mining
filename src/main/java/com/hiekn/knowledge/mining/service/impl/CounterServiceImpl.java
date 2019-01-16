@@ -2,9 +2,11 @@ package com.hiekn.knowledge.mining.service.impl;
 
 import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.bo.Counter;
+import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
 import com.hiekn.knowledge.mining.service.CounterService;
 import com.hiekn.nlplab.bean.TermBean;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.Map;
 public class CounterServiceImpl implements CounterService {
 
     @Override
-    public List<Counter> count(Map req, Map config) {
+    public List<Counter> count(Map req, ConfigReq config) {
         List<Counter> counters = new ArrayList<>();
         Map<String, BigDecimal> map = Maps.newHashMap();
         Object obj = req.get("result");
@@ -37,7 +39,11 @@ public class CounterServiceImpl implements CounterService {
                 BigDecimal f = v.divide(size, 5, BigDecimal.ROUND_HALF_EVEN);
                 counters.add(new Counter(l.getKey(), l.getValue().intValue(), f.doubleValue()));
             }
-            counters.sort(Comparator.comparing(Counter::getCount));
+            Comparator<Counter> c = Comparator.comparing(Counter::getCount);
+            if (StringUtils.hasText(config.getSort()) && "desc".equalsIgnoreCase(config.getSort())) {
+                c = c.reversed();
+            }
+            counters.sort(c);
         }
         return counters;
     }

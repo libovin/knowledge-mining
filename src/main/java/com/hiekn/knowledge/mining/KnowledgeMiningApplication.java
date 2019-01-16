@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.web.client.RestTemplate;
 
-@EnableApolloConfig
+//@EnableApolloConfig
 @SpringBootApplication
 @EnableMongoAuditing
 public class KnowledgeMiningApplication {

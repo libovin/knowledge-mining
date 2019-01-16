@@ -23,7 +23,7 @@ import org.springframework.util.Assert;
 import javax.annotation.PostConstruct;
 import java.util.Set;
 
-@Service
+//@Service
 public class DynamicLoggersConfig implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;

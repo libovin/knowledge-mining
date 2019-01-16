@@ -2,6 +2,7 @@ package com.hiekn.knowledge.mining.service.impl;
 
 import com.hiekn.knowledge.mining.bean.bo.PatternFind;
 import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
+import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
 import com.hiekn.knowledge.mining.service.PatternService;
 import com.hiekn.knowledge.mining.util.RuleUtils;
 import com.hiekn.nlplab.bean.TermBean;
@@ -17,51 +18,36 @@ import java.util.regex.Pattern;
 public class PatternServiceImpl implements PatternService {
 
     @Override
-    public Object find(Map req, Map config) {
+    public Object find(Map req, ConfigReq config) {
         List<PatternFind> arrayList = new ArrayList<>();
-        String input = (String) config.get("input");
-        String patternId = (String) config.get("pattern");
-        if ("content".equals(input)) {
-            Object o = req.get("content");
-            if (o instanceof String) {
-                String content = (String) o;
-                return find(content, patternId);
-            }
-        } else if ("result".equals(input)) {
-            Object o = req.get("result");
-            if (o instanceof String) {
-                String result = (String) o;
-                return find(result, patternId);
-            }
+        String input = config.getInput();
+        String ruleId = config.getRuleId();
+        Object o = req.get(input);
+        if (o instanceof String) {
+            String content = (String) o;
+            return find(content, ruleId);
         }
         return arrayList;
     }
 
     @Override
-    public Object matches(Map req, Map config) {
-
-        String input = (String) config.get("input");
-        String patternId = (String) config.get("pattern");
-
+    public Object matches(Map req, ConfigReq config) {
+        String input = config.getInput();
+        String ruleId = config.getRuleId();
         List<PatternMatches> patternList = new ArrayList<>();
-        if ("content".equals(input)) {
-            Object o = req.get("content");
-            if (o instanceof String) {
-                String content = (String) o;
-                return matches(content, patternId);
-            }
-        } else if ("result".equals(input)) {
-            Object o = req.get("content");
-            if (o instanceof List) {
-                List result = (List) o;
-                for (Object item : result) {
-                    if (item instanceof String) {
-                        String key = (String) item;
-                        patternList.add(matches(key, patternId));
-                    } else if (item instanceof TermBean) {
-                        TermBean termBean = (TermBean) item;
-                        patternList.add(matches(termBean.getTerm(), patternId));
-                    }
+        Object o = req.get(input);
+        if (o instanceof String) {
+            String content = (String) o;
+            return matches(content, ruleId);
+        } else if (o instanceof List) {
+            List result = (List) o;
+            for (Object item : result) {
+                if (item instanceof String) {
+                    String key = (String) item;
+                    patternList.add(matches(key, ruleId));
+                } else if (item instanceof TermBean) {
+                    TermBean termBean = (TermBean) item;
+                    patternList.add(matches(termBean.getTerm(), ruleId));
                 }
             }
         }

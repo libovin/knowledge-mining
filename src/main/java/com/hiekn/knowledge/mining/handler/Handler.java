@@ -1,14 +1,16 @@
 package com.hiekn.knowledge.mining.handler;
 
+import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
+
 import java.util.Map;
 import java.util.function.BiFunction;
 
 public class Handler {
     private Handler nextHandler;
-    private BiFunction<Map<String, ?>, Map<String, ?>, Map<String, ?>> doHandle;
-    private Map<String, ?> args;
+    private BiFunction<Map<String, ?>, ConfigReq, Map<String, ?>> doHandle;
+    private ConfigReq args;
 
-    public Map<String, ?> getArgs() {
+    public ConfigReq getArgs() {
         return args;
     }
 
@@ -17,13 +19,13 @@ public class Handler {
     }
 
     public Handler(
-            BiFunction<Map<String, ?>, Map<String, ?>, Map<String, ?>> doHandle,
-            Map<String, ?> args) {
+            BiFunction<Map<String, ?>, ConfigReq, Map<String, ?>> doHandle,
+            ConfigReq args) {
         this.doHandle = doHandle;
         this.args = args;
     }
 
-    public Map<String, ?> handle(Map<String, ?> request, Map<String, ?> args) {
+    public Map<String, ?> handle(Map<String, ?> request, ConfigReq args) {
         if (nextHandler == null) {
             return doHandle.apply(request, args);
         } else {
