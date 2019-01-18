@@ -1,9 +1,8 @@
 package com.hiekn.knowledge.mining.service.impl;
 
-import com.google.common.collect.Maps;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Task;
-import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
+import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.knowledge.mining.bean.vo.PreProcess;
 import com.hiekn.knowledge.mining.handler.Handler;
 import com.hiekn.knowledge.mining.repository.TaskRepository;

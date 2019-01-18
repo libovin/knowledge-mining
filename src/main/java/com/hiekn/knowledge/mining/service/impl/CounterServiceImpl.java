@@ -2,7 +2,7 @@ package com.hiekn.knowledge.mining.service.impl;
 
 import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.bo.Counter;
-import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
+import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.knowledge.mining.service.CounterService;
 import com.hiekn.nlplab.bean.TermBean;
 import org.springframework.stereotype.Service;

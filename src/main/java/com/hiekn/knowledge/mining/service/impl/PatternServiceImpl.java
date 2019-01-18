@@ -2,7 +2,7 @@ package com.hiekn.knowledge.mining.service.impl;
 
 import com.hiekn.knowledge.mining.bean.bo.PatternFind;
 import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
-import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
+import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.knowledge.mining.service.PatternService;
 import com.hiekn.knowledge.mining.util.RuleUtils;
 import com.hiekn.nlplab.bean.TermBean;

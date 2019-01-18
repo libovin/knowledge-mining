@@ -1,7 +1,7 @@
 package com.hiekn.knowledge.mining.service;
 
 
-import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
+import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.nlplab.bean.TermBean;
 
 import java.util.List;

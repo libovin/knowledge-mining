@@ -1,6 +1,6 @@
 package com.hiekn.knowledge.mining.handler;
 
-import com.hiekn.knowledge.mining.bean.vo.ConfigReq;
+import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 
 import java.util.Map;
 import java.util.function.BiFunction;

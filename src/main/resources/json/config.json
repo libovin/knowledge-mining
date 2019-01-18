@@ -8,12 +8,12 @@
           "L_MME",
           "N_SEG",
           "S_SEG"
-        ]
+        ],
+        "dictId": "string"
       },
       "allowedNext": {
         "nlp": ["pos", "ner"],
-        "counter": ["count"],
-        "pattern": ["matches"]
+        "tool": ["count","matches"]
       },
       "flow": {"start": {}, "middle": {}}
     },
@@ -28,8 +28,7 @@
       },
       "allowedNext": {
         "nlp": ["pos", "ner"],
-        "counter": ["count"],
-        "pattern": ["matches"]
+        "tool": ["count","matches"]
       },
       "flow": {"start": {}, "middle": {}}
     },
@@ -44,8 +43,7 @@
       },
       "allowedNext": {
         "nlp": ["pos", "ner"],
-        "counter": ["count"],
-        "pattern": ["matches"]
+        "counter": ["count","matches"]
       },
       "flow": {"start": {}, "middle": {}}
     },
@@ -53,7 +51,7 @@
       "args": {"size": "number"},
       "allowedNext": {
         "nlp": ["pos", "ner"],
-        "pattern": ["matches"]
+        "tool": ["matches"]
       },
       "flow": {"start": {}, "middle": {}}
     },
@@ -61,7 +59,7 @@
       "args": {"size": "number"},
       "allowedNext": {
         "nlp": ["segment", "keyword", "summary", "classifier"],
-        "pattern": ["find"]
+        "tool": ["find"]
       },
       "flow": {"start": {}, "middle": {}}
     },
@@ -76,25 +74,27 @@
       "flow": {"start": {}, "middle": {}}
     }
   },
-  "counter": {
+  "tool": {
     "count":{
       "args": {"sort": ["asc", "desc"]},
       "allowedNext": {
         "nlp": ["pos", "ner"],
-        "pattern": ["matches", "find"]
+        "tool": ["matches", "find"]
       },
       "flow": {"start": {}, "middle": {}}
-    }
-  },
-  "pattern": {
+    },
     "matches": {
       "args": {"ruleId":"string"},
-      "allowedNext": {"counter": ["count"]},
+      "allowedNext": {
+        "tool": ["count"]
+      },
       "flow": {"start": {}, "middle": {}}
     },
     "find": {
       "args": {"ruleId":"string"},
-      "allowedNext": {"counter": ["count"]},
+      "allowedNext": {
+        "tool": ["count"]
+      },
       "flow": {"start": {}, "middle": {}}
     }
   },
@@ -128,9 +128,8 @@
   },
   "_label": {
     "nlp": "自然语言处理",
-    "counter": "词频统计",
-    "pattern": "模式匹配",
-    "related": "关联分析",
+    "tool": "常用工具",
+    "related": "互联网挖掘",
     "segment": "分词",
     "pos": "词性",
     "ner": "实体识别",
