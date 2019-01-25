@@ -35,21 +35,21 @@ public class TaskRestApi {
     @Path("config")
     @ApiOperation("获取配置项")
     public RestResp getConfig() {
-        return new RestResp(taskService.getProp());
+        return new RestResp<>(taskService.getProp());
     }
 
     @GET
     @Path("list")
     @ApiOperation("任务列表")
-    public RestResp<RestData> getList() {
+    public RestResp<RestData<Task>> getList() {
         return new RestResp<>(taskService.getList());
     }
 
     @GET
     @Path("{id}")
     @ApiOperation("任务详情")
-    public RestResp getTask(@PathParam("id") String id) {
-        return new RestResp(taskService.getTask(id));
+    public RestResp<Task> getTask(@PathParam("id") String id) {
+        return new RestResp<>(taskService.getTask(id));
     }
 
 
@@ -57,14 +57,14 @@ public class TaskRestApi {
     @Path("preprocess")
     @ApiOperation("任务预执行")
     public RestResp preprocess(@Valid PreProcess req) {
-        return new RestResp(taskService.preprocess(req));
+        return new RestResp<>(taskService.preprocess(req));
     }
 
     @POST
     @Path("save")
     @ApiOperation("任务保存/修改")
     public RestResp save(@Valid Task req) {
-        return new RestResp(taskService.save(req));
+        return new RestResp<>(taskService.save(req));
     }
 
     @DELETE
@@ -72,7 +72,7 @@ public class TaskRestApi {
     @ApiOperation("任务删除")
     public RestResp delete(@PathParam("id") String id) {
         taskService.delete(id);
-        return new RestResp("删除成功");
+        return new RestResp<>("删除成功");
     }
 
     @POST
@@ -80,7 +80,7 @@ public class TaskRestApi {
     @ApiOperation("发布服务调用")
     public RestResp remote(@PathParam("serverId") String serverId,
                            @FormParam("context") @ApiParam(required = true) String context) {
-        return new RestResp(taskService.remote(serverId, context));
+        return new RestResp<>(taskService.remote(serverId, context));
     }
 
 }

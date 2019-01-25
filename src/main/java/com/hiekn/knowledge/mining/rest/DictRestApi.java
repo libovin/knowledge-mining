@@ -1,6 +1,7 @@
 package com.hiekn.knowledge.mining.rest;
 
 
+import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
 import com.hiekn.knowledge.mining.bean.dao.Dict;

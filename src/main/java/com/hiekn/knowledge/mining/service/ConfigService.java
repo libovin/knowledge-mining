@@ -8,5 +8,5 @@ import java.util.function.BiFunction;
 public interface ConfigService {
     Map getProp();
 
-    BiFunction getFunction(ConfigReq r);
+    BiFunction<Map<String ,?>, ConfigReq, Map<String ,?>> getFunction(ConfigReq r);
 }

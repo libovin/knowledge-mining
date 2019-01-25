@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 @Log
 public class RuleUtils {
 
-
     public static RuleUtils instance;
 
     @Autowired
@@ -42,7 +41,6 @@ public class RuleUtils {
         refreshRuleMap();
     }
 
-
     public void refreshDictMap() {
         dictMap = new ConcurrentHashMap<>();
         List<Dict> dicts = dictRepository.findAll();
@@ -55,13 +53,10 @@ public class RuleUtils {
         Dict dict = dictRepository.findOne(id);
         if (dict != null) {
             dictMap.put(id, String.join("|", dict.getText()));
-
         } else {
             log.warning("字典id：" + id + "--数据库未找到");
         }
-
     }
-
 
     public void refreshRuleMap() {
         ruleMap = new ConcurrentHashMap<>();

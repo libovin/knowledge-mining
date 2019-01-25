@@ -1,6 +1,7 @@
 package com.hiekn.knowledge.mining.bean.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Pattern;
 
 @Data
 @ApiModel
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ConfigReq {
 
     @ApiModelProperty(value = "模型", example = "nlp")
@@ -33,7 +35,7 @@ public class ConfigReq {
 
     @ApiModelProperty(value = "参数")
     @Valid
-    private Agrs agrs;
+    private ArgsReq agrs;
 
     @ApiModelProperty(hidden = true)
     @JsonIgnore

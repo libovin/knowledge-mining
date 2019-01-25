@@ -8,12 +8,15 @@ import com.hiekn.knowledge.mining.handler.Handler;
 import com.hiekn.knowledge.mining.repository.TaskRepository;
 import com.hiekn.knowledge.mining.service.ConfigService;
 import com.hiekn.knowledge.mining.service.TaskService;
+import com.hiekn.knowledge.mining.service.strategy.ModelEnum;
+import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanMap;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -35,7 +38,7 @@ public class TaskServiceImpl implements TaskService {
     public Map remote(String serverId, String context) {
         Task task = taskRepository.findOne(serverId);
         List<ConfigReq> config = task.getConfig();
-        return preprocess(new PreProcess(context,config));
+        return preprocess(new PreProcess(context, config));
     }
 
     @Override
@@ -52,27 +55,21 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Map preprocess(PreProcess req) {
         List<ConfigReq> list = req.getConfig();
-        Handler root = null;
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            ConfigReq configReq = list.get(i);
-
-                Handler handler = new Handler(configService.getFunction(configReq), configReq);
-                if (i == 0) {
-                    root = handler;
-                }
-                if (i + 1 < size) {
-                    ConfigReq nextConfigReq = list.get(i + 1);
-                    Handler nextHandler = new Handler(configService.getFunction(configReq), nextConfigReq);
-                    handler.setNextHandler(nextHandler);
-                } else {
-                    handler.setNextHandler(null);
-                }
-
-        }
+        Handler root = buildHandler(list, 0);
         Map result = root.handle(BeanMap.create(req), root.getArgs());
         result.put("content", req.getContent());
         return result;
+    }
+
+    private Handler buildHandler(List<ConfigReq> list, int i) {
+        Handler handler = null;
+        if (i < list.size()) {
+            ConfigReq configReq = list.get(i);
+
+            handler = new Handler(configService.getFunction(configReq), configReq);
+            handler.setNextHandler(buildHandler(list, i + 1));
+        }
+        return handler;
     }
 
     @Override

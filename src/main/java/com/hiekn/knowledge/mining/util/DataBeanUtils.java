@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class DataBeanUtils {
+
     public static <T> String[] getNullProperty(T entity, String... ignoreProperties) {
         PropertyDescriptor[] origDescriptors = BeanUtils.getPropertyDescriptors(entity.getClass());
         BeanMap beanMap = BeanMap.create(entity);
@@ -42,7 +43,6 @@ public class DataBeanUtils {
         return getNullProperty(o, null);
     }
 
-
     public static List<Map<String, String>> getClassProperty(Class cls) {
         List<Map<String, String>> list = new ArrayList<>();
         Field[] fields = cls.getDeclaredFields();
@@ -66,7 +66,6 @@ public class DataBeanUtils {
         List<String> list = new ArrayList<>();
         Field[] fields = cls.getDeclaredFields();
         for (Field field : fields) {
-
             String name = field.getName();
             list.add(name);
         }
