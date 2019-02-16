@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
  */
-package com.hiekn.knowledge.mining.util;
+package com.hiekn.knowledge.mining.filter;
 
 /**
  * 字节转换工具

@@ -27,13 +27,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-@Service
 public class RelatedServiceImpl implements RelatedService {
 
     private static final Logger logger = LoggerFactory.getLogger(RelatedServiceImpl.class);
 
-    @Autowired
     private RestTemplate restTemplate;
+
+    public RelatedServiceImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     private static final String BD_XUE_SHU_URL = "http://xueshu.baidu.com/";
     private static final String AMINER_URL = "https://api.aminer.cn/api/";

@@ -29,13 +29,9 @@ public class LoggingRequestFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         ContainerRequest request = (ContainerRequest) requestContext;
-        MultivaluedMap<String, String> multivaluedMap = request.getRequestHeaders();
-        log.info("SessionId: {}", servletRequest.getSession().getId());
-        for (Map.Entry<String, List<String>> entry : multivaluedMap.entrySet()) {
-            log.debug(" {}  {}", entry.getKey(), entry.getValue());
-        }
-        log.debug("远程调用地址：  {}", servletRequest.getRemoteAddr());
-        log.debug("开始计时: {}  URI: {}", new SimpleDateFormat("hh:mm:ss.SSS")
-                .format(System.currentTimeMillis()), request.getAbsolutePath());
+        log.info("SessionId:{} IP：{} 访问 URI: {} ",
+                servletRequest.getSession().getId(),
+                servletRequest.getRemoteAddr(),
+                request.getAbsolutePath());
     }
 }

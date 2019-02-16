@@ -143,6 +143,9 @@
     "baidu": "百度源",
     "aminer": "Aminer源",
     "journal": "期刊",
-    "literature": "文献"
+    "literature": "文献",
+    "algorithm": "算法",
+    "dictId": "词典",
+    "ruleId": "规则"
   }
 }

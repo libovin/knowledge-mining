@@ -1,7 +1,6 @@
 package com.hiekn.knowledge.mining.bean.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,7 +11,6 @@ import javax.validation.constraints.Pattern;
 
 @Data
 @ApiModel
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ConfigReq {
 
     @ApiModelProperty(value = "模型", example = "nlp")
@@ -35,13 +33,13 @@ public class ConfigReq {
 
     @ApiModelProperty(value = "参数")
     @Valid
-    private ArgsReq agrs;
+    private ArgsReq args;
 
     @ApiModelProperty(hidden = true)
     @JsonIgnore
     public String getAlgorithm() {
-        if (agrs != null) {
-            return this.agrs.getAlgorithm();
+        if (args != null) {
+            return this.args.getAlgorithm();
         }
         return null;
     }
@@ -49,8 +47,8 @@ public class ConfigReq {
     @ApiModelProperty(hidden = true)
     @JsonIgnore
     public Integer getSize() {
-        if (agrs != null) {
-            return this.agrs.getSize();
+        if (args != null) {
+            return this.args.getSize();
         }
         return null;
     }
@@ -58,8 +56,8 @@ public class ConfigReq {
     @ApiModelProperty(hidden = true)
     @JsonIgnore
     public String getSort() {
-        if (agrs != null) {
-            return this.agrs.getSort();
+        if (args != null) {
+            return this.args.getSort();
         }
         return null;
     }
@@ -67,8 +65,8 @@ public class ConfigReq {
     @ApiModelProperty(hidden = true)
     @JsonIgnore
     public String getRuleId() {
-        if (agrs != null) {
-            return this.agrs.getRuleId();
+        if (args != null) {
+            return this.args.getRuleId();
         }
         return null;
     }

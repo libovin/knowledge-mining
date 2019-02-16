@@ -1,4 +1,4 @@
-package com.hiekn.knowledge.mining.util;
+package com.hiekn.knowledge.mining.filter;
 
 import java.util.concurrent.ConcurrentHashMap;
 

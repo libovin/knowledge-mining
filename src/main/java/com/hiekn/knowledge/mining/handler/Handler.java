@@ -1,16 +1,23 @@
 package com.hiekn.knowledge.mining.handler;
 
+import com.hiekn.knowledge.mining.bean.bo.Counter;
+import com.hiekn.knowledge.mining.bean.bo.PatternFind;
+import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
+import com.hiekn.knowledge.mining.bean.dao.ArgsReq;
 import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
+import com.hiekn.nlplab.bean.TermBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
 public class Handler {
     private Handler nextHandler;
-    private BiFunction<Map<String, ?>, ConfigReq, Map<String, ?>> doHandle;
-    private ConfigReq args;
+    private BiFunction doHandle;
+    private ArgsReq args;
 
-    public ConfigReq getArgs() {
+    public ArgsReq getArgs() {
         return args;
     }
 
@@ -19,20 +26,55 @@ public class Handler {
     }
 
     public Handler(
-            BiFunction<Map<String, ?>, ConfigReq, Map<String, ?>> doHandle,
-            ConfigReq args) {
+            BiFunction doHandle,
+            ArgsReq args) {
         this.doHandle = doHandle;
         this.args = args;
     }
 
-    public Map<String, ?> handle(Map<String, ?> request, ConfigReq args) {
-        if (nextHandler == null) {
-            return doHandle.apply(request, args);
+
+    public Map handle(Map request, ArgsReq args) {
+        Map apply;
+        if (request.containsKey("result")) {
+            Object result = request.get("result");
+            if (result instanceof List) {
+                apply = (Map) doHandle.apply(getList((List) result), args);
+            } else {
+                apply = (Map) doHandle.apply(result, args);
+            }
         } else {
-            return nextHandler.handle(doHandle.apply(request, args), nextHandler.getArgs());
+            apply = (Map) doHandle.apply(request.get("content"), args);
+        }
+        if (nextHandler == null) {
+            return apply;
+        } else {
+            return nextHandler.handle(apply, nextHandler.getArgs());
         }
 
     }
 
+
+    private List<String> getList(List list) {
+        List<String> wordList = new ArrayList<>();
+        for (Object obj : list) {
+            if (obj instanceof String) {
+                String word = (String) obj;
+                wordList.add(word);
+            } else if (obj instanceof TermBean) {
+                TermBean word = (TermBean) obj;
+                wordList.add(word.getTerm());
+            } else if (obj instanceof PatternFind) {
+                PatternFind word = (PatternFind) obj;
+                wordList.add(word.getText());
+            } else if (obj instanceof PatternMatches) {
+                PatternMatches word = (PatternMatches) obj;
+                wordList.add(word.getText());
+            } else if (obj instanceof Counter) {
+                Counter word = (Counter) obj;
+                wordList.add(word.getWord());
+            }
+        }
+        return wordList;
+    }
 
 }

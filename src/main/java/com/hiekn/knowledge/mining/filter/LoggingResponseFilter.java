@@ -1,6 +1,5 @@
 package com.hiekn.knowledge.mining.filter;
 
-import com.hiekn.knowledge.mining.util.ByteUtils;
 import org.glassfish.jersey.server.ContainerRequest;
 import org.glassfish.jersey.server.ContainerResponse;
 import org.slf4j.Logger;
@@ -31,10 +30,9 @@ public class LoggingResponseFilter implements ContainerResponseFilter {
         ContainerRequest request = (ContainerRequest) requestContext;
         ContainerResponse response = (ContainerResponse) responseContext;
         Runtime runtime = Runtime.getRuntime();
-        servletRequest.getSession().getId();
-        log.debug("计时结束: {}  URI: {}  最大内存： {}  总内存: {}  已用内存: {}",
-                new SimpleDateFormat("hh:mm:ss.SSS").format(System.currentTimeMillis()),
-                request.getAbsolutePath(),
+        log.info("SessionId:{} IP: {} 访问结束, 最大内存：{} 总内存: {} 已用内存: {}",
+                servletRequest.getSession().getId(),
+                servletRequest.getRemoteAddr(),
                 ByteUtils.formatByteSize(runtime.maxMemory()),
                 ByteUtils.formatByteSize(runtime.totalMemory()),
                 ByteUtils.formatByteSize(runtime.totalMemory()-runtime.freeMemory()));

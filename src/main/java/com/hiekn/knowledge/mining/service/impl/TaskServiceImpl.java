@@ -8,15 +8,13 @@ import com.hiekn.knowledge.mining.handler.Handler;
 import com.hiekn.knowledge.mining.repository.TaskRepository;
 import com.hiekn.knowledge.mining.service.ConfigService;
 import com.hiekn.knowledge.mining.service.TaskService;
-import com.hiekn.knowledge.mining.service.strategy.ModelEnum;
-import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanMap;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
+
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -65,8 +63,7 @@ public class TaskServiceImpl implements TaskService {
         Handler handler = null;
         if (i < list.size()) {
             ConfigReq configReq = list.get(i);
-
-            handler = new Handler(configService.getFunction(configReq), configReq);
+            handler = new Handler(configService.getFun(configReq), configReq.getArgs());
             handler.setNextHandler(buildHandler(list, i + 1));
         }
         return handler;

@@ -9,11 +9,11 @@ import com.hiekn.knowledge.mining.service.strategy.method.ToolMethod;
 
 public enum ModelEnum {
 
-    NLP(NlpMethod.NULL),
+    NLP(NlpMethod.SEGMENT),
 
-    TOOL(ToolMethod.NULL),
+    TOOL(ToolMethod.COUNT),
 
-    RELATED(RelatedMethod.NULL),
+    RELATED(RelatedMethod.BAIDU),
 
     NULL(NullMethod.NULL);
 
@@ -23,6 +23,10 @@ public enum ModelEnum {
     }
 
     private MethodStrategy methods;
+
+    public MethodStrategy getMethods() {
+        return methods;
+    }
 
     public ModelEnum getModelStrategy(ConfigReq configReq) {
         for (ModelEnum modelEnum : ModelEnum.values()) {

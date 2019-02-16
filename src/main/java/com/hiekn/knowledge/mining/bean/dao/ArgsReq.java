@@ -1,6 +1,5 @@
 package com.hiekn.knowledge.mining.bean.dao;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -10,7 +9,6 @@ import javax.validation.constraints.Pattern;
 
 @Data
 @ApiModel
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ArgsReq {
 
     @ApiModelProperty(value = "算法", example = "crf")

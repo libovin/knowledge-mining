@@ -6,15 +6,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.CompositePropertySource;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertySource;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
-import org.springframework.web.client.RestTemplate;
 
-@EnableApolloConfig({"knowledge-mining","comm-data"})
+
+@EnableApolloConfig
 @SpringBootApplication
 @EnableMongoAuditing
 public class KnowledgeMiningApplication {
@@ -35,11 +34,6 @@ public class KnowledgeMiningApplication {
                 }
             }
         }
-    }
-
-    @Bean
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
     }
 }
 
