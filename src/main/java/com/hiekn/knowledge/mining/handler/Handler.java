@@ -4,7 +4,6 @@ import com.hiekn.knowledge.mining.bean.bo.Counter;
 import com.hiekn.knowledge.mining.bean.bo.PatternFind;
 import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
 import com.hiekn.knowledge.mining.bean.dao.ArgsReq;
-import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.nlplab.bean.TermBean;
 
 import java.util.ArrayList;
@@ -50,7 +49,6 @@ public class Handler {
         } else {
             return nextHandler.handle(apply, nextHandler.getArgs());
         }
-
     }
 
 

@@ -13,7 +13,7 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
 
-@EnableApolloConfig
+//@EnableApolloConfig
 @SpringBootApplication
 @EnableMongoAuditing
 public class KnowledgeMiningApplication {
