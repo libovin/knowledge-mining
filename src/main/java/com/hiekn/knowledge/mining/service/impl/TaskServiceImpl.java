@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanMap;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,10 @@ public class TaskServiceImpl implements TaskService {
     public Map remote(String serverId, String context) {
         Task task = taskRepository.findOne(serverId);
         List<ConfigReq> config = task.getConfig();
-        return preprocess(new PreProcess(context, config));
+        Handler root = buildHandler(config, 0);
+        List resultList =new ArrayList();
+        Map result = root.handle(BeanMap.create(new PreProcess(context, config)), root.getArgs(),resultList);
+        return result;
     }
 
     @Override
@@ -45,6 +49,7 @@ public class TaskServiceImpl implements TaskService {
             Task task = taskRepository.findOne(req.getId());
             task.setName(req.getName());
             task.setConfig(req.getConfig());
+            task.setRemark(req.getRemark());
             return taskRepository.save(task);
         }
         return taskRepository.save(req);
@@ -54,8 +59,10 @@ public class TaskServiceImpl implements TaskService {
     public Map preprocess(PreProcess req) {
         List<ConfigReq> list = req.getConfig();
         Handler root = buildHandler(list, 0);
-        Map result = root.handle(BeanMap.create(req), root.getArgs());
+        List resultList =new ArrayList();
+        Map result = root.handle(BeanMap.create(req), root.getArgs(),resultList);
         result.put("content", req.getContent());
+        result.put("stepResult",resultList);
         return result;
     }
 

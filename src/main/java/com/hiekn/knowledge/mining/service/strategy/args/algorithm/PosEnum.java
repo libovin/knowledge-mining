@@ -13,55 +13,75 @@ import java.util.function.BiFunction;
 
 public enum PosEnum implements ArgsStrategy {
     F_POS() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.posTaggerService(Config.FuDan, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, (String) x));
+                }
                 return map;
             };
         }
     },
 
     crf() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.posTaggerService(Config.HANLP, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) x));
+                }
                 return map;
             };
         }
     },
     percept() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.posTaggerService(Config.HANLP, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) x));
+                }
                 return map;
             };
         }
     },
 
     L_POS() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.posTaggerService(Config.LTP, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (String) x));
+                }
                 return map;
             };
         }
     },
 
-    S_POS () {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+    S_POS() {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.posTaggerService(Config.STANFORD, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (String) x));
+                }
                 return map;
             };
         }
     },
 
-    NULL () {
+    NULL() {
         public BiFunction<List<String>, ArgsReq, Map> getFun() {
             return (List<String> x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();

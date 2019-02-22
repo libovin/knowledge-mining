@@ -6,15 +6,17 @@ import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.knowledge.mining.service.ToolService;
 import com.hiekn.knowledge.mining.service.impl.ToolServiceImpl;
 import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
+import com.hiekn.knowledge.mining.service.strategy.args.argsnull.ArgsNullEnum;
 import com.hiekn.knowledge.mining.service.strategy.args.regex.RegexEnum;
 import com.hiekn.knowledge.mining.service.strategy.args.size.SizeEnum;
+import com.hiekn.knowledge.mining.service.strategy.args.sort.SortEnum;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
 public enum ToolMethod implements MethodStrategy {
-    COUNT(SizeEnum.SIZE) {
+    COUNT(ArgsNullEnum.NULL) {
         public BiFunction<List<String>, ArgsReq, Map> getFun() {
             return (List<String> x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();

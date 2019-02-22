@@ -1,5 +1,5 @@
 {
-  "nlp": {
+  "nlpmodel": {
     "segment": {
       "args": {
         "algorithm": [
@@ -12,7 +12,7 @@
         "dictId": "string"
       },
       "allowedNext": {
-        "nlp": ["pos", "ner"],
+        "nlpmodel": ["pos", "ner"],
         "tool": ["count","matches"]
       },
       "flow": {"start": {}, "middle": {}}
@@ -27,7 +27,7 @@
         ]
       },
       "allowedNext": {
-        "nlp": ["pos", "ner"],
+        "nlpmodel": ["ner"],
         "tool": ["count","matches"]
       },
       "flow": {"start": {}, "middle": {}}
@@ -42,7 +42,7 @@
         ]
       },
       "allowedNext": {
-        "nlp": ["pos", "ner"],
+        "nlpmodel": ["ner"],
         "counter": ["count","matches"]
       },
       "flow": {"start": {}, "middle": {}}
@@ -50,7 +50,7 @@
     "keyword": {
       "args": {"size": "number"},
       "allowedNext": {
-        "nlp": ["pos", "ner"],
+        "nlpmodel": ["pos", "ner"],
         "tool": ["matches"]
       },
       "flow": {"start": {}, "middle": {}}
@@ -58,7 +58,7 @@
     "summary": {
       "args": {"size": "number"},
       "allowedNext": {
-        "nlp": ["segment", "keyword", "summary", "classifier"],
+        "nlpmodel": ["segment", "keyword", "summary", "classifier"],
         "tool": ["find"]
       },
       "flow": {"start": {}, "middle": {}}
@@ -78,7 +78,7 @@
     "count":{
       "args": {"sort": ["asc", "desc"]},
       "allowedNext": {
-        "nlp": ["pos", "ner"],
+        "nlpmodel": ["pos", "ner"],
         "tool": ["matches", "find"]
       },
       "flow": {"start": {}, "middle": {}}
@@ -127,7 +127,7 @@
     }
   },
   "_label": {
-    "nlp": "自然语言处理",
+    "nlpmodel": "自然语言分析",
     "tool": "常用工具",
     "related": "互联网挖掘",
     "segment": "分词",
@@ -135,17 +135,21 @@
     "ner": "实体识别",
     "keyword": "关键词",
     "summary": "摘要",
-    "classifiar": "文本分类",
+    "classifier": "文本分类",
     "denpendency": "依存分析",
     "count": "词频统计",
-    "find": "查找",
-    "match": "全匹配",
+    "find": "部分匹配",
+    "matches": "全匹配",
     "baidu": "百度源",
     "aminer": "Aminer源",
     "journal": "期刊",
     "literature": "文献",
     "algorithm": "算法",
     "dictId": "词典",
-    "ruleId": "规则"
+    "ruleId": "规则",
+    "sort": "排序",
+    "asc": "从小到大",
+    "desc": "从大到小",
+    "size": "数量"
   }
 }

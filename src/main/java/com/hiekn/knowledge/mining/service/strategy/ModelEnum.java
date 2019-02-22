@@ -9,7 +9,7 @@ import com.hiekn.knowledge.mining.service.strategy.method.ToolMethod;
 
 public enum ModelEnum {
 
-    NLP(NlpMethod.SEGMENT),
+    NLPMODEL(NlpMethod.SEGMENT),
 
     TOOL(ToolMethod.COUNT),
 

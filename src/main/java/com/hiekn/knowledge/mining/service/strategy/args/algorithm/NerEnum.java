@@ -13,48 +13,68 @@ import java.util.function.BiFunction;
 
 public enum NerEnum implements ArgsStrategy {
     F_NER() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.nerService(Config.FuDan, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.FuDan, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.FuDan, (String) x));
+                }
                 return map;
             };
         }
     },
 
     crf() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.nerService(Config.HANLP, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) x));
+                }
                 return map;
             };
         }
     },
     hmm() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.nerService(Config.HANLP, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) x));
+                }
                 return map;
             };
         }
     },
 
     L_NER() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.nerService(Config.LTP, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.LTP, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.LTP, (String) x));
+                }
                 return map;
             };
         }
     },
     S_NER() {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object x, ArgsReq args) -> {
                 Map map = Maps.newHashMap();
-                map.put("result", nlpToolService.nerService(Config.STANFORD, x, this.name()));
+                if (x instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.STANFORD, (List<String>) x, this.name()));
+                } else if (x instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.STANFORD, (String) x));
+                }
                 return map;
             };
         }

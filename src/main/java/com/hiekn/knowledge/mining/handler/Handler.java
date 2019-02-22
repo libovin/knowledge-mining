@@ -32,7 +32,7 @@ public class Handler {
     }
 
 
-    public Map handle(Map request, ArgsReq args) {
+    public Map handle(Map request, ArgsReq args ,List list) {
         Map apply;
         if (request.containsKey("result")) {
             Object result = request.get("result");
@@ -44,10 +44,11 @@ public class Handler {
         } else {
             apply = (Map) doHandle.apply(request.get("content"), args);
         }
+        list.add(apply.get("result"));
         if (nextHandler == null) {
             return apply;
         } else {
-            return nextHandler.handle(apply, nextHandler.getArgs());
+            return nextHandler.handle(apply, nextHandler.getArgs(), list);
         }
     }
 
