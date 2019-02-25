@@ -58,7 +58,7 @@
     "summary": {
       "args": {"size": "number"},
       "allowedNext": {
-        "nlpmodel": ["segment", "keyword", "summary", "classifier"],
+        "nlpmodel": [],
         "tool": ["find"]
       },
       "flow": {"start": {}, "middle": {}}

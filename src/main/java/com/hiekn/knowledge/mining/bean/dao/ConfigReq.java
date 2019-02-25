@@ -14,8 +14,8 @@ import javax.validation.constraints.Pattern;
 public class ConfigReq {
 
     @ApiModelProperty(value = "模型", example = "nlp")
-    @Pattern(regexp = "(nlp|tool|related)",
-            message = "模型必须为 nlp|counter|pattern|related")
+    @Pattern(regexp = "(nlpmodel|tool|related)",
+            message = "模型必须为 nlpmodel|counter|pattern|related")
     @NotBlank
     private String model;
 
