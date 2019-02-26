@@ -17,7 +17,7 @@ public class ArgsReq {
     private String algorithm;
 
     @ApiModelProperty(value = "数量")
-    @Min(1)
+    @Min(value = 1, message = "数量必须大于1")
     private Integer size;
 
     @ApiModelProperty(value = "规则Id")

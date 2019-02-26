@@ -81,6 +81,7 @@
         "nlpmodel": ["pos", "ner"],
         "tool": ["matches", "find"]
       },
+      "default": "not-show",
       "flow": {"start": {}, "middle": {}}
     },
     "matches": {

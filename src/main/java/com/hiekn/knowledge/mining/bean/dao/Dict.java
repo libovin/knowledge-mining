@@ -10,11 +10,11 @@ import java.util.LinkedHashSet;
 @Data
 @Document
 @ApiModel
-public class Dict extends Base{
+public class Dict extends Base {
 
     @ApiModelProperty(value = "字典名称")
     private String name;
 
     @ApiModelProperty(value = "字典内容")
-    private LinkedHashSet<String> text;
+    private LinkedHashSet<String> text = new LinkedHashSet<>();
 }

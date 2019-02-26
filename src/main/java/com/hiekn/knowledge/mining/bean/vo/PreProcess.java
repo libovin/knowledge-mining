@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,6 +19,7 @@ import java.util.List;
 public class PreProcess {
 
     @ApiModelProperty(value = "待处理文本")
+    @NotBlank(message = "内容不能为空")
     private String content;
 
     @ApiModelProperty(value = "配置列表")

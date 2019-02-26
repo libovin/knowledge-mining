@@ -20,7 +20,7 @@ public class CheckRule {
 
     @Valid
     @ApiModelProperty(value = "规则")
-    @Size(min = 1, message = "规则数量必须大于1")
-    @NotNull(message = "校验规则不能为空")
+    @Size(min = 1, message = "规则定义没填")
+    @NotNull(message = "规则定义没填")
     private List<RuleModel> rules;
 }
