@@ -39,7 +39,7 @@ public class TaskServiceImpl implements TaskService {
         List<ConfigReq> config = task.getConfig();
         Handler root = buildHandler(config, 0);
         List resultList =new ArrayList();
-        Map result = root.handle(BeanMap.create(new PreProcess(context, config)), root.getArgs(),resultList);
+        Map result = root.handle(BeanMap.create(new PreProcess(context.trim(), config)), root.getArgs(),resultList);
         return result;
     }
 
@@ -61,7 +61,7 @@ public class TaskServiceImpl implements TaskService {
         Handler root = buildHandler(list, 0);
         List resultList =new ArrayList();
         Map result = root.handle(BeanMap.create(req), root.getArgs(),resultList);
-        result.put("content", req.getContent());
+        result.put("content", req.getContent().trim());
         result.put("stepResult",resultList);
         return result;
     }

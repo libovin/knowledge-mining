@@ -12,7 +12,7 @@
         "dictId": "string"
       },
       "allowedNext": {
-        "nlpmodel": ["pos", "ner"],
+        "nlpmodel": ["pos", "ner","keyword"],
         "tool": ["count","matches"]
       },
       "flow": {"start": {}, "middle": {}}
@@ -81,7 +81,7 @@
         "nlpmodel": ["pos", "ner"],
         "tool": ["matches", "find"]
       },
-      "default": "not-show",
+      "default": false,
       "flow": {"start": {}, "middle": {}}
     },
     "matches": {

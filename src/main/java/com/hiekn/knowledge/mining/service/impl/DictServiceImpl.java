@@ -76,5 +76,4 @@ public class DictServiceImpl implements DictService {
         return dictRepository.save(dict);
     }
 
-
 }

@@ -19,7 +19,11 @@ public enum PosEnum implements ArgsStrategy {
                 if (x instanceof List) {
                     map.put("result", nlpToolService.posTaggerService(Config.FuDan, (List<String>) x, this.name()));
                 } else if (x instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, (String) x));
+                    String str = (String) x;
+                    if (str.endsWith("\n")) {
+                        str = str.replace("\n", "");
+                    }
+                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, str));
                 }
                 return map;
             };

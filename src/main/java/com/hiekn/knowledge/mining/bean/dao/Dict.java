@@ -16,5 +16,5 @@ public class Dict extends Base {
     private String name;
 
     @ApiModelProperty(value = "字典内容")
-    private LinkedHashSet<String> text = new LinkedHashSet<>();
+    private LinkedHashSet<String> text;
 }
