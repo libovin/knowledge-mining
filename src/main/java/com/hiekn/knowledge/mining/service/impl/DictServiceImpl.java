@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 
 @Service("dictService")
@@ -30,6 +31,12 @@ public class DictServiceImpl implements DictService {
         Dict targe = new Dict();
         Map<String, Object> map = QueryUtils.trastation(bean, targe);
         Example<Dict> example = Example.of((Dict) map.get("bean"));
+        List<Dict> list= dictRepository.findAll(example);
+        for (Dict dict : list) {
+            if(dict.getText() == null) {
+               dict.setText(new LinkedHashSet<>());
+            }
+        }
         return new RestData<>(dictRepository.findAll(example), dictRepository.count(example));
     }
 
