@@ -76,12 +76,8 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(url + "/Swagger.html",
-                        url + "/swagger.json",
-                        "/Swagger/**")
-                .permitAll()
                 .anyRequest()
-                .authenticated();
+                .permitAll();
         http.addFilterAfter(authenticationTokenFilterBean(), CorsFilter.class);
     }
 }

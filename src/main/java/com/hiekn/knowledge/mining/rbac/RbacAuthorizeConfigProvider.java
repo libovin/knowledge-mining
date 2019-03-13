@@ -14,7 +14,7 @@ public class RbacAuthorizeConfigProvider {
 
 	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		config
-			.anyRequest()
+			.antMatchers()
 				.access("@rbacService.hasPermission(request, authentication)");
 		return true;
 	}
