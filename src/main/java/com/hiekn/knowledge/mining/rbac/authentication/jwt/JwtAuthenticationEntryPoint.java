@@ -2,7 +2,7 @@ package com.hiekn.knowledge.mining.rbac.authentication.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
-import com.hiekn.knowledge.mining.rbac.authentication.InvalidAuthenticationTokenException;
+import com.hiekn.boot.autoconfigure.web.exception.InvalidAuthenticationTokenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -3,7 +3,7 @@ package com.hiekn.knowledge.mining.rbac.authentication.jwt;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.hiekn.boot.autoconfigure.jwt.JwtProperties;
 import com.hiekn.boot.autoconfigure.jwt.JwtToken;
-import com.hiekn.knowledge.mining.rbac.authentication.InvalidAuthenticationTokenException;
+import com.hiekn.boot.autoconfigure.web.exception.InvalidAuthenticationTokenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -26,7 +26,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         String authenticationToken = (String) authentication.getCredentials();
-        JwtToken jwtToken = new JwtToken(jwtProperties); //authenticationTokenService.parseToken(authenticationToken);
+        JwtToken jwtToken = new JwtToken(jwtProperties);
         String userId;
         try {
             userId = jwtToken.checkToken(authenticationToken).getClaim("userId").asString();

@@ -1,10 +1,8 @@
 package com.hiekn.knowledge.mining.rbac.service.impl;
 
-import com.hiekn.knowledge.mining.rbac.domain.RoleUserDo;
-import com.hiekn.knowledge.mining.rbac.domain.UserDo;
+import com.hiekn.knowledge.mining.rbac.domain.User;
 import com.hiekn.knowledge.mining.rbac.dto.UserCondition;
 import com.hiekn.knowledge.mining.rbac.dto.UserInfo;
-import com.hiekn.knowledge.mining.rbac.repository.RoleUserRepository;
 import com.hiekn.knowledge.mining.rbac.repository.UserRepository;
 import com.hiekn.knowledge.mining.rbac.service.UserService;
 import org.springframework.beans.BeanUtils;
@@ -19,9 +17,6 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    private RoleUserRepository roleUserRepository;
-
-    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -29,24 +24,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfo create(UserInfo userInfo) {
-        UserDo userDo = new UserDo();
+        User userDo = new User();
         BeanUtils.copyProperties(userInfo, userDo);
-        userDo.setPassword(passwordEncoder.encode("123456"));
-        UserDo user = userRepository.save(userDo);
+        User user = userRepository.save(userDo);
         createRoleUser(userInfo, user);
         return userInfo;
     }
 
-    private void createRoleUser(UserInfo userInfo, UserDo userDo) {
-        RoleUserDo ruleUserDo = new RoleUserDo();
-        ruleUserDo.setRoleId(userInfo.getRoleId());
-        ruleUserDo.setUserId(userDo.getId());
-        roleUserRepository.save(ruleUserDo);
+    private void createRoleUser(UserInfo userInfo, User userDo) {
+
     }
 
     @Override
     public UserInfo update(UserInfo userInfo) {
-        UserDo userDo = userRepository.findOne(userInfo.getId());
+        User userDo = userRepository.findOne(userInfo.getId());
         BeanUtils.copyProperties(userInfo, userDo);
         createRoleUser(userInfo, userDo);
         return userInfo;

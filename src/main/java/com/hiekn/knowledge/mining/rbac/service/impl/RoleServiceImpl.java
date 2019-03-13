@@ -2,8 +2,7 @@ package com.hiekn.knowledge.mining.rbac.service.impl;
 
 
 import com.hiekn.knowledge.mining.rbac.dto.RoleInfo;
-import com.hiekn.knowledge.mining.rbac.repository.LinkRepository;
-import com.hiekn.knowledge.mining.rbac.repository.RoleLinkRepository;
+import com.hiekn.knowledge.mining.rbac.repository.PermissionRepository;
 import com.hiekn.knowledge.mining.rbac.repository.RoleRepository;
 import com.hiekn.knowledge.mining.rbac.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,7 @@ public class RoleServiceImpl implements RoleService {
 	private RoleRepository roleRepository;
 	
 	@Autowired
-	private LinkRepository linkRepository;
-	
-	@Autowired
-	private RoleLinkRepository roleLinkRepository;
+	private PermissionRepository linkRepository;
 
 	@Override
 	public RoleInfo create(RoleInfo roleInfo) {

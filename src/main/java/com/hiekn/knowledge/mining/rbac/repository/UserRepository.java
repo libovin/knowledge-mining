@@ -1,9 +1,9 @@
 package com.hiekn.knowledge.mining.rbac.repository;
 
-import com.hiekn.knowledge.mining.rbac.domain.UserDo;
+import com.hiekn.knowledge.mining.rbac.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UserRepository extends MongoRepository<UserDo, String> {
+public interface UserRepository extends MongoRepository<User, String> {
 
-    UserDo findByUsername(String username);
+    User findByUserId(String userId);
 }

@@ -70,22 +70,22 @@ public final class AuthenticatedUserDetails implements UserDetails, CredentialsC
         private Set<GrantedAuthority> authorities;
         private boolean active;
 
-        public Builder withUsername(String username) {
+        public Builder username(String username) {
             this.username = username;
             return this;
         }
 
-        public Builder withPassword(String password) {
+        public Builder password(String password) {
             this.password = password;
             return this;
         }
 
-        public Builder withAuthorities(Set<GrantedAuthority> authorities) {
+        public Builder authorities(Set<GrantedAuthority> authorities) {
             this.authorities = authorities;
             return this;
         }
 
-        public Builder withActive(boolean active) {
+        public Builder active(boolean active) {
             this.active = active;
             return this;
         }

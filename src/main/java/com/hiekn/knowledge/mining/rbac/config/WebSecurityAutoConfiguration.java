@@ -64,24 +64,24 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
 
         http
-            .cors()
+                .cors()
                 .configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
-                    .and()
-            .csrf()
+                .and()
+                .csrf()
                 .disable()
-            .exceptionHandling()
+                .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
-            .and()
+                .and()
                 .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeRequests()
-                    .antMatchers(url + "/Swagger.html",
-                            url + "/swagger.json",
-                            "/Swagger/**")
-                        .permitAll()
+                .antMatchers(url + "/Swagger.html",
+                        url + "/swagger.json",
+                        "/Swagger/**")
+                .permitAll()
                 .anyRequest()
-                    .authenticated();
+                .authenticated();
         http.addFilterAfter(authenticationTokenFilterBean(), CorsFilter.class);
     }
 }

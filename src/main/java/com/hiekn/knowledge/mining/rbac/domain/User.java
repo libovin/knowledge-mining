@@ -4,23 +4,17 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
-@Document
-public class LinkDo {
+import java.util.LinkedHashSet;
 
+@Data
+@Document(collection = "user_dao")
+public class User {
     @Id
     private String id;
-
+    private String userId;
     private String name;
-
-    private String link;
-
-    private String icon;
-
-    private LinkType type;
-
-    private String parentId;
-
-    private int sort;
+    private String email;
+    private String phone;
+    private LinkedHashSet<String> rules;
 
 }
