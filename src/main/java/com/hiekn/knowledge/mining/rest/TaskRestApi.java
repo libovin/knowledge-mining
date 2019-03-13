@@ -2,20 +2,21 @@ package com.hiekn.knowledge.mining.rest;
 
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
-import com.hiekn.knowledge.mining.bean.vo.PreProcess;
 import com.hiekn.knowledge.mining.bean.dao.Task;
+import com.hiekn.knowledge.mining.bean.vo.PreProcess;
 import com.hiekn.knowledge.mining.service.TaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.beans.BeanMap;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -27,6 +28,9 @@ import javax.ws.rs.core.MediaType;
 @Api("知识挖掘任务")
 @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 public class TaskRestApi {
+
+    @HeaderParam(HttpHeaders.AUTHORIZATION)
+    private String authorization;
 
     @Autowired
     private TaskService taskService;

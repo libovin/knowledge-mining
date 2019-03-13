@@ -1,46 +1,40 @@
 package com.hiekn.knowledge.mining.rbac.authentication.jwt;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.hiekn.boot.autoconfigure.jwt.JwtProperties;
 import com.hiekn.boot.autoconfigure.jwt.JwtToken;
+import com.hiekn.knowledge.mining.rbac.authentication.InvalidAuthenticationTokenException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.StringUtils;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class JwtAuthenticationProvider implements AuthenticationProvider {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtProperties jwtProperties;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        JwtAuthenticationToken authenticationToken = (JwtAuthenticationToken) authentication;
-
-        JwtToken jwtToken= (JwtToken) authenticationToken.getPrincipal();
-
-        if(StringUtils.isEmpty(jwtToken.getToken())){
-            throw new InternalAuthenticationServiceException("无法获取用户信息");
+        String authenticationToken = (String) authentication.getCredentials();
+        JwtToken jwtToken = new JwtToken(jwtProperties); //authenticationTokenService.parseToken(authenticationToken);
+        String userId;
+        try {
+            userId = jwtToken.checkToken(authenticationToken).getClaim("userId").asString();
+        } catch (JWTDecodeException e) {
+            throw new InvalidAuthenticationTokenException("Token验证失败", e);
         }
-        String userId = jwtToken.getUserIdAsString();
-        System.out.println(userId);
-        // Set<String> userIds = usersConnectionRepository.findUserIdsConnectedTo(authenticationToken.getProviderId(), providerUserIds);
-
-//        if (CollectionUtils.isEmpty(userIds) || userIds.size() != 1) {
-//            throw new InternalAuthenticationServiceException("无法获取用户信息");
-//        }
-
-        // String userId = userIds.iterator().next();
-
-        UserDetails user = null;// = userDetailsService.loadUserByUserId(userId);
-
-        if (user == null) {
-            throw new InternalAuthenticationServiceException("无法获取用户信息");
-        }
-
-        JwtAuthenticationToken authenticationResult = new JwtAuthenticationToken(user, user.getAuthorities());
-
-        authenticationResult.setDetails(authenticationToken.getDetails());
-
-        return authenticationResult;
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(userId);
+        return new JwtAuthenticationToken(userDetails, userDetails.getAuthorities());
     }
 
     @Override

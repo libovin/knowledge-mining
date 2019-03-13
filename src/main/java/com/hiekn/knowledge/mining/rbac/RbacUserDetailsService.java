@@ -20,7 +20,9 @@ public class RbacUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("表单登录用户名:" + username);
         UserDo userDo = userRepository.findByUsername(username);
+        if(userDo == null) {
 
+        }
         return userDo;
     }
 

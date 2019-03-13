@@ -10,12 +10,14 @@ import com.hiekn.knowledge.mining.service.RuleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -30,6 +32,9 @@ import java.util.Map;
 @Api("规则")
 @Produces(MediaType.APPLICATION_JSON)
 public class RuleRestApi {
+
+    @HeaderParam(HttpHeaders.AUTHORIZATION)
+    private String authorization;
 
     @Autowired
     private RuleService ruleService;
