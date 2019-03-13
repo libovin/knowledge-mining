@@ -12,11 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
-/**
- * @author zhailiang
- *
- */
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {

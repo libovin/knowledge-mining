@@ -5,10 +5,6 @@ import com.hiekn.knowledge.mining.rbac.service.LinkService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author zhailiang
- *
- */
 @Service
 @Transactional
 public class LinkServiceImpl implements LinkService {

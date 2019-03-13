@@ -1,4 +1,3 @@
-
 package com.hiekn.knowledge.mining.rbac.repository;
 
 import com.hiekn.knowledge.mining.rbac.domain.RoleLinkDo;

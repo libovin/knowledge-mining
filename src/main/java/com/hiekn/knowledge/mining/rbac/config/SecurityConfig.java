@@ -1,4 +1,4 @@
-package com.hiekn.knowledge.mining.config;
+package com.hiekn.knowledge.mining.rbac.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
