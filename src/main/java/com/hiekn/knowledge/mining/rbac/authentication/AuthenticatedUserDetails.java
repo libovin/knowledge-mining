@@ -1,5 +1,6 @@
 package com.hiekn.knowledge.mining.rbac.authentication;
 
+import com.hiekn.knowledge.mining.rbac.model.dao.User;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,16 +11,22 @@ import java.util.Set;
 
 public final class AuthenticatedUserDetails implements UserDetails, CredentialsContainer {
 
-    private final String username;
+    private final User user;
     private String password;
     private final Set<GrantedAuthority> authorities;
     private final boolean active;
+    private final boolean expired;
+    private final boolean locked;
+    private final boolean credentials;
 
-    private AuthenticatedUserDetails(String username, String password, Set<GrantedAuthority> authorities, boolean active) {
-        this.username = username;
+    private AuthenticatedUserDetails(User user, String password, Set<GrantedAuthority> authorities, boolean active) {
+        this.user = user;
         this.password = password;
         this.authorities = Collections.unmodifiableSet(authorities);
         this.active = active;
+        this.expired = true;
+        this.locked = true;
+        this.credentials = true;
     }
 
     @Override
@@ -29,27 +36,27 @@ public final class AuthenticatedUserDetails implements UserDetails, CredentialsC
 
     @Override
     public String getPassword() {
-        return password;
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return user.getName();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return expired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return locked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return credentials;
     }
 
     @Override
@@ -62,16 +69,22 @@ public final class AuthenticatedUserDetails implements UserDetails, CredentialsC
         this.password = null;
     }
 
+    public User getUser() {
+        return this.user;
+    }
 
     public static class Builder {
 
-        private String username;
+        private User user;
         private String password;
         private Set<GrantedAuthority> authorities;
         private boolean active;
 
-        public Builder username(String username) {
-            this.username = username;
+        public Builder user(User user) {
+            user.setPermissionSet(null);
+            user.setRoles(null);
+            user.setRoleSet(null);
+            this.user = user;
             return this;
         }
 
@@ -91,7 +104,7 @@ public final class AuthenticatedUserDetails implements UserDetails, CredentialsC
         }
 
         public AuthenticatedUserDetails build() {
-            return new AuthenticatedUserDetails(username, password, authorities, active);
+            return new AuthenticatedUserDetails(user, password, authorities, active);
         }
     }
 }

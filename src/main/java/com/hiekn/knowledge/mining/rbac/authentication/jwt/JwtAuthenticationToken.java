@@ -11,23 +11,12 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
     private String authenticationToken;
     private UserDetails userDetails;
 
-    /**
-     * Creates a {@link JwtAuthenticationToken} instance for an unauthenticated token.
-     *
-     * @param authenticationToken
-     */
     public JwtAuthenticationToken(String authenticationToken) {
         super(AuthorityUtils.NO_AUTHORITIES);
         this.authenticationToken = authenticationToken;
         this.setAuthenticated(false);
     }
 
-    /**
-     * Creates a {@link JwtAuthenticationToken} instance for an authenticated token.
-     *
-     * @param userDetails
-     * @param authorities
-     */
     public JwtAuthenticationToken(UserDetails userDetails,
                                   Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
@@ -39,8 +28,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
     @Override
     public void setAuthenticated(boolean authenticated) {
         if (authenticated) {
-            throw new IllegalArgumentException(
-                    "Cannot set this token to trusted. Use constructor which takes a GrantedAuthority list instead");
+            throw new IllegalArgumentException("Cannot set this token to trusted. Use constructor which takes a GrantedAuthority list instead");
         }
         super.setAuthenticated(false);
     }

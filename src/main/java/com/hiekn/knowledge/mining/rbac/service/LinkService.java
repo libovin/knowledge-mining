@@ -1,6 +1,6 @@
 package com.hiekn.knowledge.mining.rbac.service;
 
-import com.hiekn.knowledge.mining.rbac.dto.LinkInfo;
+import com.hiekn.knowledge.mining.rbac.model.dto.LinkInfo;
 
 public interface LinkService {
 

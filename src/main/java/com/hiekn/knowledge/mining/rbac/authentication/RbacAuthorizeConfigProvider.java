@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hiekn.knowledge.mining.rbac;
+package com.hiekn.knowledge.mining.rbac.authentication;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

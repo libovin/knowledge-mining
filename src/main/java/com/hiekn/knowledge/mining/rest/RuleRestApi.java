@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
@@ -56,6 +57,7 @@ public class RuleRestApi {
     @ApiOperation("删除规则")
     @DELETE
     @Path("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp delete(@PathParam("id") String id) {
         ruleService.delete(id);
         return new RestResp<>();
@@ -65,6 +67,7 @@ public class RuleRestApi {
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @PreAuthorize("hasAnyRole('EDIT','ADMIN')")
     public RestResp<Rule> modify(@PathParam("id") String id, @Valid Rule rule) {
         return new RestResp<>(ruleService.modify(id, rule));
     }
@@ -72,6 +75,7 @@ public class RuleRestApi {
     @ApiOperation("新增规则")
     @POST
     @Path("add")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp<Rule> add(@Valid Rule rule) {
         return new RestResp<>(ruleService.add(rule));
     }

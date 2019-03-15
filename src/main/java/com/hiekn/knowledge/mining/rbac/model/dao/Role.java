@@ -1,4 +1,4 @@
-package com.hiekn.knowledge.mining.rbac.domain;
+package com.hiekn.knowledge.mining.rbac.model.dao;
 
 
 import lombok.Data;
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Data
-@Document
+@Document(collection = "sys_role")
 public class Role {
 
     @Id

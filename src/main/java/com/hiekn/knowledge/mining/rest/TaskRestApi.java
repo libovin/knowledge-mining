@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
@@ -67,6 +68,7 @@ public class TaskRestApi {
     @POST
     @Path("save")
     @ApiOperation("任务保存/修改")
+    @PreAuthorize("hasAnyRole('EDIT','ADMIN')")
     public RestResp save(@Valid Task req) {
         return new RestResp<>(taskService.save(req));
     }
@@ -74,6 +76,7 @@ public class TaskRestApi {
     @DELETE
     @Path("{id}")
     @ApiOperation("任务删除")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp delete(@PathParam("id") String id) {
         taskService.delete(id);
         return new RestResp<>("删除成功");

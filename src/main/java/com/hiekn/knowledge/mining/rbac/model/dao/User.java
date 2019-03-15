@@ -1,4 +1,4 @@
-package com.hiekn.knowledge.mining.rbac.domain;
+package com.hiekn.knowledge.mining.rbac.model.dao;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -9,18 +9,22 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
-@Document(collection = "user_dao")
+@Document(collection = "sys_user")
 public class User {
     @Id
     private String id;
     private String userId;
+    private String password;
     private String name;
     private String email;
     private String phone;
     private LinkedHashSet<String> roles;
 
     @Transient
-    private Set<Permission> permissions;
+    private Set<Role> roleSet;
+
+    @Transient
+    private Set<Permission> permissionSet;
 
 
 

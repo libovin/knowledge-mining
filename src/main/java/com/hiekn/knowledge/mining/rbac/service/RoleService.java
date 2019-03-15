@@ -1,6 +1,6 @@
 package com.hiekn.knowledge.mining.rbac.service;
 
-import com.hiekn.knowledge.mining.rbac.dto.RoleInfo;
+import com.hiekn.knowledge.mining.rbac.model.dto.RoleInfo;
 
 import java.util.List;
 

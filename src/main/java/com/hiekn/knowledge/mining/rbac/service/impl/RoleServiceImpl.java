@@ -1,7 +1,7 @@
 package com.hiekn.knowledge.mining.rbac.service.impl;
 
 
-import com.hiekn.knowledge.mining.rbac.dto.RoleInfo;
+import com.hiekn.knowledge.mining.rbac.model.dto.RoleInfo;
 import com.hiekn.knowledge.mining.rbac.repository.PermissionRepository;
 import com.hiekn.knowledge.mining.rbac.repository.RoleRepository;
 import com.hiekn.knowledge.mining.rbac.service.RoleService;

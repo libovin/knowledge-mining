@@ -1,4 +1,4 @@
-package com.hiekn.knowledge.mining.rbac.domain;
+package com.hiekn.knowledge.mining.rbac.model.dao;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;

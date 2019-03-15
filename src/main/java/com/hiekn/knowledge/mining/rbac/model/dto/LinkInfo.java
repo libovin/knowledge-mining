@@ -1,6 +1,5 @@
-package com.hiekn.knowledge.mining.rbac.dto;
+package com.hiekn.knowledge.mining.rbac.model.dto;
 
-import com.hiekn.knowledge.mining.rbac.domain.LinkType;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -18,8 +17,6 @@ public class LinkInfo {
 	private String link;
 
 	private String icon;
-
-	private LinkType type;
 
 	private List<LinkInfo> children = new ArrayList<>();
 

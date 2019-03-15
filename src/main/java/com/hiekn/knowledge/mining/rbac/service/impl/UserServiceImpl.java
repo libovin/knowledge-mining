@@ -1,8 +1,8 @@
 package com.hiekn.knowledge.mining.rbac.service.impl;
 
-import com.hiekn.knowledge.mining.rbac.domain.User;
-import com.hiekn.knowledge.mining.rbac.dto.UserCondition;
-import com.hiekn.knowledge.mining.rbac.dto.UserInfo;
+import com.hiekn.knowledge.mining.rbac.model.dao.User;
+import com.hiekn.knowledge.mining.rbac.model.dto.UserCondition;
+import com.hiekn.knowledge.mining.rbac.model.dto.UserInfo;
 import com.hiekn.knowledge.mining.rbac.repository.UserRepository;
 import com.hiekn.knowledge.mining.rbac.service.UserService;
 import org.springframework.beans.BeanUtils;

@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
@@ -55,6 +56,7 @@ public class DictRestApi {
     @ApiOperation("删除字典")
     @DELETE
     @Path("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp delete(@PathParam("id") String id) {
         dictService.delete(id);
         return new RestResp<>();
@@ -64,6 +66,7 @@ public class DictRestApi {
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @PreAuthorize("hasAnyRole('EDIT','ADMIN')")
     public RestResp<Dict> modify(@PathParam("id") String id, @Valid Dict dict) {
         return new RestResp<>(dictService.modify(id, dict));
     }
@@ -71,6 +74,7 @@ public class DictRestApi {
     @ApiOperation("新增字典")
     @POST
     @Path("add")
+    @PreAuthorize("hasAnyRole('EDIT','ADMIN')")
     public RestResp<Dict> add(@Valid Dict dict) {
         return new RestResp<>(dictService.add(dict));
     }
@@ -78,6 +82,7 @@ public class DictRestApi {
     @ApiOperation("导入字典")
     @POST
     @Path("import")
+    @PreAuthorize("hasRole('ADMIN')")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public RestResp<Dict> importDict(@BeanParam DictFileImport fileImport) {
         return new RestResp<>(dictService.importDict(fileImport));

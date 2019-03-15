@@ -1,7 +1,7 @@
 package com.hiekn.knowledge.mining.rbac.service;
 
-import com.hiekn.knowledge.mining.rbac.dto.UserCondition;
-import com.hiekn.knowledge.mining.rbac.dto.UserInfo;
+import com.hiekn.knowledge.mining.rbac.model.dto.UserCondition;
+import com.hiekn.knowledge.mining.rbac.model.dto.UserInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

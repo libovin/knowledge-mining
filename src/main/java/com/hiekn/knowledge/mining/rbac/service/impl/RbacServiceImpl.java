@@ -1,6 +1,6 @@
 package com.hiekn.knowledge.mining.rbac.service.impl;
 
-import com.hiekn.knowledge.mining.rbac.domain.User;
+import com.hiekn.knowledge.mining.rbac.model.dao.User;
 import com.hiekn.knowledge.mining.rbac.service.RbacService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
