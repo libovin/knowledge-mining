@@ -1,20 +1,32 @@
 package com.hiekn.knowledge.mining.rbac.service;
 
-import com.hiekn.knowledge.mining.rbac.model.dto.UserCondition;
+import com.hiekn.boot.autoconfigure.base.model.result.RestData;
+import com.hiekn.knowledge.mining.rbac.model.dao.User;
+import com.hiekn.knowledge.mining.rbac.model.dao.UserReal;
 import com.hiekn.knowledge.mining.rbac.model.dto.UserInfo;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Set;
 
 public interface UserService {
+	String login(String username,String password) throws Exception;
 
 	UserInfo create(UserInfo adminInfo);
+	User createUser(UserReal source);
 
-	UserInfo update(UserInfo adminInfo);
+	UserInfo update(String id,UserInfo adminInfo);
+	UserInfo updatePwd(String id,UserInfo adminInfo) throws Exception;
 
 	void delete(String id);
 
-	UserInfo getInfo(String id);
+	void reset(String id,String pwd) throws Exception;
 
-	Page<UserInfo> query(UserCondition condition, Pageable pageable);
+	RestData<UserInfo> query(Pageable pageable);
+
+	Set<GrantedAuthority> mapToGrantedAuthorities(User user);
+
+	User getUserPermissions(User user);
+	User findByUserId(String username);
 
 }

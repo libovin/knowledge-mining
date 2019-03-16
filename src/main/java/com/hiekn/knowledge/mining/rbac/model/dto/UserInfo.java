@@ -5,13 +5,30 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Data
 public class UserInfo {
-	
-	private String id;
 
-	@NotBlank(message = "角色id不能为空")
-	private String roleId;
+    public interface Create {
+    }
 
-	@NotBlank(message = "用户名不能为空")
-	private String username;
+    public interface Update {
+    }
+    public interface Login {
+
+    }
+
+    private String id;
+
+    @NotBlank(message = "登陆名", groups = {Create.class,Login.class})
+    private String username;
+
+    @NotBlank(message = "显示名称", groups = Create.class)
+    private String name;
+
+    @NotBlank(message = "密码不能为空", groups = {Create.class, Update.class,Login.class})
+    private String password;
+
+    @NotBlank(message = "新密码不能为空", groups = {Update.class})
+    private String newPwd;
+
+    private String email;
 
 }

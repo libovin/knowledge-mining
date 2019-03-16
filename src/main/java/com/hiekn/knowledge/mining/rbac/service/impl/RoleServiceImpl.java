@@ -1,6 +1,8 @@
 package com.hiekn.knowledge.mining.rbac.service.impl;
 
 
+import com.hiekn.knowledge.mining.rbac.authentication.Authority;
+import com.hiekn.knowledge.mining.rbac.model.dao.Role;
 import com.hiekn.knowledge.mining.rbac.model.dto.RoleInfo;
 import com.hiekn.knowledge.mining.rbac.repository.PermissionRepository;
 import com.hiekn.knowledge.mining.rbac.repository.RoleRepository;
@@ -9,50 +11,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
-@Transactional
 public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	private RoleRepository roleRepository;
-	
-	@Autowired
-	private PermissionRepository linkRepository;
 
-	@Override
-	public RoleInfo create(RoleInfo roleInfo) {
-		return null;
+	private String rolePrefix = "ROLE_";
+
+	public Role findRoleBy(String authority){
+		Role role = roleRepository.findByRole(authority);
+		if (role == null) {
+			role = new Role();
+			role.setRole(rolePrefix + authority);
+			role.setPermissions(Collections.emptyList());
+			role = roleRepository.insert(role);
+		}
+		return role;
 	}
 
 	@Override
-	public RoleInfo update(RoleInfo roleInfo) {
-		return null;
-	}
-
-	@Override
-	public void delete(String id) {
-
-	}
-
-	@Override
-	public RoleInfo getInfo(String id) {
-		return null;
-	}
-
-	@Override
-	public List<RoleInfo> findAll() {
-		return null;
-	}
-
-	@Override
-	public String[] getRoleResources(String id) {
-		return new String[0];
-	}
-
-	@Override
-	public void setRoleResources(String id, String ids) {
-
+	public Role findOne(String id) {
+		return roleRepository.findOne(id);
 	}
 }

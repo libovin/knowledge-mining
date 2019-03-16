@@ -81,9 +81,6 @@ public final class AuthenticatedUserDetails implements UserDetails, CredentialsC
         private boolean active;
 
         public Builder user(User user) {
-            user.setPermissionSet(null);
-            user.setRoles(null);
-            user.setRoleSet(null);
             this.user = user;
             return this;
         }

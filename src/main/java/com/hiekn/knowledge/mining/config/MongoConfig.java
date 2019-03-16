@@ -12,6 +12,8 @@ import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
+import java.util.Random;
+
 @Configuration
 public class MongoConfig {
 
@@ -27,5 +29,9 @@ public class MongoConfig {
         return mappingConverter;
     }
 
+    @Bean
+    public Random random(){
+        return new Random();
+    }
 
 }
