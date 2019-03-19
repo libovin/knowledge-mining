@@ -5,7 +5,9 @@ import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
 
 import com.hiekn.knowledge.mining.bean.dao.Token;
+import com.hiekn.knowledge.mining.bean.dao.TokenInterface;
 import com.hiekn.knowledge.mining.bean.vo.TokenQuery;
+import com.hiekn.knowledge.mining.service.TokenCountService;
 import com.hiekn.knowledge.mining.service.TokenInterfaceService;
 import com.hiekn.knowledge.mining.service.TokenService;
 import io.swagger.annotations.Api;
@@ -38,11 +40,21 @@ public class TokenRestApi {
     @Autowired
     private TokenInterfaceService tokenInterfaceService;
 
+    @Autowired
+    private TokenCountService tokenCountService;
+
     @ApiOperation("Token列表")
     @POST
     @Path("/get/list")
     public RestResp<RestData<Token>> findAll(@Valid TokenQuery tokenQuery) {
         return new RestResp<>(tokenService.findAll(tokenQuery));
+    }
+
+    @ApiOperation("根据接口ID获取token列表")
+    @POST
+    @Path("/list/{interfaceId}")
+    public RestResp<RestData<Token>> findByInterfaceId(@PathParam("interfaceId") String interfaceId) {
+        return new RestResp<>(tokenInterfaceService.findTokenInterfaceByInterfaceId(interfaceId));
     }
 
     @ApiOperation("Token详情")
@@ -91,4 +103,13 @@ public class TokenRestApi {
         tokenInterfaceService.deleteTokenInterfaces(id,ids);
         return new RestResp();
     }
+
+    @ApiOperation("统计接口使用Token次数")
+    @POST
+    @Path("/count")
+    public RestResp<RestData> tokenCount() {
+
+        return new RestResp<>(tokenCountService.countByServerId());
+    }
+
 }

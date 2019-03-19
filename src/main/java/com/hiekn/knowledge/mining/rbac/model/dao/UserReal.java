@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name="user")
+@Table(name="t_user")
 @DynamicUpdate
 @DynamicInsert
 public class UserReal {

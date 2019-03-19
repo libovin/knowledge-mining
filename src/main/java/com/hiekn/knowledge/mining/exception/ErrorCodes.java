@@ -108,5 +108,6 @@ public class ErrorCodes implements ExceptionKeys {
 	public final static int SOURCE_ID_CAST_ERROR = 52003;
 	public final static int PARAM_IS_NULL = 52004;
 	public final static int TOKEN_IS_NULL = 52005;
+	public final static int TOKEN_FAILURE = 53001;
 
 }

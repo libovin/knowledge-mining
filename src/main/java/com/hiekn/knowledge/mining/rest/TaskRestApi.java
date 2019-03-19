@@ -86,7 +86,8 @@ public class TaskRestApi {
     @Path("remote/{serverId}")
     @ApiOperation("发布服务调用")
     public RestResp remote(@PathParam("serverId") String serverId,
-                           @FormParam("context") @ApiParam(required = true) String context) {
+                           @FormParam("context") @ApiParam(required = true) String context,
+                           @ApiParam(required =true,value = "token值")@FormParam("token") String token) {
         return new RestResp<>(taskService.remote(serverId, context));
     }
 
