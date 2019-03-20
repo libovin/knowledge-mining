@@ -26,7 +26,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Component
 @Path("token")
@@ -52,9 +54,9 @@ public class TokenRestApi {
 
     @ApiOperation("根据接口ID获取token列表")
     @POST
-    @Path("/list/{interfaceId}")
-    public RestResp<RestData<Token>> findByInterfaceId(@PathParam("interfaceId") String interfaceId) {
-        return new RestResp<>(tokenInterfaceService.findTokenInterfaceByInterfaceId(interfaceId));
+    @Path("/list/{serverId}")
+    public RestResp<RestData<Token>> findByInterfaceId(@PathParam("serverId") String interfaceId) {
+        return new RestResp<>(tokenInterfaceService.findByInterfaceId(interfaceId));
     }
 
     @ApiOperation("Token详情")
@@ -90,26 +92,32 @@ public class TokenRestApi {
     @ApiOperation("接口分配Token")
     @POST
     @Path("/interface/{id}")
-    public RestResp tokenInterfaceAdd(@ApiParam(required = true,value = "接口Id") @PathParam("id") String id,
-                                      @ApiParam(required = true,value = "tokenIds")@FormParam(value = "ids") String ids) {
+    public RestResp tokenInterfaceAdd(@ApiParam(required = true, value = "接口Id") @PathParam("id") String id,
+                                      @ApiParam(required = true, value = "tokenIds") @FormParam(value = "ids") String ids) {
         return new RestResp<>(tokenInterfaceService.addToken(id, ids));
     }
 
     @ApiOperation("接口解绑Token")
     @POST
     @Path("/interface/delete/{id}")
-    public RestResp tokenInterfaceDelete(@ApiParam(required = true,value = "接口Id") @PathParam("id") String id,
-                                      @ApiParam(required = true,value = "tokenIds")@FormParam(value = "ids") String ids) {
-        tokenInterfaceService.deleteTokenInterfaces(id,ids);
+    public RestResp tokenInterfaceDelete(@ApiParam(required = true, value = "接口Id") @PathParam("id") String id,
+                                         @ApiParam(required = true, value = "tokenIds") @FormParam(value = "ids") String ids) {
+        tokenInterfaceService.deleteTokenInterfaces(id, ids);
         return new RestResp();
     }
 
     @ApiOperation("统计接口使用Token次数")
     @POST
-    @Path("/count/{serverId}")
-    public RestResp<RestData> tokenCount(@PathParam("serverId")String serverId) {
-
+    @Path("/count/service/{serverId}")
+    public RestResp<List> tokenCount(@PathParam("serverId") String serverId) {
         return new RestResp<>(tokenCountService.countByServerId(serverId));
+    }
+
+    @ApiOperation("统计接口使用Token次数")
+    @POST
+    @Path("/count/token/{token}")
+    public RestResp<List> serviceCount(@PathParam("token") String token) {
+        return new RestResp<>(tokenCountService.countByToken(token));
     }
 
 }

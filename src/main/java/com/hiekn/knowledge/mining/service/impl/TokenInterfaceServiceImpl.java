@@ -5,7 +5,6 @@ import com.hiekn.boot.autoconfigure.base.exception.ServiceException;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Token;
 import com.hiekn.knowledge.mining.bean.dao.TokenInterface;
-import com.hiekn.knowledge.mining.bean.vo.TokenQuery;
 import com.hiekn.knowledge.mining.exception.ErrorCodes;
 import com.hiekn.knowledge.mining.repository.TokenInterfaceRepository;
 import com.hiekn.knowledge.mining.service.TokenInterfaceService;
@@ -44,15 +43,15 @@ public class TokenInterfaceServiceImpl implements TokenInterfaceService {
 
         List<String> list = verifyTokenIds(tokenIds);
 
-        list.forEach(s -> tokenInterfaceRepository.deleteTokenInterfaceByInterfaceIdAndTokenId(interfaceId, s));
+        list.forEach(s -> tokenInterfaceRepository.deleteByInterfaceIdAndTokenId(interfaceId, s));
 
     }
 
     @Override
-    public RestData<Token> findTokenInterfaceByInterfaceId(String interfaceId) {
+    public RestData<Token> findByInterfaceId(String interfaceId) {
         List<Token> tokenList = Lists.newArrayList();
         List<TokenInterface> list =
-                tokenInterfaceRepository.findTokenInterfaceByInterfaceId(interfaceId);
+                tokenInterfaceRepository.findByInterfaceId(interfaceId);
         list.forEach(t ->{
             Token tt= tokenService.findOne(t.getTokenId());
             tt.setTokenInterface(t);

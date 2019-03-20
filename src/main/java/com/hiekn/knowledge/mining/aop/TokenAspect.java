@@ -16,7 +16,8 @@ import java.util.Arrays;
 public class TokenAspect {
 
     @Pointcut("execution(* com.hiekn.knowledge.mining.rest.TaskRestApi.remote(..))")
-    public void recordToken(){}
+    public void recordToken() {
+    }
 
 
     @Autowired
@@ -27,22 +28,21 @@ public class TokenAspect {
     public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
 
         Object o = null;
-        try {
-            o = joinPoint.proceed();
-            Object[] args = joinPoint.getArgs();
-            System.out.println("args size : " + args.length);
-            if (args != null && args.length == 3){
-                String serverId = (String) args[0];
-                String token = (String) args[2];
-                //验证token是否过期
-                tokenCountService.recordToken(serverId,token);
-            }
 
-            Arrays.stream(args).forEach(System.out::println);
-            System.out.println(o.toString());
-        }catch (Throwable e){
-            throw e;
+        Object[] args = joinPoint.getArgs();
+        System.out.println("args size : " + args.length);
+        if (args != null && args.length == 3) {
+            String serverId = (String) args[0];
+            String token = (String) args[2];
+            //验证token是否过期
+            tokenCountService.recordToken(serverId, token);
         }
+        o = joinPoint.proceed();
+
+
+        Arrays.stream(args).forEach(System.out::println);
+        System.out.println(o.toString());
+
 
         return o;
     }

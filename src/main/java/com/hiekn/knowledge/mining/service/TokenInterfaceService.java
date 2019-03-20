@@ -13,6 +13,6 @@ public interface TokenInterfaceService {
 
     void deleteTokenInterfaces(String interfaceId, String tokenIds);
 
-    RestData<Token> findTokenInterfaceByInterfaceId(String interfaceId);
+    RestData<Token> findByInterfaceId(String interfaceId);
 
 }

@@ -8,22 +8,34 @@ import com.hiekn.knowledge.mining.bean.dao.Task;
 import com.hiekn.knowledge.mining.bean.dao.Token;
 import com.hiekn.knowledge.mining.exception.ErrorCodes;
 import com.hiekn.knowledge.mining.filter.LoggingRequestFilter;
+import com.hiekn.knowledge.mining.repository.TaskRepository;
 import com.hiekn.knowledge.mining.service.TokenCountService;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.beans.BeanMap;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.Field;
+import org.springframework.data.mongodb.core.aggregation.Fields;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
 
 @Service
 public class TokenCountServiceImpl implements TokenCountService {
@@ -33,46 +45,65 @@ public class TokenCountServiceImpl implements TokenCountService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     @Override
     public void recordToken(String serverId, String token) {
-        try {
-            //验证token是否过期
-            List<Token> tokenList = mongoTemplate.find(new Query(Criteria.where("content").is(token)),Token.class);
-            if (tokenList != null && tokenList.size() > 0){
-                Token  t = tokenList.get(0);
-                Date date = t.getDate();
-                if (date.getTime() < (new Date()).getTime()){
-                    throw ServiceException.newInstance(ErrorCodes.TOKEN_FAILURE);
-                }
+
+        //验证token是否过期
+        List<Token> tokenList = mongoTemplate.find(new Query(where("content").is(token)), Token.class);
+        if (tokenList != null && tokenList.size() > 0) {
+            Token t = tokenList.get(0);
+            Date date = t.getDate();
+            if (date.getTime() < (new Date()).getTime()) {
+                throw ServiceException.newInstance(ErrorCodes.TOKEN_FAILURE);
             }
-            Document document = new Document();
-            document.put("serverId",serverId);
-            document.put("token",token);
-            mongoTemplate.insert(document,collection);
-        }catch (Exception e){
-            e.printStackTrace();
-            log.error(e.getMessage());
         }
+        Document document = new Document();
+        document.put("serverId", serverId);
+        document.put("token", token);
+        mongoTemplate.insert(document, collection);
+
     }
 
     @Override
-    public RestData countByServerId(String serverId) {
-        Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("serverId").is(serverId)),
-                Aggregation.group("serverId").count().as(
-                "count"));
+    public List countByServerId(String serverId) {
+        List<AggregationOperation> aggregations = new ArrayList<>();
+        aggregations.add(match(where("serverId").is(serverId)));
+        aggregations.add(group("token").count().as("count"));
+        aggregations.add(lookup("token", "_id", "content", "token"));
+        aggregations.add(unwind("token"));
+        aggregations.add(project()
+                .and("count").as("useCount")
+                .and("token.name").as("tokenName")
+                .and("token.active").as("active")
+                .and("token.content").as("token")
+                .and("token.remark").as("remark")
+                .andExclude("_id")
+        );
+        Aggregation aggregation = newAggregation(aggregations);
+        AggregationResults aggregate = mongoTemplate.aggregate(aggregation, collection, Document.class);
+        return aggregate.getMappedResults();
+    }
+
+    @Override
+    public List countByToken(String token) {
+        List<AggregationOperation> aggregations = new ArrayList<>();
+        aggregations.add(match(where("token").is(token)));
+        aggregations.add(group("serverId").count().as("count"));
+        Aggregation aggregation = Aggregation.newAggregation(aggregations);
         AggregationResults<Document> aggregate = mongoTemplate.aggregate(aggregation, collection, Document.class);
-        Iterator<Document> iterator = aggregate.iterator();
-        List<Map<String,String>> mapList = Lists.newArrayList();
-        while (iterator.hasNext()){
-            Map<String,String> map = Maps.newHashMap();
-            Document next = iterator.next();
-            String sId = (String)next.get("_id");
-            Task task = mongoTemplate.findOne(new Query(Criteria.where("_id").is(sId)), Task.class);
-            map.put("name",task.getName());
-            map.put("serverId",sId);
-            map.put("count",String.valueOf(next.get("count")));
-            mapList.add(map);
-        }
-        return new RestData(mapList,mapList.size());
+        List<Document> mappedResults = aggregate.getMappedResults();
+        return mappedResults.stream().map(a -> {
+            Task task = taskRepository.findOne((String) a.get("_id"));
+            Map<String, Object> map = new HashMap<>();
+            map.put("serviceName", task.getName());
+            map.put("remark", task.getRemark());
+            map.put("serviceId", task.getId());
+            map.put("useCount", a.get("count"));
+            return map;
+        }).collect(Collectors.toList());
+
     }
 }
