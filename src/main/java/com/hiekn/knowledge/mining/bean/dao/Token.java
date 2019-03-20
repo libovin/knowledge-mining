@@ -35,7 +35,7 @@ public class Token extends Base {
     private String token;
 
     @Transient
-    @ApiModelProperty(hidden = true)
-    private TokenInterface tokenInterface;
+    @ApiModelProperty(value = "分配时间")
+    private Long tsCreateTime;
 
 }
