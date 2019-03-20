@@ -67,7 +67,7 @@ public class TokenRestApi {
     @ApiOperation("删除Token")
     @DELETE
     @Path("/delete/{id}")
-    public RestResp delete(@PathParam("id") String id) {
+    public RestResp delete(@PathParam("id") String id) throws Exception {
         tokenService.delete(id);
         return new RestResp<>();
     }

@@ -11,4 +11,5 @@ public interface TokenInterfaceRepository extends MongoRepository<TokenInterface
     TokenInterface deleteTokenInterfaceByInterfaceIdAndTokenId(String interfaceId, String tokenId);
     TokenInterface findTokenInterfaceByInterfaceIdAndTokenId(String interfaceId, String tokenId);
     List<TokenInterface> findTokenInterfaceByInterfaceId(String interfaceId);
+    List<TokenInterface> findByTokenId(String tokenId);
 }

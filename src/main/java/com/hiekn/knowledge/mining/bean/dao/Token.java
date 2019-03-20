@@ -3,6 +3,7 @@ package com.hiekn.knowledge.mining.bean.dao;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -23,5 +24,8 @@ public class Token  extends Base {
 
     @ApiModelProperty(value = "token值",hidden = true)
     private String content;
+
+    @Transient
+    private TokenInterface tokenInterface;
 
 }

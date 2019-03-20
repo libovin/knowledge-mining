@@ -11,7 +11,7 @@ public interface TokenService {
 
     Token findOne(String id);
 
-    void delete(String id);
+    void delete(String id) throws Exception;
 
     Token modify(String id, Token token);
 

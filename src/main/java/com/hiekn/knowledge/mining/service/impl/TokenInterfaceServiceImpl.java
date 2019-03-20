@@ -54,7 +54,9 @@ public class TokenInterfaceServiceImpl implements TokenInterfaceService {
         List<TokenInterface> list =
                 tokenInterfaceRepository.findTokenInterfaceByInterfaceId(interfaceId);
         list.forEach(t ->{
-            tokenList.add(tokenService.findOne(t.getTokenId()));
+            Token tt= tokenService.findOne(t.getTokenId());
+            tt.setTokenInterface(t);
+            tokenList.add(tt);
         });
         return new RestData<>(tokenList,tokenList.size());
     }

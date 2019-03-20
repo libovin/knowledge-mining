@@ -2,7 +2,9 @@ package com.hiekn.knowledge.mining.service.impl;
 
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Token;
+import com.hiekn.knowledge.mining.bean.dao.TokenInterface;
 import com.hiekn.knowledge.mining.bean.vo.TokenQuery;
+import com.hiekn.knowledge.mining.repository.TokenInterfaceRepository;
 import com.hiekn.knowledge.mining.repository.TokenRepository;
 import com.hiekn.knowledge.mining.service.TokenService;
 import com.hiekn.knowledge.mining.util.DataBeanUtils;
@@ -15,7 +17,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -25,6 +30,8 @@ public class TokenServiceImpl implements TokenService {
 
     @Autowired
     private TokenRepository tokenRepository;
+    @Autowired
+    private TokenInterfaceRepository tokenInterfaceRepository;
 
     @Override
     public RestData<Token> findAll(TokenQuery bean) {
@@ -49,8 +56,11 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete(String id) throws Exception {
+        List<TokenInterface> byTokenId = tokenInterfaceRepository.findByTokenId(id);
+        if(!CollectionUtils.isEmpty(byTokenId)){
+            throw new Exception("该Token与接口关联不能删除");
+        }
         tokenRepository.delete(id);
     }
 

@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -32,6 +33,7 @@ public class TokenInterface {
     @ApiModelProperty(value = "tokenId")
     @NotBlank(message = "Token Id 不能为空")
     private String tokenId;
+
 
     public TokenInterface(){
 
