@@ -7,7 +7,6 @@ import com.hiekn.knowledge.mining.bean.vo.TokenQuery;
 import com.hiekn.knowledge.mining.repository.TokenInterfaceRepository;
 import com.hiekn.knowledge.mining.repository.TokenRepository;
 import com.hiekn.knowledge.mining.service.TokenService;
-import com.hiekn.knowledge.mining.util.DataBeanUtils;
 import com.hiekn.knowledge.mining.util.QueryUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -67,8 +64,7 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public Token modify(String id, Token token) {
         Token targe = tokenRepository.findOne(id);
-        String[] stringArr = DataBeanUtils.getNullProperty(token);
-        BeanUtils.copyProperties(token, targe, stringArr);
+        BeanUtils.copyProperties(token, targe, "content");
         return tokenRepository.save(targe);
     }
 
