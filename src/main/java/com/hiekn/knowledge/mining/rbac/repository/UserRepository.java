@@ -1,5 +1,6 @@
 package com.hiekn.knowledge.mining.rbac.repository;
 
+
 import com.hiekn.knowledge.mining.rbac.model.dao.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

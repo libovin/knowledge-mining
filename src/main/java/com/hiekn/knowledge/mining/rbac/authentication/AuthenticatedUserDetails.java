@@ -1,5 +1,6 @@
 package com.hiekn.knowledge.mining.rbac.authentication;
 
+
 import com.hiekn.knowledge.mining.rbac.model.dao.User;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;

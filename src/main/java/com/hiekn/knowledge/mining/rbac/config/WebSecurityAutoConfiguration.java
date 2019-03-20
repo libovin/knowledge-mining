@@ -1,5 +1,6 @@
 package com.hiekn.knowledge.mining.rbac.config;
 
+
 import com.hiekn.knowledge.mining.rbac.authentication.jwt.JwtAuthenticationEntryPoint;
 import com.hiekn.knowledge.mining.rbac.authentication.jwt.JwtAuthenticationProvider;
 import com.hiekn.knowledge.mining.rbac.authentication.jwt.JwtAuthenticationTokenFilter;

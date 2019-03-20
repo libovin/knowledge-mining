@@ -1,6 +1,5 @@
 package com.hiekn.knowledge.mining.rbac.service.impl;
 
-import com.auth0.jwt.JWT;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.jwt.JwtToken;
 import com.hiekn.knowledge.mining.rbac.authentication.Authority;
@@ -8,14 +7,11 @@ import com.hiekn.knowledge.mining.rbac.model.dao.Permission;
 import com.hiekn.knowledge.mining.rbac.model.dao.Role;
 import com.hiekn.knowledge.mining.rbac.model.dao.User;
 import com.hiekn.knowledge.mining.rbac.model.dao.UserReal;
-import com.hiekn.knowledge.mining.rbac.model.dto.UserCondition;
 import com.hiekn.knowledge.mining.rbac.model.dto.UserInfo;
 import com.hiekn.knowledge.mining.rbac.repository.PermissionRepository;
-import com.hiekn.knowledge.mining.rbac.repository.RoleRepository;
 import com.hiekn.knowledge.mining.rbac.repository.UserRepository;
 import com.hiekn.knowledge.mining.rbac.service.RoleService;
 import com.hiekn.knowledge.mining.rbac.service.UserService;
-import org.apache.lucene.search.Collector;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +21,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -53,14 +48,18 @@ public class UserServiceImpl implements UserService {
     private JwtToken jwtToken;
 
     @Override
-    public UserInfo create(UserInfo userInfo) {
+    public UserInfo create(UserInfo userInfo) throws Exception {
         User user = new User();
+        User userTemp = userRepository.findByPhone(userInfo.getUsername());
+        if (userTemp != null) {
+            throw new Exception("用户已存在");
+        }
         user.setEmail(userInfo.getEmail());
         user.setName(userInfo.getName());
         user.setPhone(userInfo.getUsername());
         user.setUserId(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(userInfo.getPassword()));
-        Role role = roleService.findRoleBy("ROLE_" + Authority.EDIT.name());
+        Role role = roleService.findRoleBy(Authority.ROLE_EDIT.name());
         String roleId = role.getId();
         user.setRoles(new LinkedHashSet<String>() {{
             add(roleId);
@@ -101,7 +100,7 @@ public class UserServiceImpl implements UserService {
         user = getUserPermissions(user);
         Set<GrantedAuthority> grantedAuthorities = mapToGrantedAuthorities(user);
         for (GrantedAuthority grantedAuthority : grantedAuthorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+            if (grantedAuthority.getAuthority().equals(Authority.ROLE_ADMIN.name())) {
                 throw new Exception("关联账户不能修改密码");
             }
         }
@@ -144,6 +143,7 @@ public class UserServiceImpl implements UserService {
         for (String ruleId : user.getRoles()) {
             Role role = roleService.findOne(ruleId);
             roleSet.add(role);
+
             for (String permissionId : role.getPermissions()) {
                 Permission permission = permissionRepository.findOne(permissionId);
                 permissionSet.add(permission);
@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService {
         target.setPassword(source.getPwd());
         String password = target.getPassword();
         target.setPassword(passwordEncoder.encode(password));
-        Role role = roleService.findRoleBy(Authority.ADMIN.name());
+        Role role = roleService.findRoleBy(Authority.ROLE_ADMIN.name());
         String roleId = role.getId();
         target.setRoles(new LinkedHashSet<String>() {{
             add(roleId);
@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
 
     public String login(String username, String password) throws Exception {
         User user = userRepository.findByPhone(username);
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             throw new Exception("用户名密码不匹配");
         }
         return jwtToken.createToken(user.getUserId());
