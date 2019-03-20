@@ -10,15 +10,8 @@ import org.springframework.data.annotation.Version;
 @Data
 public abstract class Base {
     @Id
-    @ApiModelProperty(value = "id",hidden = true)
+    @ApiModelProperty(value = "id", hidden = true)
     private String id;
-
-    @ApiModelProperty(value = "备注")
-    private String remark;
-
-    @Version
-    @ApiModelProperty(hidden = true)
-    private Long version;
 
     @CreatedDate
     @ApiModelProperty(hidden = true)
@@ -27,5 +20,12 @@ public abstract class Base {
     @LastModifiedDate
     @ApiModelProperty(hidden = true)
     private Long updateTime;
+
+    @Version
+    @ApiModelProperty(hidden = true)
+    private Long version;
+
+    @ApiModelProperty(value = "备注")
+    private String remark;
 
 }

@@ -9,6 +9,7 @@ import com.hiekn.knowledge.mining.bean.dao.Token;
 import com.hiekn.knowledge.mining.exception.ErrorCodes;
 import com.hiekn.knowledge.mining.filter.LoggingRequestFilter;
 import com.hiekn.knowledge.mining.repository.TaskRepository;
+import com.hiekn.knowledge.mining.repository.TokenRepository;
 import com.hiekn.knowledge.mining.service.TokenCountService;
 import org.bson.Document;
 import org.slf4j.Logger;
@@ -47,24 +48,25 @@ public class TokenCountServiceImpl implements TokenCountService {
 
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired
+    private TokenRepository tokenRepository;
 
     @Override
-    public void recordToken(String serverId, String token) {
+    public void recordToken(String serverId, String token) throws Exception {
 
         //验证token是否过期
-        List<Token> tokenList = mongoTemplate.find(new Query(where("content").is(token)), Token.class);
-        if (tokenList != null && tokenList.size() > 0) {
-            Token t = tokenList.get(0);
-            Date date = t.getDate();
-            if (date.getTime() < (new Date()).getTime()) {
-                throw ServiceException.newInstance(ErrorCodes.TOKEN_FAILURE);
-            }
+        Token tokenEntity = tokenRepository.findByToken(token);
+        if (tokenEntity == null) {
+            throw new Exception("token 不存在");
+        }
+        Long date = tokenEntity.getExpireDate();
+        if (date < System.currentTimeMillis()) {
+            throw ServiceException.newInstance(ErrorCodes.TOKEN_FAILURE);
         }
         Document document = new Document();
         document.put("serverId", serverId);
         document.put("token", token);
         mongoTemplate.insert(document, collection);
-
     }
 
     @Override
@@ -72,13 +74,13 @@ public class TokenCountServiceImpl implements TokenCountService {
         List<AggregationOperation> aggregations = new ArrayList<>();
         aggregations.add(match(where("serverId").is(serverId)));
         aggregations.add(group("token").count().as("count"));
-        aggregations.add(lookup("token", "_id", "content", "token"));
+        aggregations.add(lookup("token", "_id", "token", "token"));
         aggregations.add(unwind("token"));
         aggregations.add(project()
                 .and("count").as("useCount")
                 .and("token.name").as("tokenName")
                 .and("token.active").as("active")
-                .and("token.content").as("token")
+                .and("token.token").as("token")
                 .and("token.remark").as("remark")
                 .andExclude("_id")
         );

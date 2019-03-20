@@ -3,9 +3,7 @@ package com.hiekn.knowledge.mining.rest;
 
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
-
 import com.hiekn.knowledge.mining.bean.dao.Token;
-import com.hiekn.knowledge.mining.bean.dao.TokenInterface;
 import com.hiekn.knowledge.mining.bean.vo.TokenQuery;
 import com.hiekn.knowledge.mining.service.TokenCountService;
 import com.hiekn.knowledge.mining.service.TokenInterfaceService;
@@ -26,7 +24,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -48,15 +45,15 @@ public class TokenRestApi {
     @ApiOperation("Token列表")
     @POST
     @Path("/get/list")
-    public RestResp<RestData<Token>> findAll(@Valid TokenQuery tokenQuery) {
+    public RestResp<RestData<Token>> findAll(TokenQuery tokenQuery) {
         return new RestResp<>(tokenService.findAll(tokenQuery));
     }
 
     @ApiOperation("根据接口ID获取token列表")
     @POST
     @Path("/list/{serverId}")
-    public RestResp<RestData<Token>> findByInterfaceId(@PathParam("serverId") String interfaceId) {
-        return new RestResp<>(tokenInterfaceService.findByInterfaceId(interfaceId));
+    public RestResp<RestData<Token>> findByInterfaceId(@PathParam("serverId") String serverId) {
+        return new RestResp<>(tokenInterfaceService.findByInterfaceId(serverId));
     }
 
     @ApiOperation("Token详情")
@@ -85,6 +82,7 @@ public class TokenRestApi {
     @ApiOperation("新增Token")
     @POST
     @Path("/add")
+    @Consumes(MediaType.APPLICATION_JSON)
     public RestResp<Token> add(@Valid Token token) {
         return new RestResp<>(tokenService.add(token));
     }
