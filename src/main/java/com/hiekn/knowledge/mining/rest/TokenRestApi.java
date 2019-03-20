@@ -95,7 +95,7 @@ public class TokenRestApi {
         return new RestResp<>(tokenInterfaceService.addToken(id, ids));
     }
 
-    @ApiOperation("接口删除Token")
+    @ApiOperation("接口解绑Token")
     @POST
     @Path("/interface/delete/{id}")
     public RestResp tokenInterfaceDelete(@ApiParam(required = true,value = "接口Id") @PathParam("id") String id,
@@ -106,10 +106,10 @@ public class TokenRestApi {
 
     @ApiOperation("统计接口使用Token次数")
     @POST
-    @Path("/count")
-    public RestResp<RestData> tokenCount() {
+    @Path("/count/{serverId}")
+    public RestResp<RestData> tokenCount(@PathParam("serverId")String serverId) {
 
-        return new RestResp<>(tokenCountService.countByServerId());
+        return new RestResp<>(tokenCountService.countByServerId(serverId));
     }
 
 }

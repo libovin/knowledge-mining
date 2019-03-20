@@ -56,18 +56,20 @@ public class TokenCountServiceImpl implements TokenCountService {
     }
 
     @Override
-    public RestData countByServerId() {
-        Aggregation aggregation = Aggregation.newAggregation(Aggregation.group("serverId").count().as("count"));
+    public RestData countByServerId(String serverId) {
+        Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("serverId").is(serverId)),
+                Aggregation.group("serverId").count().as(
+                "count"));
         AggregationResults<Document> aggregate = mongoTemplate.aggregate(aggregation, collection, Document.class);
         Iterator<Document> iterator = aggregate.iterator();
         List<Map<String,String>> mapList = Lists.newArrayList();
         while (iterator.hasNext()){
             Map<String,String> map = Maps.newHashMap();
             Document next = iterator.next();
-            String serverId = (String)next.get("_id");
-            Task task = mongoTemplate.findOne(new Query(Criteria.where("_id").is(serverId)), Task.class);
+            String sId = (String)next.get("_id");
+            Task task = mongoTemplate.findOne(new Query(Criteria.where("_id").is(sId)), Task.class);
             map.put("name",task.getName());
-            map.put("serverId",serverId);
+            map.put("serverId",sId);
             map.put("count",String.valueOf(next.get("count")));
             mapList.add(map);
         }

@@ -10,5 +10,5 @@ public interface TokenCountService {
 
     void recordToken(String serverId,String token);
 
-    RestData<Map<String,String>> countByServerId();
+    RestData<Map<String,String>> countByServerId(String serverId);
 }
