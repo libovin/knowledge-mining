@@ -68,7 +68,7 @@ public class AuthRestApi {
     @Path("/add")
     @POST
     @PreAuthorize("hasRole('ADMIN')")
-    public RestResp add(@Validated(UserInfo.Create.class) UserInfo userInfo) {
+    public RestResp add(@Validated(UserInfo.Create.class) UserInfo userInfo) throws Exception {
         return new RestResp<>(userService.create(userInfo));
     }
 

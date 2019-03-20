@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TokenInterfaceRepository extends MongoRepository<TokenInterface, String> {
 
-    TokenInterface deleteByInterfaceIdAndTokenId(String interfaceId, String tokenId);
+    void deleteByInterfaceIdAndTokenId(String interfaceId, String tokenId);
 
     List<TokenInterface> findByInterfaceId(String interfaceId);
 

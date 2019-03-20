@@ -12,6 +12,7 @@ import com.hiekn.knowledge.mining.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,23 +29,20 @@ public class TokenInterfaceServiceImpl implements TokenInterfaceService {
     @Override
     public RestData<TokenInterface> addToken(String id, String ids) {
 
-        List<String> list = verifyTokenIds(ids);
+        List<Token> list = verifyTokenIds(ids);
 
         List<TokenInterface> tokenInterfaces = Lists.newArrayList();
-        list.forEach(s -> {
-            tokenInterfaces.add(new TokenInterface(id, s));
-        });
+        list.forEach(s ->
+                tokenInterfaces.add(new TokenInterface(id, s.getId()))
+        );
         List<TokenInterface> lists = tokenInterfaceRepository.insert(tokenInterfaces);
         return new RestData<>(lists, lists.size());
     }
 
     @Override
     public void deleteTokenInterfaces(String interfaceId, String tokenIds) {
-
-        List<String> list = verifyTokenIds(tokenIds);
-
-        list.forEach(s -> tokenInterfaceRepository.deleteByInterfaceIdAndTokenId(interfaceId, s));
-
+        List<Token> list = verifyTokenIds(tokenIds);
+        list.forEach(s -> tokenInterfaceRepository.deleteByInterfaceIdAndTokenId(interfaceId, s.getId()));
     }
 
     @Override
@@ -52,25 +50,27 @@ public class TokenInterfaceServiceImpl implements TokenInterfaceService {
         List<Token> tokenList = Lists.newArrayList();
         List<TokenInterface> list =
                 tokenInterfaceRepository.findByInterfaceId(interfaceId);
-        list.forEach(t ->{
-            Token tt= tokenService.findOne(t.getTokenId());
+        list.forEach(t -> {
+            Token tt = tokenService.findOne(t.getTokenId());
             tt.setTsCreateTime(t.getCreateTime());
             tokenList.add(tt);
         });
-        return new RestData<>(tokenList,tokenList.size());
+        return new RestData<>(tokenList, tokenList.size());
     }
 
-    private List<String> verifyTokenIds(String tokenIds) {
+    private List<Token> verifyTokenIds(String tokenIds) {
         if (tokenIds == null) {
             throw ServiceException.newInstance(ErrorCodes.PARAM_IS_NULL);
         }
         List<String> list = Arrays.asList(tokenIds.split(","));
+        List<Token> tokenList = new ArrayList<>();
         for (String s : list) {
             Token one = tokenService.findOne(s);
             if (one == null)
                 throw ServiceException.newInstance(ErrorCodes.TOKEN_IS_NULL);
+            tokenList.add(one);
         }
-        return list;
+        return tokenList;
     }
 
 
