@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+//生成所有参数的注解
 public class Counter {
     /**
      * 词

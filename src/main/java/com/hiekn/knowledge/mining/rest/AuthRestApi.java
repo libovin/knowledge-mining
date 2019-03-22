@@ -35,6 +35,7 @@ import java.util.Random;
 @Component
 @Path("auth")
 @Api("权限")
+//返回给client json类型
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthRestApi {
 

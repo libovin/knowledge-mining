@@ -61,9 +61,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(userInfo.getPassword()));
         Role role = roleService.findRoleBy(Authority.ROLE_EDIT.name());
         String roleId = role.getId();
-        user.setRoles(new LinkedHashSet<String>() {{
-            add(roleId);
-        }});
+        user.setRoles(new LinkedHashSet<String>() {
+                          {
+                              add(roleId);
+                          }
+                      }
+        );
         userRepository.insert(user);
         return userInfo;
     }

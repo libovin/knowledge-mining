@@ -29,4 +29,9 @@ public class ArgsReq {
 
     @ApiModelProperty(value = "词典Id")
     private String dictId;
+
+    @ApiModelProperty(value = "语言")
+    @Pattern(regexp = "(ar|de|en|es|fr|zh)",
+             message = "语言必须为 ar|de|en|es|fr|zh")
+    private String language;
 }

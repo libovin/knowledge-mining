@@ -12,4 +12,5 @@ public class DictFileImport extends FileImport {
     @ApiModelProperty(example = "会议名称字典", value = "表类型")
     @FormDataParam("name")
     private String name;
+
 }

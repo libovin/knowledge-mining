@@ -68,7 +68,7 @@ public class TaskRestApi {
     @Path("save")
     @ApiOperation("任务保存/修改")
     @PreAuthorize("hasAnyRole('EDIT','ADMIN')")
-    public RestResp save(
+    public RestResp<Task> save(
             @HeaderParam(HttpHeaders.AUTHORIZATION) String authorization,
             @Valid Task req) {
         return new RestResp<>(taskService.save(req));

@@ -15,7 +15,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.FuDan, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.FuDan, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -25,7 +25,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -34,7 +34,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -43,7 +43,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -52,7 +52,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -61,7 +61,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -70,7 +70,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -79,7 +79,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -89,7 +89,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.LTP, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.LTP, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -99,7 +99,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.NLPir, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.NLPir, input, this.name(),args.getLanguage()));
                 return map;
             };
         }
@@ -109,7 +109,7 @@ public enum SegmentEnum implements ArgsStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.STANFORD, input, this.name()));
+                map.put("result", nlpToolService.segmentService(Config.STANFORD, input, this.name(),args.getLanguage()));
                 return map;
             };
         }

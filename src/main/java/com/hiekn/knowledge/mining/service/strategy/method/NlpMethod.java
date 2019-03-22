@@ -1,5 +1,6 @@
 package com.hiekn.knowledge.mining.service.strategy.method;
 
+import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.dao.ArgsReq;
 import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
@@ -22,7 +23,7 @@ public enum NlpMethod implements MethodStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq y) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, ""));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, input, "",y.getLanguage()));
                 return map;
             };
         }
@@ -31,7 +32,7 @@ public enum NlpMethod implements MethodStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq y) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.posTaggerService(Config.HANLP, input));
+                map.put("result", nlpToolService.posTaggerService(Config.HANLP, input,y.getLanguage()));
                 return map;
             };
         }
@@ -42,9 +43,9 @@ public enum NlpMethod implements MethodStrategy {
                 Map map = new HashMap();
                 List<TermBean> list = new ArrayList<>();
                 if (input instanceof String) {
-                    list = nlpToolService.nerService(Config.HANLP, (String) input);
+                    list = nlpToolService.nerService(Config.HANLP, (String) input,y.getLanguage());
                 } else if (input instanceof List) {
-                    list = nlpToolService.nerService(Config.HANLP, (List<String>) input, Config.CRF);
+                    list = nlpToolService.nerService(Config.HANLP, (List<String>) input, Config.CRF,y.getLanguage());
                 }
                 map.put("result", list);
                 return map;
@@ -57,9 +58,9 @@ public enum NlpMethod implements MethodStrategy {
                 Map map = new HashMap();
                 List<String> list = new ArrayList<>();
                 if (input instanceof String) {
-                    list = nlpToolService.keywordsService(Config.HANLP, (String) input, y.getSize());
+                    list = nlpToolService.keywordsService(Config.HANLP, (String) input, y.getSize(),y.getLanguage());
                 } else if (input instanceof List) {
-                    list = nlpToolService.keywordsService(Config.HANLP, (List<String>) input, y.getSize());
+                    list = nlpToolService.keywordsService(Config.HANLP, (List<String>) input, y.getSize(),y.getLanguage());
                 }
                 map.put("result", list);
                 return map;
@@ -70,7 +71,7 @@ public enum NlpMethod implements MethodStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq y) -> {
                 Map map = new HashMap();
-                List<String> list = nlpToolService.summaryService(Config.HANLP, input, y.getSize());
+                List<String> list = nlpToolService.summaryService(Config.HANLP, input, y.getSize(),y.getLanguage());
                 map.put("result", list);
                 return map;
             };
@@ -80,7 +81,7 @@ public enum NlpMethod implements MethodStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq y) -> {
                 Map map = new HashMap();
-                String str = nlpToolService.classifyService(Config.HANLP, input);
+                String str = nlpToolService.classifyService(Config.HANLP, input,y.getLanguage());
                 map.put("result", str);
                 return map;
             };
@@ -90,7 +91,7 @@ public enum NlpMethod implements MethodStrategy {
         public BiFunction<String, ArgsReq, Map> getFun() {
             return (String input, ArgsReq y) -> {
                 Map map = new HashMap();
-                String str = nlpToolService.denpendencyService(Config.HANLP, input);
+                String str = nlpToolService.denpendencyService(Config.HANLP, input,y.getLanguage());
                 map.put("result", str);
                 return map;
             };

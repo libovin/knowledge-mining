@@ -13,11 +13,12 @@ import java.util.Set;
 public interface UserService {
 	String login(String username, String password) throws Exception;
 
-	UserInfo create(UserInfo adminInfo) throws Exception;
+	UserInfo create(UserInfo adminInfo)throws Exception;
+
 	User createUser(UserReal source);
 
-	UserInfo update(String id, UserInfo adminInfo);
-	UserInfo updatePwd(String id, UserInfo adminInfo) throws Exception;
+	UserInfo update(String id,UserInfo adminInfo);
+	UserInfo updatePwd(String id,UserInfo adminInfo) throws Exception;
 
 	void delete(String id);
 

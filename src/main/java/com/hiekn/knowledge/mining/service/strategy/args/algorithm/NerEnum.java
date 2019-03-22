@@ -17,9 +17,9 @@ public enum NerEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.FuDan, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.nerService(Config.FuDan, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.FuDan, (String) input));
+                    map.put("result", nlpToolService.nerService(Config.FuDan, (String) input,args.getLanguage()));
                 }
                 return map;
             };
@@ -31,9 +31,9 @@ public enum NerEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) input));
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) input,args.getLanguage()));
                 }
                 return map;
             };
@@ -44,9 +44,9 @@ public enum NerEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) input));
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) input,args.getLanguage()));
                 }
                 return map;
             };
@@ -58,10 +58,11 @@ public enum NerEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.LTP, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.nerService(Config.LTP, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.LTP, (String) input));
+                    map.put("result", nlpToolService.nerService(Config.LTP, (String) input,args.getLanguage()));
                 }
+                System.out.println(map);
                 return map;
             };
         }
@@ -71,9 +72,9 @@ public enum NerEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.STANFORD, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.nerService(Config.STANFORD, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.STANFORD, (String) input));
+                    map.put("result", nlpToolService.nerService(Config.STANFORD, (String) input,args.getLanguage()));
                 }
                 return map;
             };
@@ -81,9 +82,6 @@ public enum NerEnum implements ArgsStrategy {
     };
 
     protected NLPToolService nlpToolService = new NLPToolService();
-
-    NerEnum() {
-    }
 
     @Override
     public ArgsStrategy getArgsStrategy(ArgsReq agrs) {

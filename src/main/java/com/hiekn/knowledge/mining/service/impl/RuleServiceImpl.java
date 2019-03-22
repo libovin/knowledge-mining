@@ -38,6 +38,7 @@ public class RuleServiceImpl implements RuleService {
         Map<String, Object> map = QueryUtils.trastation(bean, targe);
         Example<Rule> example = Example.of((Rule) map.get("bean"));
         return new RestData<>(ruleRepository.findAll(example), ruleRepository.count(example));
+
     }
 
     @Override

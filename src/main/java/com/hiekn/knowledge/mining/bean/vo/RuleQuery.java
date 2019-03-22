@@ -10,4 +10,5 @@ public class RuleQuery {
 
     @ApiModelProperty(example = "数字规则", value = "规则名")
     private String name;
+
 }

@@ -17,13 +17,13 @@ public enum PosEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
                     String str = (String) input;
                     if (str.endsWith("\n")) {
                         str = str.replace("\n", "");
                     }
-                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, str));
+                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, str,args.getLanguage()));
                 }
                 return map;
             };
@@ -35,9 +35,9 @@ public enum PosEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) input));
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) input,args.getLanguage()));
                 }
                 return map;
             };
@@ -48,9 +48,9 @@ public enum PosEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) input));
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) input,args.getLanguage()));
                 }
                 return map;
             };
@@ -62,9 +62,9 @@ public enum PosEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (String) input));
+                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (String) input,args.getLanguage()));
                 }
                 return map;
             };
@@ -76,9 +76,9 @@ public enum PosEnum implements ArgsStrategy {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
                 if (input instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (List<String>) input, this.name()));
+                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (List<String>) input, this.name(),args.getLanguage()));
                 } else if (input instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (String) input));
+                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (String) input,args.getLanguage()));
                 }
                 return map;
             };
