@@ -10,7 +10,7 @@ import java.util.Map;
 @Service
 public interface TokenCountService {
 
-    void recordToken(String serverId,String token) throws Exception;
+    Boolean recordToken(String serverId,String token) throws Exception;
 
     List countByServerId(String serverId);
     List countByToken(String token);

@@ -52,21 +52,26 @@ public class TokenCountServiceImpl implements TokenCountService {
     private TokenRepository tokenRepository;
 
     @Override
-    public void recordToken(String serverId, String token) throws Exception {
+    public Boolean recordToken(String serverId, String token) {
 
         //验证token是否过期
         Token tokenEntity = tokenRepository.findByToken(token);
         if (tokenEntity == null) {
-            throw new Exception("token 不存在");
+            return false;
+        }
+        if(1 == tokenEntity.getActive()){
+            return false;
         }
         Long date = tokenEntity.getExpireDate();
-        if (date < System.currentTimeMillis()) {
-            throw ServiceException.newInstance(ErrorCodes.TOKEN_FAILURE);
+        Long x=System.currentTimeMillis();
+        if (date < x) {
+            return false;
         }
         Document document = new Document();
         document.put("serverId", serverId);
         document.put("token", token);
         mongoTemplate.insert(document, collection);
+        return true;
     }
 
     @Override

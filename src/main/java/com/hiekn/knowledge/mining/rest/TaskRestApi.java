@@ -30,8 +30,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 public class TaskRestApi {
 
-    @HeaderParam(HttpHeaders.AUTHORIZATION)
-    private String authorization;
+
 
     @Autowired
     private TaskService taskService;
@@ -69,7 +68,9 @@ public class TaskRestApi {
     @Path("save")
     @ApiOperation("任务保存/修改")
     @PreAuthorize("hasAnyRole('EDIT','ADMIN')")
-    public RestResp save(@Valid Task req) {
+    public RestResp save(
+            @HeaderParam(HttpHeaders.AUTHORIZATION) String authorization,
+            @Valid Task req) {
         return new RestResp<>(taskService.save(req));
     }
 
@@ -77,7 +78,9 @@ public class TaskRestApi {
     @Path("{id}")
     @ApiOperation("任务删除")
     @PreAuthorize("hasRole('ADMIN')")
-    public RestResp delete(@PathParam("id") String id) {
+    public RestResp delete(
+            @HeaderParam(HttpHeaders.AUTHORIZATION) String authorization,
+            @PathParam("id") String id) {
         taskService.delete(id);
         return new RestResp<>("删除成功");
     }
@@ -87,7 +90,7 @@ public class TaskRestApi {
     @ApiOperation("发布服务调用")
     public RestResp remote(@PathParam("serverId") String serverId,
                            @FormParam("context") @ApiParam(required = true) String context,
-                           @ApiParam(required =true,value = "token值")@FormParam("token") String token) {
+                           @ApiParam(required =true,value = "token值") @FormParam("token") String token) {
         return new RestResp<>(taskService.remote(serverId, context));
     }
 

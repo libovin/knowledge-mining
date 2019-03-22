@@ -11,8 +11,8 @@ public class UserInfo {
 
     public interface Update {
     }
-    public interface Login {
 
+    public interface Login {
     }
 
     private String id;

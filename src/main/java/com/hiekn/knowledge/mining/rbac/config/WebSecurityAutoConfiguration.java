@@ -22,7 +22,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.filter.CorsFilter;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
@@ -59,7 +58,6 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     @Value("${spring.jersey.application-path}")
     private String url;
 
@@ -71,26 +69,22 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
         if(cross){
             web.ignoring().antMatchers(HttpMethod.OPTIONS);
         }
-
     }
 
     public void configure(HttpSecurity http) throws Exception {
-
         http
-                .csrf()
-                    .disable()
-                .exceptionHandling()
-                    .authenticationEntryPoint(authenticationEntryPoint)
-                    .and()
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                .authorizeRequests()
-                    .anyRequest()
-                        .permitAll()
-                    .and()
-                .addFilterAfter(authenticationTokenFilterBean(), CorsFilter.class)
-        ;
-
+            .csrf()
+                .disable()
+            .exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .and()
+            .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+            .authorizeRequests()
+                .anyRequest()
+                    .permitAll()
+                .and()
+            .addFilterAfter(authenticationTokenFilterBean(), CorsFilter.class);
     }
 }
