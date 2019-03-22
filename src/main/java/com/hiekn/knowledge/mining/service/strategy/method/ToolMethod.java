@@ -1,6 +1,5 @@
 package com.hiekn.knowledge.mining.service.strategy.method;
 
-import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.dao.ArgsReq;
 import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.knowledge.mining.service.ToolService;
@@ -8,9 +7,8 @@ import com.hiekn.knowledge.mining.service.impl.ToolServiceImpl;
 import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
 import com.hiekn.knowledge.mining.service.strategy.args.argsnull.ArgsNullEnum;
 import com.hiekn.knowledge.mining.service.strategy.args.regex.RegexEnum;
-import com.hiekn.knowledge.mining.service.strategy.args.size.SizeEnum;
-import com.hiekn.knowledge.mining.service.strategy.args.sort.SortEnum;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -18,9 +16,9 @@ import java.util.function.BiFunction;
 public enum ToolMethod implements MethodStrategy {
     COUNT(ArgsNullEnum.NULL) {
         public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                map.put("result", toolService.count(x, args));
+            return (List<String> input, ArgsReq args) -> {
+                Map map = new HashMap();
+                map.put("result", toolService.count(input, args));
                 return map;
             };
         }
@@ -28,9 +26,9 @@ public enum ToolMethod implements MethodStrategy {
 
     FIND(RegexEnum.REGEX) {
         public BiFunction<String, ArgsReq, Map> getFun() {
-            return (String x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                map.put("result", toolService.find(x, args));
+            return (String input, ArgsReq args) -> {
+                Map map = new HashMap();
+                map.put("result", toolService.find(input, args));
                 return map;
             };
         }
@@ -38,12 +36,12 @@ public enum ToolMethod implements MethodStrategy {
 
     MATCHES(RegexEnum.REGEX) {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof String) {
-                    map.put("result", toolService.matches((String) x, args));
-                } else if (x instanceof List) {
-                    map.put("result", toolService.matches((List<String>) x, args));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof String) {
+                    map.put("result", toolService.matches((String) input, args));
+                } else if (input instanceof List) {
+                    map.put("result", toolService.matches((List<String>) input, args));
                 }
                 return map;
             };

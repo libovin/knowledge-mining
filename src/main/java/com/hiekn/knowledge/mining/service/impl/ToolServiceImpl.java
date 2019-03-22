@@ -1,6 +1,5 @@
 package com.hiekn.knowledge.mining.service.impl;
 
-import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.bo.Counter;
 import com.hiekn.knowledge.mining.bean.bo.PatternFind;
 import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
@@ -12,6 +11,7 @@ import org.springframework.util.StringUtils;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -23,7 +23,7 @@ public class ToolServiceImpl implements ToolService {
     @Override
     public List<Counter> count(List<String> req, ArgsReq argsReq) {
         List<Counter> counters = new ArrayList<>();
-        Map<String, BigDecimal> map = Maps.newHashMap();
+        Map<String, BigDecimal> map = new HashMap();
         BigDecimal size = new BigDecimal(req.size());
         for (String item : req) {
             map.compute(item, (k, v) -> v == null ? BigDecimal.ONE : v.add(BigDecimal.ONE));

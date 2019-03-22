@@ -1,12 +1,12 @@
 package com.hiekn.knowledge.mining.service.strategy.args.algorithm;
 
-import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.dao.ArgsReq;
 import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
 import com.hiekn.knowledge.mining.service.strategy.args.argsnull.ArgsNullEnum;
 import com.hiekn.nlplab.conf.Config;
 import com.hiekn.nlplab.nlptools.NLPToolService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -14,12 +14,12 @@ import java.util.function.BiFunction;
 public enum NerEnum implements ArgsStrategy {
     F_NER() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.FuDan, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.FuDan, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.FuDan, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.FuDan, (String) input));
                 }
                 return map;
             };
@@ -28,12 +28,12 @@ public enum NerEnum implements ArgsStrategy {
 
     crf() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) input));
                 }
                 return map;
             };
@@ -41,12 +41,12 @@ public enum NerEnum implements ArgsStrategy {
     },
     hmm() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.HANLP, (String) input));
                 }
                 return map;
             };
@@ -55,12 +55,12 @@ public enum NerEnum implements ArgsStrategy {
 
     L_NER() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.LTP, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.LTP, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.LTP, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.LTP, (String) input));
                 }
                 return map;
             };
@@ -68,12 +68,12 @@ public enum NerEnum implements ArgsStrategy {
     },
     S_NER() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.nerService(Config.STANFORD, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.nerService(Config.STANFORD, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.nerService(Config.STANFORD, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.nerService(Config.STANFORD, (String) input));
                 }
                 return map;
             };

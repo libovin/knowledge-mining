@@ -1,12 +1,12 @@
 package com.hiekn.knowledge.mining.service.strategy.args.algorithm;
 
-import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.bean.dao.ArgsReq;
 import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
 import com.hiekn.knowledge.mining.service.strategy.args.argsnull.ArgsNullEnum;
 import com.hiekn.nlplab.conf.Config;
 import com.hiekn.nlplab.nlptools.NLPToolService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -14,12 +14,12 @@ import java.util.function.BiFunction;
 public enum PosEnum implements ArgsStrategy {
     F_POS() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    String str = (String) x;
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.FuDan, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    String str = (String) input;
                     if (str.endsWith("\n")) {
                         str = str.replace("\n", "");
                     }
@@ -32,12 +32,12 @@ public enum PosEnum implements ArgsStrategy {
 
     crf() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) input));
                 }
                 return map;
             };
@@ -45,12 +45,12 @@ public enum PosEnum implements ArgsStrategy {
     },
     percept() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String) input));
                 }
                 return map;
             };
@@ -59,12 +59,12 @@ public enum PosEnum implements ArgsStrategy {
 
     L_POS() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.LTP, (String) input));
                 }
                 return map;
             };
@@ -73,12 +73,12 @@ public enum PosEnum implements ArgsStrategy {
 
     S_POS() {
         public BiFunction<Object, ArgsReq, Map> getFun() {
-            return (Object x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                if (x instanceof List) {
-                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (List<String>) x, this.name()));
-                } else if (x instanceof String) {
-                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (String) x));
+            return (Object input, ArgsReq args) -> {
+                Map map = new HashMap();
+                if (input instanceof List) {
+                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (List<String>) input, this.name()));
+                } else if (input instanceof String) {
+                    map.put("result", nlpToolService.posTaggerService(Config.STANFORD, (String) input));
                 }
                 return map;
             };
@@ -87,9 +87,9 @@ public enum PosEnum implements ArgsStrategy {
 
     NULL() {
         public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> x, ArgsReq args) -> {
-                Map map = Maps.newHashMap();
-                map.put("result", x);
+            return (List<String> input, ArgsReq args) -> {
+                Map map = new HashMap();
+                map.put("result", input);
                 return map;
             };
         }

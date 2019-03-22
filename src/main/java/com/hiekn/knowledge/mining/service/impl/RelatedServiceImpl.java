@@ -3,7 +3,6 @@ package com.hiekn.knowledge.mining.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Maps;
 import com.hiekn.knowledge.mining.service.RelatedService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,15 +10,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -88,7 +86,7 @@ public class RelatedServiceImpl implements RelatedService {
 
     @Override
     public Map<String, Object> extractJournal(String kw) {
-        Map<String, Object> rs = Maps.newHashMap();
+        Map<String, Object> rs = new HashMap();
         String string = sendGet(BD_XUE_SHU_URL + "s?wd=" + kw);
         Document document = Jsoup.parse(string);
         Elements elements = document.select("div.op-scholar-card-info-cont.c-span-last .op-scholar-card-subinfo > div");
@@ -102,7 +100,7 @@ public class RelatedServiceImpl implements RelatedService {
 
     @Override
     public Map<String, Object> extractLiterature(String kw) {
-        Map<String, Object> rs = Maps.newHashMap();
+        Map<String, Object> rs = new HashMap();
         String replaceUrl = getReplaceUrl(sendGet(BD_XUE_SHU_URL + "s?wd=" + kw));
         if (Objects.nonNull(replaceUrl)) {
             Elements elements = Jsoup.parse(sendGet(replaceUrl)).select(".c_content > div");
@@ -115,7 +113,7 @@ public class RelatedServiceImpl implements RelatedService {
 
     @Override
     public Map<String, Object> extractAnalysis(String kw) {
-        Map<String, Object> rs = Maps.newHashMap();
+        Map<String, Object> rs = new HashMap();
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("kw_list", kw);
         body.add("cmd", "batch_get_kw_chart");
@@ -137,7 +135,7 @@ public class RelatedServiceImpl implements RelatedService {
 
     @Override
     public Map<String, Object> extractAminer(String kw) {
-        Map<String, Object> rs = Maps.newHashMap();
+        Map<String, Object> rs = new HashMap();
         String listData = sendGet(AMINER_URL + "search/person?query=" + kw + "&size=1&sort=relevance");
         JSONArray dataArr = JSON.parseObject(listData).getJSONArray("result");
         if (!dataArr.isEmpty()) {

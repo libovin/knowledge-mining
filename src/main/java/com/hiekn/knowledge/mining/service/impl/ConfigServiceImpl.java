@@ -3,12 +3,10 @@ package com.hiekn.knowledge.mining.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Charsets;
-import com.google.common.collect.Maps;
 import com.google.common.io.Resources;
 import com.hiekn.knowledge.mining.bean.dao.ArgsReq;
 import com.hiekn.knowledge.mining.bean.dao.ConfigReq;
 import com.hiekn.knowledge.mining.service.ConfigService;
-
 import com.hiekn.knowledge.mining.service.strategy.ModelEnum;
 import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
 import com.hiekn.knowledge.mining.service.strategy.args.argsnull.ArgsNullEnum;
@@ -19,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
@@ -63,7 +62,7 @@ public class ConfigServiceImpl implements ConfigService {
             }
         }
         return (x, y) -> {
-            Map map = Maps.newHashMap();
+            Map map = new HashMap();
             map.put("result", x);
             return map;
         };
