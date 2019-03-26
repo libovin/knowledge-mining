@@ -12,5 +12,5 @@ public interface MethodStrategy {
 
     ArgsStrategy getArgs();
 
-    BiFunction<? extends Object, ArgsReq, Map> getFun();
+    BiFunction<Object, ArgsReq, Map> getFun();
 }

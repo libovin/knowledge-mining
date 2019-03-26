@@ -15,20 +15,20 @@ import java.util.function.BiFunction;
 
 public enum ToolMethod implements MethodStrategy {
     COUNT(ArgsNullEnum.NULL) {
-        public BiFunction<List<String>, ArgsReq, Map> getFun() {
-            return (List<String> input, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", toolService.count(input, args));
+                map.put("result", toolService.count( (List<String>)input, args));
                 return map;
             };
         }
     },
 
     FIND(RegexEnum.REGEX) {
-        public BiFunction<String, ArgsReq, Map> getFun() {
-            return (String input, ArgsReq args) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", toolService.find(input, args));
+                map.put("result", toolService.find((String) input, args));
                 return map;
             };
         }

@@ -2,155 +2,378 @@
   "nlpmodel": {
     "segment": {
       "args": {
-        "algorithm": [
-          "F_SEG",
-          "shortest","crf","nlp","dict","index","standard","n_short",
-          "L_MME",
-          "N_SEG",
-          "S_SEG"
-        ],
+        "language": [
+          "ar",
+          "de",
+          "en",
+          "es",
+          "fr",
+          "zh"
+        ]
+      ,
+        "algorithm": {
+          "fudannlp": [
+            "F_SEG"
+          ],
+          "hanlp": [
+            "shortest",
+            "crf",
+            "nlp",
+            "dict",
+            "index",
+            "standard",
+            "n_short"
+          ],
+          "ltp": [
+            "L_MME"
+          ],
+          "nlpir": [
+            "N_SEG"
+          ],
+          "stanfordnlp": [
+            "S_SEG"
+          ]
+        },
         "dictId": "string"
       },
       "allowedNext": {
-        "nlpmodel": ["pos", "ner","keyword"],
-        "tool": ["count","matches"]
+        "nlpmodel": [
+          "pos",
+          "ner",
+          "keyword"
+        ],
+        "tool": [
+          "count",
+          "matches"
+        ]
       },
-      "flow": {"start": {}, "middle": {}}
+      "flow": {
+        "start": {},
+        "middle": {}
+      }
     },
     "pos": {
       "args": {
-        "algorithm": [
-          "F_POS",
-          "crf", "percept",
-          "L_POS",
-          "S_POS"
-        ]
+        "language":
+        [
+          "ar",
+          "de",
+          "en",
+          "es",
+          "fr",
+          "zh"
+        ],
+        "algorithm": {
+          "fudannlp": [
+            "F_POS"
+          ],
+          "hanlp": [
+            "crf",
+            "percept"
+          ],
+          "LTP": [
+            "L_POS"
+          ],
+          "stanfordnlp": [
+            "S_POS"
+          ]
+        }
       },
       "allowedNext": {
-        "nlpmodel": ["ner"],
-        "tool": ["count","matches"]
+        "nlpmodel": [
+          "ner"
+        ],
+        "tool": [
+          "count",
+          "matches"
+        ]
       },
-      "flow": {"start": {}, "middle": {}}
+      "flow": {
+        "start": {},
+        "middle": {}
+      }
     },
     "ner": {
       "args": {
-        "algorithm": [
-          "F_NER",
-          "crf", "hmm",
-          "L_NER",
-          "S_NER"
-        ]
+        "language":
+        [
+          "ar",
+          "de",
+          "en",
+          "es",
+          "fr",
+          "zh"
+        ],
+        "algorithm": {
+          "fudannlp": [
+            "F_NER"
+          ],
+          "hanlp": [
+            "crf",
+            "hmm"
+          ],
+          "ltp": [
+            "L_NER"
+          ],
+          "stanfordnlp": [
+            "S_NER"
+          ]
+        },
+        "allowedNext": {
+          "nlpmodel": [
+            "ner"
+          ],
+          "counter": [
+            "count",
+            "matches"
+          ]
+        },
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
       },
-      "allowedNext": {
-        "nlpmodel": ["ner"],
-        "counter": ["count","matches"]
+      "keyword": {
+        "args": {
+          "language":
+          [
+            "ar",
+            "de",
+            "en",
+            "es",
+            "fr",
+            "zh"
+          ],
+          "size": "number"
+        },
+        "allowedNext": {
+          "nlpmodel": [
+            "pos",
+            "ner"
+          ],
+          "tool": [
+            "matches"
+          ]
+        },
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
       },
-      "flow": {"start": {}, "middle": {}}
-    },
-    "keyword": {
-      "args": {"size": "number"},
-      "allowedNext": {
-        "nlpmodel": ["pos", "ner"],
-        "tool": ["matches"]
+      "summary": {
+        "args": {
+          "language":
+          [
+            "ar",
+            "de",
+            "en",
+            "es",
+            "fr",
+            "zh"
+          ],
+          "size": "number"
+        },
+        "allowedNext": {
+          "nlpmodel": [],
+          "tool": [
+            "find"
+          ]
+        },
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
       },
-      "flow": {"start": {}, "middle": {}}
-    },
-    "summary": {
-      "args": {"size": "number"},
-      "allowedNext": {
-        "nlpmodel": [],
-        "tool": ["find"]
+      "classifier": {
+        "args": {
+          "language":
+          [
+            "ar",
+            "de",
+            "en",
+            "es",
+            "fr",
+            "zh"
+          ]
+        },
+        "allowedNext": {},
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
       },
-      "flow": {"start": {}, "middle": {}}
-    },
-    "classifier": {
-      "args": {},
-      "allowedNext": {},
-      "flow": {"start": {}, "middle": {}}
-    },
-    "denpendency": {
-      "args": {},
-      "allowedNext": {},
-      "flow": {"start": {}, "middle": {}}
-    }
-  },
-  "tool": {
-    "count":{
-      "args": {"sort": ["asc", "desc"]},
-      "allowedNext": {
-        "nlpmodel": ["pos", "ner"],
-        "tool": ["matches", "find"]
-      },
-      "default": false,
-      "flow": {"start": {}, "middle": {}}
-    },
-    "matches": {
-      "args": {"ruleId":"string"},
-      "allowedNext": {
-        "tool": ["count"]
-      },
-      "flow": {"start": {}, "middle": {}}
-    },
-    "find": {
-      "args": {"ruleId":"string"},
-      "allowedNext": {
-        "tool": ["count"]
-      },
-      "flow": {"start": {}, "middle": {}}
-    }
-  },
-  "related": {
-    "baidu": {
-      "args": {},
-      "allowedNext": {},
-      "flow": {
-        "start": {},
-        "middle": {}
+      "denpendency": {
+        "args": {
+          "language":
+          [
+            "ar",
+            "de",
+            "en",
+            "es",
+            "fr",
+            "zh"
+          ]
+        },
+        "allowedNext": {},
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
       }
     },
-    "aminer": {
-      "args": {},
-      "allowedNext": {},
-      "flow": {
-        "start": {},
-        "middle": {}
+    "tool": {
+      "count": {
+        "args": {
+          "sort": [
+            "asc",
+            "desc"
+          ]
+        },
+        "allowedNext": {
+          "nlpmodel": [
+            "pos",
+            "ner"
+          ],
+          "tool": [
+            "matches",
+            "find"
+          ]
+        },
+        "default": false,
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
+      },
+      "matches": {
+        "args": {
+          "ruleId": "string"
+        },
+        "allowedNext": {
+          "tool": [
+            "count"
+          ]
+        },
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
+      },
+      "find": {
+        "args": {
+          "ruleId": "string"
+        },
+        "allowedNext": {
+          "tool": [
+            "count"
+          ]
+        },
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
       }
     },
-    "journal": {
-      "args": {},
-      "allowedNext": {},
-      "flow": {"start": {}, "middle": {}}
+    "related": {
+      "important": {
+        "args": {},
+        "allowedNext": {},
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
+      },
+      "baidu": {
+        "args": {},
+        "allowedNext": {},
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
+      },
+      "aminer": {
+        "args": {},
+        "allowedNext": {},
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
+      },
+      "journal": {
+        "args": {
+          "Cited the amount_weight": "num",
+          "Search index_weight": "num",
+          "identificated_weight": "num",
+          "factor of influence_weight": "num"
+        },
+        "allowedNext": {
+          "related": [
+            "important"
+          ]
+        },
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
+      },
+      "literature": {
+        "args": {
+          "Cited the amount_weight": "num",
+          "reading quantity": "num"
+        },
+        "allowedNext": {
+          "related": [
+            "important"
+          ]
+        },
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
+      },
+      "Important": {
+        "args": {
+        },
+        "allowedNext": {
+          "related": {}
+        },
+        "flow": {
+          "start": {},
+          "middle": {}
+        }
+      }
     },
-    "literature": {
-      "args": {},
-      "allowedNext": {},
-      "flow": {"start": {}, "middle": {}}
+    "_label": {
+      "nlpmodel": "自然语言分析",
+      "tool": "常用工具",
+      "related": "互联网挖掘",
+      "segment": "分词",
+      "pos": "词性",
+      "ner": "实体识别",
+      "keyword": "关键词",
+      "summary": "摘要",
+      "classifier": "文本分类",
+      "denpendency": "依存分析",
+      "count": "词频统计",
+      "find": "模糊匹配",
+      "matches": "精确匹配",
+      "baidu": "趋势分析",
+      "aminer": "人物评价",
+      "journal": "期刊",
+      "literature": "文献",
+      "algorithm": "算法",
+      "dictId": "词典",
+      "ruleId": "规则",
+      "sort": "排序",
+      "asc": "从小到大",
+      "desc": "从大到小",
+      "size": "数量",
+      "important": "重要性评价",
+      "Cited the amount_weight": "被引量_权值",
+      "Search index_weight": "搜索指数_权值",
+      "identificated_weight": "发文量_权值",
+      "reading quantity_weight": "阅读量_权值",
+      "factor of influence_weight": "影响因子_权值"
     }
-  },
-  "_label": {
-    "nlpmodel": "自然语言分析",
-    "tool": "常用工具",
-    "related": "互联网挖掘",
-    "segment": "分词",
-    "pos": "词性",
-    "ner": "实体识别",
-    "keyword": "关键词",
-    "summary": "摘要",
-    "classifier": "文本分类",
-    "denpendency": "依存分析",
-    "count": "词频统计",
-    "find": "模糊匹配",
-    "matches": "精确匹配",
-    "baidu": "百度源",
-    "aminer": "Aminer源",
-    "journal": "期刊",
-    "literature": "文献",
-    "algorithm": "算法",
-    "dictId": "词典",
-    "ruleId": "规则",
-    "sort": "排序",
-    "asc": "从小到大",
-    "desc": "从大到小",
-    "size": "数量"
   }
 }

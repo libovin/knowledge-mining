@@ -95,6 +95,7 @@ public class RelatedServiceImpl implements RelatedService {
             String text = element.select("span:eq(1)").first().ownText();
             rs.put(key, text);
         }
+        rs.put("method","JOURNAL");
         return rs;
     }
 
@@ -108,6 +109,7 @@ public class RelatedServiceImpl implements RelatedService {
                 rs.put(element.select("p:eq(0)").first().ownText(), element.select("p:eq(1)").first().text());
             }
         }
+        rs.put("method","LITERATURE");
         return rs;
     }
 

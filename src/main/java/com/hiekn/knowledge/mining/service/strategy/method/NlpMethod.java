@@ -20,19 +20,19 @@ import java.util.function.BiFunction;
 
 public enum NlpMethod implements MethodStrategy {
     SEGMENT(SegmentEnum.crf) {
-        public BiFunction<String, ArgsReq, Map> getFun() {
-            return (String input, ArgsReq y) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object input, ArgsReq y) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.segmentService(Config.HANLP, input, "",y.getLanguage()));
+                map.put("result", nlpToolService.segmentService(Config.HANLP, (String) input, "",y.getLanguage()));
                 return map;
             };
         }
     },
     POS(PosEnum.crf) {
-        public BiFunction<String, ArgsReq, Map> getFun() {
-            return (String input, ArgsReq y) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object input, ArgsReq y) -> {
                 Map map = new HashMap();
-                map.put("result", nlpToolService.posTaggerService(Config.HANLP, input,y.getLanguage()));
+                map.put("result", nlpToolService.posTaggerService(Config.HANLP, (String)input,y.getLanguage()));
                 return map;
             };
         }
@@ -68,30 +68,30 @@ public enum NlpMethod implements MethodStrategy {
         }
     },
     SUMMARY(ArgsNullEnum.NULL) {
-        public BiFunction<String, ArgsReq, Map> getFun() {
-            return (String input, ArgsReq y) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object input, ArgsReq y) -> {
                 Map map = new HashMap();
-                List<String> list = nlpToolService.summaryService(Config.HANLP, input, y.getSize(),y.getLanguage());
+                List<String> list = nlpToolService.summaryService(Config.HANLP, (String) input, y.getSize(),y.getLanguage());
                 map.put("result", list);
                 return map;
             };
         }
     },
     CLASSIFIER(ArgsNullEnum.NULL) {
-        public BiFunction<String, ArgsReq, Map> getFun() {
-            return (String input, ArgsReq y) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object input, ArgsReq y) -> {
                 Map map = new HashMap();
-                String str = nlpToolService.classifyService(Config.HANLP, input,y.getLanguage());
+                String str = nlpToolService.classifyService(Config.HANLP, (String) input,y.getLanguage());
                 map.put("result", str);
                 return map;
             };
         }
     },
     DENPENDENCY(ArgsNullEnum.NULL) {
-        public BiFunction<String, ArgsReq, Map> getFun() {
-            return (String input, ArgsReq y) -> {
+        public BiFunction<Object, ArgsReq, Map> getFun() {
+            return (Object input, ArgsReq y) -> {
                 Map map = new HashMap();
-                String str = nlpToolService.denpendencyService(Config.HANLP, input,y.getLanguage());
+                String str = nlpToolService.denpendencyService(Config.HANLP, (String) input,y.getLanguage());
                 map.put("result", str);
                 return map;
             };

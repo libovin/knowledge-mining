@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
+import javax.ws.rs.DefaultValue;
 
 @Data
 @ApiModel
@@ -34,4 +35,19 @@ public class ArgsReq {
     @Pattern(regexp = "(ar|de|en|es|fr|zh)",
              message = "语言必须为 ar|de|en|es|fr|zh")
     private String language;
+
+    @ApiModelProperty(value = "被引量_权值")
+    private Double citedtheamountweight;
+
+    @ApiModelProperty(value = "搜索指数_权值")
+    private Double searchindexweight;
+
+    @ApiModelProperty(value = "发文量_权值")
+    private Double identificatedweight;
+
+    @ApiModelProperty(value = "阅读量_权值")
+    private Double readingquantityweight;
+
+    @ApiModelProperty(value = "影响因子_权值")
+    private Double factorofinfluenceweight;
 }

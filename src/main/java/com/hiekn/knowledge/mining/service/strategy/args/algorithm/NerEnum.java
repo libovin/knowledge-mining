@@ -62,7 +62,6 @@ public enum NerEnum implements ArgsStrategy {
                 } else if (input instanceof String) {
                     map.put("result", nlpToolService.nerService(Config.LTP, (String) input,args.getLanguage()));
                 }
-                System.out.println(map);
                 return map;
             };
         }

@@ -4,7 +4,6 @@ import com.hiekn.knowledge.mining.bean.bo.Counter;
 import com.hiekn.knowledge.mining.bean.bo.PatternFind;
 import com.hiekn.knowledge.mining.bean.bo.PatternMatches;
 import com.hiekn.knowledge.mining.bean.dao.ArgsReq;
-import com.hiekn.knowledge.mining.service.strategy.args.algorithm.NerEnum;
 import com.hiekn.nlplab.bean.TermBean;
 
 import java.util.ArrayList;

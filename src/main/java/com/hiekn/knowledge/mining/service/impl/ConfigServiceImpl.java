@@ -53,7 +53,7 @@ public class ConfigServiceImpl implements ConfigService {
         if (modelEnum != ModelEnum.NULL) {
             MethodStrategy methods = modelEnum.getMethods().getMethodStrategy(r);
             if (methods != NullMethod.NULL) {
-                ArgsStrategy argsStrategy = methods.getArgs();
+                ArgsStrategy argsStrategy = methods.getArgs().getArgsStrategy(r.getArgs());
                 if (argsStrategy != ArgsNullEnum.NULL) {
                     return argsStrategy.getArgsStrategy(r.getArgs()).getFun();
                 } else {
