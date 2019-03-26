@@ -9,6 +9,7 @@ import com.hiekn.knowledge.mining.service.strategy.args.ArgsStrategy;
 import com.hiekn.knowledge.mining.service.strategy.args.argsnull.ArgsNullEnum;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
