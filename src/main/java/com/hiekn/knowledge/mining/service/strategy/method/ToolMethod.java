@@ -24,7 +24,7 @@ public enum ToolMethod implements MethodStrategy {
         }
     },
 
-    FIND(RegexEnum.REGEX) {
+    FIND(ArgsNullEnum.NULL) {
         public BiFunction<Object, ArgsReq, Map> getFun() {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
@@ -34,7 +34,7 @@ public enum ToolMethod implements MethodStrategy {
         }
     },
 
-    MATCHES(RegexEnum.REGEX) {
+    MATCHES(ArgsNullEnum.NULL) {
         public BiFunction<Object, ArgsReq, Map> getFun() {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
