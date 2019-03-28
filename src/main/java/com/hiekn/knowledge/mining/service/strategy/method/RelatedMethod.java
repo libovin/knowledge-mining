@@ -56,121 +56,105 @@ public enum RelatedMethod implements MethodStrategy {
     IMPORTANT(ArgsNullEnum.NULL) {
         public BiFunction<Object, ArgsReq, Map> getFun() {
             return (Object input, ArgsReq args) -> {
-                //用于返回
-                Map<String ,Object> mapReturn = new HashMap<>();
+                System.out.println(input);
                 //用于接收
                 Map<String , Object> map = (Map)input;
+                //用于计算
+                Map<String , BigDecimal> mapBigDecimal = new HashMap<>();
+                //用于返回
+                Map<String ,Object> mapReturn = new HashMap<>();
                 //获取method类型
                 String method = (String) map.get("method");
                 //取小数点后面8位，四舍五入
                 MathContext mc = new MathContext(8, RoundingMode.HALF_DOWN);
                 //进行判断
                 if ("JOURNAL".equals(method)){
-                    //加入四个key，用于在迭代的时候添加归一之后的数据
-                    map.put("被引量(归一)",null);
-                    map.put("搜索指数(归一)",null);
-                    map.put("发文量(归一)",null);
-                    map.put("影响因子(归一)",null);
-//                    map.put("被引量(归一)",(Double.parseDouble(((String) map.get("被引量")))/1000000));
-//                    map.put("搜索指数(归一)",(Double.parseDouble(((String) map.get("搜索指数")))/100000));
-//                    map.put("发文量(归一)",(Double.parseDouble(((String) map.get("发文量")))/100000));
-//                    遍历key
-                    for (String key : map.keySet()){
-                        //进行判断
-                        if ("被引量".equals(key)){
-                            //对数据归一
-                            //Double value= Math.atan(Double.parseDouble(((String) map.get(key))))*(2/Math.PI);
-                            BigDecimal bigDecimal = (BigDecimal.valueOf(Double.parseDouble(((String) map.get(key)))));
-                            BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(1297080),mc);
-                            map.put("被引量(归一)",value);
-                        } else if ("搜索指数".equals(key)){
-                            //Double value= Math.atan(Double.parseDouble(((String) map.get(key))))*(2/Math.PI);
-                            BigDecimal bigDecimal = (BigDecimal.valueOf(Double.parseDouble(((String) map.get(key)))));
-                            BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(180901),mc);
-                            map.put("搜索指数(归一)",value);
-                        } else if ("发文量".equals(key)) {
-                            //Double value= Math.atan(Double.parseDouble(((String) map.get(key))))*(2/Math.PI);
-                            BigDecimal bigDecimal = (BigDecimal.valueOf(Double.parseDouble(((String) map.get(key)))));
-                            BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(108091),mc);
-                            map.put("发文量(归一)",value);
-                        }
-                        else if ("影响因子".equals(key)){
-                            //Double value= Math.atan(Double.parseDouble(((String) map.get(key))))*(2/Math.PI);
-                            BigDecimal bigDecimal = (BigDecimal.valueOf(Double.parseDouble(((String) map.get(key)))));
-                            BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(11),mc);
-                            map.put("影响因子(归一)",value);
-                        }
+                    if (map.containsKey("被引量")){
+                        BigDecimal bigDecimal = ( new BigDecimal((String) map.get("被引量")));
+                        //这里的值是随便定的
+                        BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(1297080),mc);
+                        mapBigDecimal.put("被引量(归一)",value);
+                    }else{
+                        mapBigDecimal.put("被引量(归一)",BigDecimal.valueOf(0));
                     }
-//                    double v1 = (double)map.get("被引量(归一)");
-//                    double v2 = (double)map.get("搜索指数(归一)");
-//                    double v3  = (double)map.get("发文量(归一)");
-//                    double v4  = (double)map.get("影响因子(归一)");
+                    if (map.containsKey("搜索指数")){
+                        BigDecimal bigDecimal = ( new BigDecimal((String) map.get("搜索指数")));
+                        BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(180901),mc);
+                        mapBigDecimal.put("搜索指数(归一)",value);
+                    }else {
+                        mapBigDecimal.put("搜索指数(归一)",BigDecimal.valueOf(0));
+                    }
+                    if (map.containsKey("发文量")){
+                        BigDecimal bigDecimal = ( new BigDecimal((String) map.get("发文量")));
+                        BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(108091),mc);
+                        mapBigDecimal.put("发文量(归一)",value);
+                    }else{
+                        mapBigDecimal.put("发文量(归一)",BigDecimal.valueOf(0));
+                    }
+                    if (map.containsKey("影响因子")){
+                        mapBigDecimal.put("影响因子",new BigDecimal((String)map.get("影响因子")));
+                    }else{
+                        mapBigDecimal.put("影响因子",BigDecimal.valueOf(0));
+                    }
                     //判断值是否为null
-                    Double v1 = args.getCitedtheamountweight();
+                    BigDecimal v1 = args.getCitedtheamountweight();
                     if (v1==null){
-                        v1=1.00;
+                        v1=BigDecimal.valueOf(1);
                     }
-                    Double v2 = args.getSearchindexweight();
+                    BigDecimal v2 = args.getSearchindexweight();
                     if (v2==null){
-                        v2=1.00;
+                        v2=BigDecimal.valueOf(1);
                     }
-                    Double v3 = args.getIdentificatedweight();
+                    BigDecimal v3 = args.getIdentificatedweight();
                     if (v3==null){
-                        v3=1.00;
+                        v3=BigDecimal.valueOf(1);
                     }
-                    Double v4 = args.getFactorofinfluenceweight();
+                    BigDecimal v4 = args.getFactorofinfluenceweight();
                     if (v4==null){
-                        v4=1.00;
-                    }
-//                  double num =v1*v5+v2*v6+v3*v7+v4*v8;
-//                    double num = (v1*args.getCitedtheamountweight()+
-//                            v2*args.getSearchindexweight()+
-//                            v3*args.getIdentificatedweight()+
-//                            v4*args.getFactorofinfluenceweight())/4;
-//                            加权平均
-                    BigDecimal num =  ((
-                            (BigDecimal) map.get("被引量(归一)")).multiply(BigDecimal.valueOf(v1)).add((
-                                    (BigDecimal) map.get("搜索指数(归一)")).multiply(BigDecimal.valueOf(v2))) .add((
-                                    (BigDecimal) map.get("发文量(归一)")).multiply(BigDecimal.valueOf(v3))).add((
-                                    (BigDecimal) map.get("影响因子(归一)")).multiply(BigDecimal.valueOf(v4)))).divide((
-                            BigDecimal.valueOf(4)),mc);
-                    //放入集合
-                    map.put("加权平均值",num);
-                }else if ("LITERATURE".equals(method)){
-//                    map.put("被引量(归一)",(Double.parseDouble(((String) map.get("被引量：")))/1000000));
-//                    map.put("阅读量(归一)",(Double.parseDouble(((String) map.get("阅读量：")))/100000));
-                    map.put("被引量(归一)",null);
-                    map.put("阅读量(归一)",null);
-                    for (String key : map.keySet()){
-                        if ("被引量：".equals(key)) {
-                            //double value = (Double.parseDouble(((String) map.get(key)))/1000000);
-                            BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(((String) map.get(key))));
-                            BigDecimal value =  bigDecimal.divide(BigDecimal.valueOf(1701020),mc);
-                            map.put("被引量(归一)",value);
-                        }else if ("阅读量：".equals(key)){
-                            //double value = (Double.parseDouble(((String) map.get(key)))/100000);
-                            BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(((String) map.get(key))));
-                            BigDecimal value =  bigDecimal.divide(BigDecimal.valueOf(1001),mc);
-                            map.put("阅读量(归一)",value);
-                        }
-                    }
-                    Double v1 = args.getCitedtheamountweight();
-                    if (v1==null){
-                        v1=1.00;
-                    }
-                    Double v2 = args.getReadingquantityweight();
-                    if (v2==null){
-                        v2=1.00;
+                        v4=BigDecimal.valueOf(1);
                     }
                     //加权平均
                     BigDecimal num =  ((
-                            (BigDecimal) map.get("被引量(归一)")).multiply(BigDecimal.valueOf(v1)).add((
-                            (BigDecimal) map.get("阅读量(归一)")).multiply(BigDecimal.valueOf(v2)))
+                            mapBigDecimal.get("被引量(归一)")).multiply(v1).add((
+                            mapBigDecimal.get("搜索指数(归一)")).multiply(v2)) .add((
+                            mapBigDecimal.get("发文量(归一)")).multiply(v3)).add((
+                            mapBigDecimal.get("影响因子")).multiply(v4))).divide((
+                            BigDecimal.valueOf(4)),mc);
+                    //放入集合
+                    mapBigDecimal.put("加权平均值",num);
+                }else if ("LITERATURE".equals(method)){
+                    if (map.containsKey("被引量：")){
+                        BigDecimal bigDecimal = ( new BigDecimal((String) map.get("被引量：")));
+                        BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(107041),mc);
+                        mapBigDecimal.put("被引量(归一)",value);
+                    }else {
+                        mapBigDecimal.put("被引量(归一)",BigDecimal.valueOf(0));
+                    }
+                    if (map.containsKey("阅读量：")){
+                        BigDecimal bigDecimal = ( new BigDecimal((String) map.get("阅读量：")));
+                        BigDecimal value = bigDecimal.divide(BigDecimal.valueOf(106241),mc);
+                        mapBigDecimal.put("阅读量(归一)",value);
+                    }else {
+                        mapBigDecimal.put("阅读量(归一)",BigDecimal.valueOf(0));
+
+                    }
+                    BigDecimal v1 = args.getCitedtheamountweight();
+                    if (v1==null){
+                        v1=BigDecimal.valueOf(1);
+                    }
+                    BigDecimal v2 = args.getReadingquantityweight();
+                    if (v2==null){
+                        v2=BigDecimal.valueOf(1);
+                    }
+                    //加权平均
+                    BigDecimal num =  ((
+                            mapBigDecimal.get("被引量(归一)")).multiply(v1).add((
+                            mapBigDecimal.get("阅读量(归一)")).multiply(v2))
                             .divide((
                             BigDecimal.valueOf(2)),mc));
-                    map.put("加权平均值",num);
+                    mapBigDecimal.put("加权平均值",num);
                 }
-                mapReturn.put("result", map);
+                mapReturn.put("result", mapBigDecimal);
                 return mapReturn;
             };
         }
