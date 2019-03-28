@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.ws.rs.DefaultValue;
+import java.math.BigDecimal;
 
 @Data
 @ApiModel
@@ -37,17 +38,17 @@ public class ArgsReq {
     private String language;
 
     @ApiModelProperty(value = "被引量_权值")
-    private Double citedtheamountweight;
+    private BigDecimal citedtheamountweight;
 
     @ApiModelProperty(value = "搜索指数_权值")
-    private Double searchindexweight;
+    private BigDecimal searchindexweight;
 
     @ApiModelProperty(value = "发文量_权值")
-    private Double identificatedweight;
+    private BigDecimal identificatedweight;
 
     @ApiModelProperty(value = "阅读量_权值")
-    private Double readingquantityweight;
+    private BigDecimal readingquantityweight;
 
     @ApiModelProperty(value = "影响因子_权值")
-    private Double factorofinfluenceweight;
+    private BigDecimal factorofinfluenceweight;
 }
