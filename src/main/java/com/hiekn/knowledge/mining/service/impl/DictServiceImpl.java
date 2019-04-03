@@ -67,9 +67,9 @@ public class DictServiceImpl implements DictService {
     public Dict importDict(DictFileImport fileImport) {
         Dict dict = new Dict();
         dict.setName(fileImport.getName());
+        LinkedHashSet<String> set = new LinkedHashSet<>();
         if (fileImport.getFileIn() != null) {
             InputStreamReader isr = new InputStreamReader(fileImport.getFileIn());
-            LinkedHashSet<String> set = new LinkedHashSet<>();
             try (BufferedReader bufferedReader = new BufferedReader(isr)) {
                 String line = null;
                 while ((line = bufferedReader.readLine()) != null) {
@@ -78,8 +78,8 @@ public class DictServiceImpl implements DictService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            dict.setText(set);
         }
+        dict.setText(set);
         return dictRepository.save(dict);
     }
 

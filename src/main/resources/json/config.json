@@ -262,7 +262,9 @@
   },
   "related": {
     "baidu": {
-      "args": {},
+      "args": {
+        "source": ["百度","google"]
+      },
       "allowedNext": {},
       "flow": {
         "start": {},
@@ -278,7 +280,9 @@
       }
     },
     "journal": {
-      "args": {},
+      "args": {
+        "source": ["百度", "必应"]
+      },
       "allowedNext": {
         "related": [
           "important"
@@ -290,7 +294,9 @@
       }
     },
     "literature": {
-      "args": {},
+      "args": {
+        "source": ["百度", "必应"]
+      },
       "allowedNext": {
         "related": [
           "important"
@@ -365,6 +371,7 @@
     "en": "英语",
     "es": "西班牙语",
     "fr": "法语",
-    "zh": "中文"
+    "zh": "中文",
+    "source": "源"
   }
 }

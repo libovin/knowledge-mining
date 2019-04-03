@@ -13,15 +13,15 @@ import java.io.InputStream;
 @ApiModel
 public class FileImport {
 
-    @ApiParam(value = "file")
-    @FormDataParam("file")
+    @ApiParam(value = "filename")
+    @FormDataParam("filename")
     FormDataContentDisposition fileInfo;
 
-    @ApiParam(value = "file")
-    @FormDataParam("file")
+    @ApiParam(value = "filename")
+    @FormDataParam("filename")
     FormDataBodyPart formDataBodyPart;
 
-    @ApiParam(value = "file")
-    @FormDataParam("file")
+    @ApiParam(value = "filename")
+    @FormDataParam("filename")
     InputStream fileIn;
 }

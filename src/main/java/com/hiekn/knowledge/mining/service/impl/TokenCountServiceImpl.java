@@ -59,7 +59,7 @@ public class TokenCountServiceImpl implements TokenCountService {
         if (tokenEntity == null) {
             return false;
         }
-        if(1 == tokenEntity.getActive()){
+        if(0 == tokenEntity.getActive()){
             return false;
         }
         Long date = tokenEntity.getExpireDate();
