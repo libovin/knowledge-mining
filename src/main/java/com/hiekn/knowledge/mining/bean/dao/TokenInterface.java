@@ -38,6 +38,7 @@ public class TokenInterface {
     public TokenInterface(){
 
     }
+
     public TokenInterface(String interfaceId, String tokenId) {
         this.interfaceId = interfaceId;
         this.tokenId = tokenId;

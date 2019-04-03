@@ -30,8 +30,6 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
 public class TaskRestApi {
 
-
-
     @Autowired
     private TaskService taskService;
 

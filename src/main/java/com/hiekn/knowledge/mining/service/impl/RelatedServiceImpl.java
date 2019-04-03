@@ -95,7 +95,7 @@ public class RelatedServiceImpl implements RelatedService {
             String text = element.select("span:eq(1)").first().ownText();
             rs.put(key, text);
         }
-        rs.put("method","JOURNAL");
+        rs.put("method", "JOURNAL");
         return rs;
     }
 
@@ -109,7 +109,7 @@ public class RelatedServiceImpl implements RelatedService {
                 rs.put(element.select("p:eq(0)").first().ownText(), element.select("p:eq(1)").first().text());
             }
         }
-        rs.put("method","LITERATURE");
+        rs.put("method", "LITERATURE");
         return rs;
     }
 
@@ -127,9 +127,7 @@ public class RelatedServiceImpl implements RelatedService {
             JSONObject data = JSON.parseObject(source);
             if (data.getInteger("error_no") == 0) {
                 data = data.getJSONObject("data").getJSONObject("current_kw_data");
-                data.forEach((k, v) -> {
-                    rs.put(k, v);
-                });
+                data.forEach((k, v) -> rs.put(k, v));
             }
         }
         return rs;
