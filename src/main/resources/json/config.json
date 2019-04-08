@@ -110,9 +110,6 @@
         ]
       },
       "allowedNext": {
-        "nlpmodel": [
-          "ner"
-        ],
         "counter": [
           "count",
           "matches"
@@ -236,23 +233,7 @@
         "ruleId": "string"
       },
       "allowedNext": {
-        "tool": [
-          "count"
-        ]
-      },
-      "flow": {
-        "start": {},
-        "middle": {}
-      }
-    },
-    "find": {
-      "args": {
-        "ruleId": "string"
-      },
-      "allowedNext": {
-        "tool": [
-          "count"
-        ]
+        "tool": ["matches"]
       },
       "flow": {
         "start": {},
@@ -346,8 +327,7 @@
     "classifier": "文本分类",
     "denpendency": "依存分析",
     "count": "词频统计",
-    "find": "模糊匹配",
-    "matches": "精确匹配",
+    "matches": "文本匹配",
     "baidu": "趋势分析",
     "aminer": "人物评价",
     "journal": "期刊",

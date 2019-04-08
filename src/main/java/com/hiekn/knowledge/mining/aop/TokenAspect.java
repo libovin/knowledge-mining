@@ -20,16 +20,12 @@ public class TokenAspect {
     public void recordToken() {
     }
 
-
     @Autowired
     private TokenCountService tokenCountService;
 
-
     @Around("recordToken()")
     public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
-
         Object o = null;
-
         Object[] args = joinPoint.getArgs();
         if (args != null && args.length == 3) {
             String serverId = (String) args[0];
@@ -48,6 +44,5 @@ public class TokenAspect {
         } else {
             return o;
         }
-
     }
 }

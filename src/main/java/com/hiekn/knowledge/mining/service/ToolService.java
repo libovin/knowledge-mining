@@ -16,5 +16,5 @@ public interface ToolService {
 
     PatternMatches matches(String req, ArgsReq argsReq);
 
-    List<PatternMatches> matches (List<String> req,ArgsReq argsReq);
+    List<PatternMatches> matches (List req,ArgsReq argsReq);
 }

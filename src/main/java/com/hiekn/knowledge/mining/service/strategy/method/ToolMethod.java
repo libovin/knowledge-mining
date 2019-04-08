@@ -18,7 +18,7 @@ public enum ToolMethod implements MethodStrategy {
         public BiFunction<Object, ArgsReq, Map> getFun() {
             return (Object input, ArgsReq args) -> {
                 Map map = new HashMap();
-                map.put("result", toolService.count( (List<String>)input, args));
+                map.put("result", toolService.count((List<String>) input, args));
                 return map;
             };
         }
@@ -41,7 +41,10 @@ public enum ToolMethod implements MethodStrategy {
                 if (input instanceof String) {
                     map.put("result", toolService.matches((String) input, args));
                 } else if (input instanceof List) {
-                    map.put("result", toolService.matches((List<String>) input, args));
+                    map.put("result", toolService.matches((List) input, args));
+                } else if (input instanceof Map) {
+                    Map<String, Object> o = (Map) input;
+                    map.put("", toolService.matches((String) o.get("text"), args));
                 }
                 return map;
             };

@@ -10,6 +10,7 @@ import com.hiekn.knowledge.mining.service.ConfigService;
 import com.hiekn.knowledge.mining.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanMap;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -88,6 +89,6 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public RestData<Task> getList() {
-        return new RestData<>(taskRepository.findAll(), taskRepository.count());
+        return new RestData<>(taskRepository.findAll(new Sort(Sort.Direction.DESC,"createTime")), taskRepository.count());
     }
 }
