@@ -32,6 +32,7 @@ import java.util.Map;
 @Path("rule")
 @Api("规则")
 @Produces(MediaType.APPLICATION_JSON)
+@PreAuthorize("hasRole('ADMIN')")
 public class RuleRestApi {
 
     @HeaderParam(HttpHeaders.AUTHORIZATION)

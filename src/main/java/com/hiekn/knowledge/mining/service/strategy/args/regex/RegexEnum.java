@@ -23,9 +23,7 @@ public enum RegexEnum implements ArgsStrategy {
 
     @Override
     public ArgsStrategy getArgsStrategy(ArgsReq args) {
-        if (StringUtils.hasText(args.getRuleId())) {
-            return REGEX;
-        }
+
         return ArgsNullEnum.NULL;
     }
 }

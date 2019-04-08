@@ -44,20 +44,24 @@ public class ToolServiceImpl implements ToolService {
     @Override
     public List<PatternFind> find(String req, ArgsReq argsReq) {
         List<PatternFind> arr = new ArrayList<>();
-        Pattern pattern = RuleUtils.instance.getRulePattern(argsReq.getRuleId());
-        Matcher matcher = pattern.matcher(req);
-        while (matcher.find()) {
-            int s = matcher.start();
-            int e = matcher.end();
-            String w = req.substring(s, e);
-            arr.add(new PatternFind(w, s, e));
+        List<String> split = argsReq.getRuleId();
+        for (String ss : split) {
+            Pattern pattern = RuleUtils.instance.getRulePattern(ss);
+            Matcher matcher = pattern.matcher(req);
+            while (matcher.find()) {
+                int s = matcher.start();
+                int e = matcher.end();
+                String w = req.substring(s, e);
+                arr.add(new PatternFind(w, s, e));
+            }
         }
+
         return arr;
     }
 
     @Override
     public PatternMatches matches(String req, ArgsReq argsReq) {
-        String[] split = argsReq.getRuleId().split(",");
+        List<String> split = argsReq.getRuleId();
         boolean flag = false;
         for (String s : split) {
             Pattern pattern = RuleUtils.instance.getRulePattern(s);

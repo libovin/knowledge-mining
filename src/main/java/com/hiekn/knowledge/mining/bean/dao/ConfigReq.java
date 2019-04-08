@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Data
 @ApiModel
@@ -64,7 +65,7 @@ public class ConfigReq {
 
     @ApiModelProperty(hidden = true)
     @JsonIgnore
-    public String getRuleId() {
+    public List<String> getRuleId() {
         if (args != null) {
             return this.args.getRuleId();
         }

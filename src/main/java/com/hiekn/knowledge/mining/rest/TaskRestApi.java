@@ -36,6 +36,7 @@ public class TaskRestApi {
     @GET
     @Path("config")
     @ApiOperation("获取配置项")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp getConfig() {
         return new RestResp<>(taskService.getProp());
     }
@@ -43,6 +44,7 @@ public class TaskRestApi {
     @GET
     @Path("list")
     @ApiOperation("任务列表")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp<RestData<Task>> getList() {
         return new RestResp<>(taskService.getList());
     }
@@ -50,6 +52,7 @@ public class TaskRestApi {
     @GET
     @Path("{id}")
     @ApiOperation("任务详情")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp<Task> getTask(@PathParam("id") String id) {
         return new RestResp<>(taskService.getTask(id));
     }
@@ -58,6 +61,7 @@ public class TaskRestApi {
     @POST
     @Path("preprocess")
     @ApiOperation("任务预执行")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp preprocess(@Valid PreProcess req) {
         return new RestResp<>(taskService.preprocess(req));
     }
@@ -65,7 +69,7 @@ public class TaskRestApi {
     @POST
     @Path("save")
     @ApiOperation("任务保存/修改")
-    @PreAuthorize("hasAnyRole('EDIT','ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public RestResp<Task> save(
             @HeaderParam(HttpHeaders.AUTHORIZATION) String authorization,
             @Valid Task req) {

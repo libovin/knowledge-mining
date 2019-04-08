@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @ApiModel
@@ -23,7 +24,7 @@ public class ArgsReq {
     private Integer size;
 
     @ApiModelProperty(value = "规则Id")
-    private String ruleId;
+    private List<String> ruleId;
 
     @ApiModelProperty(value = "排序", example = "desc")
     @Pattern(regexp = "(asc|desc)", message = "排序必须为 asc|desc")

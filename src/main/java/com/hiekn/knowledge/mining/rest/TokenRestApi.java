@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Valid;
@@ -31,6 +32,7 @@ import java.util.List;
 @Path("token")
 @Api("Token管理")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+@PreAuthorize("hasRole('ADMIN')")
 public class TokenRestApi {
 
     @Autowired

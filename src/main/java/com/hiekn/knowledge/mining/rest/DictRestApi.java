@@ -30,6 +30,7 @@ import javax.ws.rs.core.MediaType;
 @Path("dict")
 @Api("字典")
 @Produces(MediaType.APPLICATION_JSON)
+@PreAuthorize("hasRole('ADMIN')")
 public class DictRestApi {
 
     @HeaderParam(HttpHeaders.AUTHORIZATION)
@@ -74,7 +75,6 @@ public class DictRestApi {
     @ApiOperation("新增字典")
     @POST
     @Path("add")
-    @PreAuthorize("hasAnyRole('EDIT','ADMIN')")
     public RestResp<Dict> add(@Valid Dict dict) {
         return new RestResp<>(dictService.add(dict));
     }
@@ -82,7 +82,6 @@ public class DictRestApi {
     @ApiOperation("导入字典")
     @POST
     @Path("import")
-    @PreAuthorize("hasRole('ADMIN')")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public RestResp<Dict> importDict(@BeanParam DictFileImport fileImport) {
         return new RestResp<>(dictService.importDict(fileImport));
