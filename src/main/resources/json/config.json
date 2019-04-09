@@ -67,7 +67,15 @@
           "stanfordnlp": [
             "S_POS"
           ]
-        }
+        },
+        "language": [
+          "ar",
+          "de",
+          "en",
+          "es",
+          "fr",
+          "zh"
+        ]
       },
       "allowedNext": {
         "nlpmodel": [

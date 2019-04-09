@@ -11,6 +11,7 @@ import com.hiekn.knowledge.mining.util.QueryUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -37,7 +38,7 @@ public class DictServiceImpl implements DictService {
                dict.setText(new LinkedHashSet<>());
             }
         }
-        return new RestData<>(dictRepository.findAll(example), dictRepository.count(example));
+        return new RestData<>(dictRepository.findAll(example,new Sort(Sort.Direction.DESC,"createTime")), dictRepository.count(example));
     }
 
     @Override
