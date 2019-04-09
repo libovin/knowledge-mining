@@ -1,13 +1,7 @@
 package com.hiekn.knowledge.mining.service.impl;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.hiekn.boot.autoconfigure.base.exception.ServiceException;
-import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.knowledge.mining.bean.dao.Task;
 import com.hiekn.knowledge.mining.bean.dao.Token;
-import com.hiekn.knowledge.mining.exception.ErrorCodes;
-import com.hiekn.knowledge.mining.filter.LoggingRequestFilter;
 import com.hiekn.knowledge.mining.repository.TaskRepository;
 import com.hiekn.knowledge.mining.repository.TokenRepository;
 import com.hiekn.knowledge.mining.service.TokenCountService;
@@ -15,28 +9,25 @@ import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.beans.BeanMap;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.Field;
-import org.springframework.data.mongodb.core.aggregation.Fields;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.lookup;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.unwind;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
 
 @Service
 public class TokenCountServiceImpl implements TokenCountService {
