@@ -167,10 +167,7 @@
         ]
       },
       "allowedNext": {
-        "nlpmodel": [],
-        "tool": [
-          "find"
-        ]
+        "nlpmodel": []
       },
       "flow": {
         "start": {},
@@ -221,13 +218,8 @@
         ]
       },
       "allowedNext": {
-        "nlpmodel": [
-          "pos",
-          "ner"
-        ],
         "tool": [
-          "matches",
-          "find"
+          "matches"
         ]
       },
       "default": false,
